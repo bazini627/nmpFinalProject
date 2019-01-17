@@ -1,0 +1,668 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.0302618249568,
+          33.5276819108859
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/14/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.07491790982122,
+          33.54414473222415
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/10/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.07881386268149,
+          33.54292818890128
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/28/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.02938030879072,
+          33.534790176056596
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/23/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.07555361657772,
+          33.54329531806545
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/24/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.0836432213432,
+          33.54254817337418
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "10/13/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.07592421742743,
+          33.54296374833628
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "11/09/2015",
+        "city": "Mecca",
+        "region": "Riverside County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66283996203994,
+          32.624506307218894
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "05/16/2016",
+        "city": null,
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66732916842982,
+          32.62595933836609
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "05/27/2016",
+        "city": null,
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66920547699023,
+          32.71421646906434
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "06/28/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.55440022425942,
+          32.701564099517704
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "06/28/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.58954977369906,
+          34.83182442956114
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/12/2016",
+        "city": "Needles",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.67333213364249,
+          32.715117333354996
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/11/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66370119562842,
+          32.62001534603975
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/11/2016",
+        "city": null,
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.55006442385853,
+          32.70499937955419
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/11/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.59815980002338,
+          34.82580660314919
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/21/2016",
+        "city": "Needles",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.59782148344873,
+          34.832700545143794
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/27/2016",
+        "city": "Needles",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.6702023915953,
+          32.71511557577822
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/25/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66811041423607,
+          32.62598977044367
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/25/2016",
+        "city": null,
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.55295913703675,
+          32.70235551859694
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/25/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66882772048352,
+          32.7188197513739
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/06/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.55091699434254,
+          32.70153210108912
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/06/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66777859731556,
+          32.71252704576695
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/22/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.54886832154995,
+          32.706244690696685
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/22/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.46088321220095,
+          34.00892627820676
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/01/2016",
+        "city": "Venice",
+        "region": "Los Angeles County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.66961949060908,
+          32.71239508804344
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/06/2016",
+        "city": "Yuma",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.54734517881776,
+          32.70644429019259
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/06/2016",
+        "city": "Gila Valley",
+        "region": "Yuma County (Arizona, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.45915981514521,
+          34.00698498401424
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/14/2016",
+        "city": "Venice",
+        "region": "Los Angeles County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.17815502094619,
+          34.625073538267486
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "10/05/2016",
+        "city": "Palmdale",
+        "region": "Los Angeles County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.97645827717282,
+          37.29636826575491
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/14/2017",
+        "city": "Gustine",
+        "region": "Merced County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.3534931012735,
+          34.13000981287042
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/18/2017",
+        "city": "Rialto",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.96933818902524,
+          37.286753601157805
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/25/2017",
+        "city": "Gustine",
+        "region": "Merced County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.35168563547677,
+          34.133758075897745
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "07/26/2017",
+        "city": "Rialto",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.35456371754577,
+          34.127930256031405
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/02/2017",
+        "city": "Rialto",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.35899758234908,
+          34.127833583419836
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/16/2017",
+        "city": "Rialto",
+        "region": "San Bernardino County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.06241663379531,
+          34.680136004082875
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/13/2017",
+        "city": "Lancaster",
+        "region": "Los Angeles County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.11853904186542,
+          34.5610411456705
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "09/27/2017",
+        "city": "Palmdale",
+        "region": "Los Angeles County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.3378948582166,
+          37.2523994794886
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/17/2018",
+        "city": "Merced",
+        "region": "Merced County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.32996652261058,
+          37.256880552910935
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "date": "08/30/2018",
+        "city": "Merced",
+        "region": "Merced County (California, USA)",
+        "positive": "SLEV",
+        "title": "YTD Positive Sentinel Chicken"
+      }
+    }
+  ]
+}
