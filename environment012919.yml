@@ -1,7 +1,7 @@
 name: nmpFinalProject
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
   - attrs=18.2.0=py_0
   - backcall=0.1.0=py_0
