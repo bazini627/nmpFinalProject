@@ -8,3 +8,11 @@ here in California of St. Louis Encephalitis since about 2015.
 I'm thinking about using this data in conjunction with some CDC data for census tracts that have been deemed vulnerable according to their [Social Vulnerability Index](https://svi.cdc.gov/).  With this map in it's current incarnation we can see where WNV/SLE 
 outbreaks may be occurring and with my project I'd like to make an attempt at showing who may be affected the most by these viruses.  I have a vague idea of a dashboard which would basically just use a point-in-polygon analysis to display how many positive 
 detections exist within a given SVI for a particular county. I'd also like to maybe show trends for WNV/SLE for CA and counties as another component of the dashboard.      
+
+### Data Sources
+
+[CDC Social Vulnerability Index (SVI)](https://svi.cdc.gov/data-and-tools-download.html)
+
+[California Surveillance Gateway Maps](https://maps.calsurv.org/)
+
+
