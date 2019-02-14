@@ -8,6 +8,21 @@ I'm thinking about using this data in conjunction with some CDC data for census 
 outbreaks may be occurring and with my project I'd like to make an attempt at showing who may be affected the most by these viruses.  I have a vague idea of a dashboard which would basically just use a point-in-polygon analysis to display how many positive 
 detections exist within a given SVI for a particular county. I'd also like to maybe show trends for WNV/SLE for CA and counties as another component of the dashboard.      
 
+### Thoughts For Maps
+
+1. Time series map with slider to display WNV & SLE Data.
+
+2.  Individual maps for 2016, 2014, and 2010 showing detections overlayed with CDC layer for vulnerable census tracts.
+    
+3. Point in polygon analysis for these years?
+     
+     - Are we seeing more detections in tracts that were deemed vulnerable than in those that have not?
+     - Did we see an increase in detections in vulnerable tracts for these years?
+     - What's the cutoff for SVI index to determine most vulnerable?
+     - Demographics of these census tracts that are seeing detections
+
+4. Hexbin map for these years possibly?
+
 ### Data Sources
 
 [CDC Social Vulnerability Index (SVI)](https://svi.cdc.gov/data-and-tools-download.html)
