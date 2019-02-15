@@ -20,6 +20,8 @@ West Nile Virus is pretty well known at this point but we've seen a reemergence 
 ### Data Sources
 
 [CDC Social Vulnerability Index (SVI)](https://svi.cdc.gov/data-and-tools-download.html)
+The CDC describes their Social Vulnerability index as a way to measure the ability of a community to withstand "external stresses on human health, such as natural or human-caused disasters, or disease outbreaks".  The Social Vulnerability Index has adopted "15 
+U.S. census variables at the tract level" to aid in the identification of communities that would potentially need help in being able to prepare for, or recover from, a disaster which could dramtically afffect its public health and well-being.
 
 [California Surveillance Gateway Maps](https://maps.calsurv.org/)
 
