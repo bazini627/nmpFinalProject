@@ -23,4 +23,6 @@ West Nile Virus is pretty well known at this point but we've seen a reemergence 
 
 [California Surveillance Gateway Maps](https://maps.calsurv.org/)
 
+![California Surveillance Gateway Map](C:\Users\MBacinsk\Pictures\csgMap.png)
+
 
