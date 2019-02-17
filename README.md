@@ -28,4 +28,88 @@ U.S. census variables at the tract level" to aid in the identification of commun
 
 ![California Surveillance Gateway Map](./images/csgMap.PNG)
 
+### PostGIS Analysis For SLE Positives In Vulnerable Census Tracts For 2016
+
+### Added CDC 2016 GeoJSON to PostGIS with:
+
+`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" cdcSVI2016.geojson -nln data.cdc_svi_2016`
+
+
+### Added SLE GeoJSON to PostGIS with:
+
+`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018.geojson -nln data.sle_2015_2018`
+
+
+### Changed date column in SLE table to date type from string with:
+
+```sql
+ALTER TABLE data.sle_2015_2018
+ALTER COLUMN date TYPE date using to_date(date, 'MM/DD/YYYY');
+```
+
+
+### Reproject point geometry in sle table to  CA Albers
+```sql
+alter table data.sle_2015_2018
+alter column wkb_geometry
+type geometry(Point, 3310)
+using st_transform(wkb_geometry, 3310);
+```
+
+
+### Reproject polygon/multipolygon geometry in a cdc 2016 table to CA Albers
+```sql
+alter table data.cdc_svi_2016
+alter column wkb_geometry
+type geometry(Geometry, 3310)
+using st_transform(wkb_geometry, 3310);
+```
+
+### Rename tables to reflect geometry projection
+
+```sql
+ALTER TABLE data.cdc_svi_2016
+RENAME TO cdc_svi_2016_3310;
+```
+
+```sql
+ALTER TABLE data.cdc_svi_2016
+RENAME TO cdc_svi_2016_3310;
+```
+
+
+### Points within CDC SVI polygons with overal vulnerability value of >= .75 
+```sql
+ SELECT year_2016.city,
+    year_2016.region,
+    year_2016.title,
+    year_2016.wkb_geometry
+   FROM ( SELECT sle_2015_2018.ogc_fid,
+            sle_2015_2018.date,
+            sle_2015_2018.city,
+            sle_2015_2018.region,
+            sle_2015_2018.positive,
+            sle_2015_2018.title,
+            sle_2015_2018.wkb_geometry
+           FROM data.sle_2015_2018
+          WHERE date_part('year'::text, sle_2015_2018.date) = '2016'::double precision) year_2016
+     JOIN data.cdc_svi_2016 ON st_dwithin(year_2016.wkb_geometry, cdc_svi_2016.wkb_geometry, 0::double precision)
+  WHERE cdc_svi_2016.rpl_themes >= 0.75::double precision;
+```
+
+
+### Counts of detections by city for 2016 from sle table
+
+```sql
+SELECT count(*) as theCount, city 
+  FROM 
+  (
+	  select * from data.sle_2015_2018 where EXTRACT(YEAR FROM date) = '2016'
+  ) as city_counts
+  GROUP BY city
+  Order By theCount DESC
+```
+
+
+
 
