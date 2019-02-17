@@ -30,6 +30,7 @@ West Nile Virus is pretty well known at this point but we've seen a reemergence 
      JOIN data.cdc_svi_2016 ON st_dwithin(year_2016.wkb_geometry, cdc_svi_2016.wkb_geometry, 0::double precision)
   WHERE cdc_svi_2016.rpl_themes >= 0.75::double precision;
     ```
+    
      - Did we see an increase in detections in vulnerable tracts for these years?
      - What's the cutoff for SVI index to determine most vulnerable?
      - Demographics of these census tracts that are seeing detections
