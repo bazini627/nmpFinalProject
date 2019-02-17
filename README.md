@@ -30,17 +30,17 @@ U.S. census variables at the tract level" to aid in the identification of commun
 
 ### PostGIS Analysis For SLE Positives In Vulnerable Census Tracts For 2016
 
-### Added CDC 2016 GeoJSON to PostGIS with:
+#### Add CDC 2016 GeoJSON to PostGIS
 
 `ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" cdcSVI2016.geojson -nln data.cdc_svi_2016`
 
 
-### Added SLE GeoJSON to PostGIS with:
+#### Add SLE GeoJSON to PostGIS
 
 `ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018.geojson -nln data.sle_2015_2018`
 
 
-### Changed date column in SLE table to date type from string with:
+#### Change date column in SLE table to date type from string
 
 ```sql
 ALTER TABLE data.sle_2015_2018
@@ -48,7 +48,7 @@ ALTER COLUMN date TYPE date using to_date(date, 'MM/DD/YYYY');
 ```
 
 
-### Reproject point geometry in sle table to  CA Albers
+#### Reproject point geometry in SLE table to  CA Albers
 ```sql
 alter table data.sle_2015_2018
 alter column wkb_geometry
@@ -57,7 +57,7 @@ using st_transform(wkb_geometry, 3310);
 ```
 
 
-### Reproject polygon/multipolygon geometry in a cdc 2016 table to CA Albers
+#### Reproject polygon/multipolygon geometry in CDC 2016 table to CA Albers
 ```sql
 alter table data.cdc_svi_2016
 alter column wkb_geometry
@@ -65,7 +65,7 @@ type geometry(Geometry, 3310)
 using st_transform(wkb_geometry, 3310);
 ```
 
-### Rename tables to reflect geometry projection
+#### Rename tables to reflect geometry projection
 
 ```sql
 ALTER TABLE data.cdc_svi_2016
@@ -78,7 +78,7 @@ RENAME TO cdc_svi_2016_3310;
 ```
 
 
-### Points within CDC SVI polygons with overal vulnerability value of >= .75 
+#### Points within CDC SVI polygons with overall vulnerability value of >= .75 
 ```sql
  SELECT year_2016.city,
     year_2016.region,
@@ -98,7 +98,7 @@ RENAME TO cdc_svi_2016_3310;
 ```
 
 
-### Counts of detections by city for 2016 from sle table
+#### Counts of detections by city for 2016 from sle table
 
 ```sql
 SELECT count(*) as theCount, city 
@@ -109,7 +109,3 @@ SELECT count(*) as theCount, city
   GROUP BY city
   Order By theCount DESC
 ```
-
-
-
-
