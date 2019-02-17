@@ -84,17 +84,17 @@ RENAME TO cdc_svi_2016_3310;
     year_2016.region,
     year_2016.title,
     year_2016.wkb_geometry
-   FROM ( SELECT sle_2015_2018.ogc_fid,
-            sle_2015_2018.date,
-            sle_2015_2018.city,
-            sle_2015_2018.region,
-            sle_2015_2018.positive,
-            sle_2015_2018.title,
-            sle_2015_2018.wkb_geometry
-           FROM data.sle_2015_2018
-          WHERE date_part('year'::text, sle_2015_2018.date) = '2016'::double precision) year_2016
-     JOIN data.cdc_svi_2016 ON st_dwithin(year_2016.wkb_geometry, cdc_svi_2016.wkb_geometry, 0::double precision)
-  WHERE cdc_svi_2016.rpl_themes >= 0.75::double precision;
+   FROM ( SELECT sle_2015_2018_3310.ogc_fid,
+            sle_2015_2018_3310.date,
+            sle_2015_2018_3310.city,
+            sle_2015_2018_3310.region,
+            sle_2015_2018_3310.positive,
+            sle_2015_2018_3310.title,
+            sle_2015_2018_3310.wkb_geometry
+           FROM data.sle_2015_2018_3310
+          WHERE date_part('year'::text, sle_2015_2018_3310.date) = '2016'::double precision) year_2016
+     JOIN data.cdc_svi_2016_3310 ON st_dwithin(year_2016.wkb_geometry, cdc_svi_2016_3310.wkb_geometry, 0::double precision)
+  WHERE cdc_svi_2016_3310.rpl_themes >= 0.75::double precision;
 ```
 
 
@@ -104,7 +104,7 @@ RENAME TO cdc_svi_2016_3310;
 SELECT count(*) as theCount, city 
   FROM 
   (
-	  select * from data.sle_2015_2018 where EXTRACT(YEAR FROM date) = '2016'
+	  select * from data.sle_2015_2018_3310 where EXTRACT(YEAR FROM date) = '2016'
   ) as city_counts
   GROUP BY city
   Order By theCount DESC
