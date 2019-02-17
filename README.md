@@ -11,7 +11,7 @@ West Nile Virus is pretty well known at this point but we've seen a reemergence 
 3. Point in polygon analysis for these years?
      
      - Are we seeing more detections in tracts that were deemed vulnerable than in those that have not?
-	- Ran a little bit of analysis for 2016 for SLE in PostGIS and seems like 60% of positives were in census tracts with a vulnerabiltiy value of .75 or higher
+        - Ran a little bit of analysis for 2016 for SLE in PostGIS and seems like 60% of positives were in census tracts with a vulnerabiltiy value of .75 or higher
      - Did we see an increase in detections in vulnerable tracts for these years?
      - What's the cutoff for SVI index to determine most vulnerable?
      - Demographics of these census tracts that are seeing detections
