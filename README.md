@@ -97,6 +97,8 @@ RENAME TO cdc_svi_2016_3310;
   WHERE cdc_svi_2016_3310.rpl_themes >= 0.75::double precision;
 ```
 
+#### Export the above view to a GeoJSON with GDAL
+`ogr2ogr -t_srs EPSG:4326 -s_srs EPSG:3310 -f GeoJSON sle_2016_cdc_svi_gt75.geojson "PG:host=localhost dbname=california user=postgres password=123" -sql "SELECT * FROM data.sle_2016_cdc_svi"`
 
 #### Counts of detections by city for 2016 from sle table
 
