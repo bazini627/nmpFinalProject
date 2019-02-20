@@ -73,23 +73,23 @@ RENAME TO cdc_svi_2016_3310;
 ```
 
 ```sql
-ALTER TABLE data.cdc_svi_2016
-RENAME TO cdc_svi_2016_3310;
+ALTER TABLE data.sle2015_2018
+RENAME TO sle_2015_2018_3310;
 ```
 
 
 #### Points within CDC SVI polygons with overall vulnerability value of >= .75 
 ```sql
  SELECT year_2016.city,
-    year_2016.region,
-    year_2016.title,
+    year_2016.county,
+    year_2016.spectype,
     year_2016.wkb_geometry
    FROM ( SELECT sle_2015_2018_3310.ogc_fid,
             sle_2015_2018_3310.date,
             sle_2015_2018_3310.city,
-            sle_2015_2018_3310.region,
-            sle_2015_2018_3310.positive,
-            sle_2015_2018_3310.title,
+            sle_2015_2018_3310.county,
+            sle_2015_2018_3310.virus,
+            sle_2015_2018_3310.spectype,
             sle_2015_2018_3310.wkb_geometry
            FROM data.sle_2015_2018_3310
           WHERE date_part('year'::text, sle_2015_2018_3310.date) = '2016'::double precision) year_2016
@@ -103,11 +103,19 @@ RENAME TO cdc_svi_2016_3310;
 #### Counts of detections by city for 2016 from sle table
 
 ```sql
-SELECT count(*) as theCount, city 
-  FROM 
-  (
-	  select * from data.sle_2015_2018_3310 where EXTRACT(YEAR FROM date) = '2016'
-  ) as city_counts
-  GROUP BY city
-  Order By theCount DESC
+ SELECT count(*) AS thecount,
+    city_counts.city,
+    city_counts.spectype,
+    city_counts.county
+   FROM ( SELECT sle_2015_2018_3310.ogc_fid,
+            sle_2015_2018_3310.date,
+            sle_2015_2018_3310.city,
+            sle_2015_2018_3310.county,
+            sle_2015_2018_3310.virus,
+            sle_2015_2018_3310.spectype,
+            sle_2015_2018_3310.wkb_geometry
+           FROM data.sle_2015_2018_3310
+          WHERE date_part('year'::text, sle_2015_2018_3310.date) = '2016'::double precision) city_counts
+  GROUP BY city_counts.city, city_counts.county, city_counts.spectype
+  ORDER BY (count(*)) DESC;
 ```
