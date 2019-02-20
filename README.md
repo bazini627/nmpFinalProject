@@ -37,7 +37,7 @@ U.S. census variables at the tract level" to aid in the identification of commun
 
 #### Add SLE GeoJSON to PostGIS
 
-`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018.geojson -nln data.sle_2015_2018`
+`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018_cleaned.geojson -nln data.sle_2015_2018`
 
 
 #### Change date column in SLE table to date type from string
