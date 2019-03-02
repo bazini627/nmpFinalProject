@@ -10,14 +10,12 @@
 { "type": "Feature", "properties": { "city": "Bakersfield", "county": "Kern", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -118.941204391111, 35.346185255890703 ] } },
 { "type": "Feature", "properties": { "city": "Bakersfield", "county": "Kern", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -119.004894987328527, 35.377683394408578 ] } },
 { "type": "Feature", "properties": { "city": "Bakersfield", "county": "Kern", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -118.974317234406286, 35.285489083440282 ] } },
-{ "type": "Feature", "properties": { "city": null, "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.073791212632756, 33.52318183677199 ] } },
 { "type": "Feature", "properties": { "city": "Bakersfield", "county": "Kern", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -119.011398495879959, 35.376871060601822 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.026372756447842, 33.526474282287509 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.025712050761925, 33.525471972700338 ] } },
 { "type": "Feature", "properties": { "city": "Lamont", "county": "Kern", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -118.937175597311992, 35.28384143286744 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.077420133295391, 33.537557755915934 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.076556811930672, 33.522713909328722 ] } },
-{ "type": "Feature", "properties": { "city": null, "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.070231544728671, 33.522060392079943 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.080651571245852, 33.520842104057877 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.096558535164235, 33.530074829369624 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.093600814700466, 33.527444373342099 ] } },
@@ -124,6 +122,8 @@
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.077920763885828, 33.460785844961855 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -115.961258453698875, 33.521785534033747 ] } },
 { "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.06435997097573, 33.531381469134793 ] } },
-{ "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.091042931133742, 33.523360319591809 ] } }
+{ "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.091042931133742, 33.523360319591809 ] } },
+{ "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.073791212632756, 33.52318183677199 ] } },
+{ "type": "Feature", "properties": { "city": "Mecca", "county": "Riverside", "spectype": "Mosquito Pool" }, "geometry": { "type": "Point", "coordinates": [ -116.070231544728671, 33.522060392079943 ] } }
 ]
 }
