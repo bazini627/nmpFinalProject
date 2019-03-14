@@ -8,7 +8,7 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
 **II. Methodolgy**
 
-   A. Data
+   *A. Data*
     
    [CDC Social Vulnerability Index (SVI)](https://svi.cdc.gov/data-and-tools-download.html)
    The CDC describes their Social Vulnerability index as a way to measure the ability of a community to withstand "external stresses on human health, such as natural or human-caused disasters, or disease outbreaks".  The Social Vulnerability Index has adopted "15 U.S. census variables at the tract level" to aid in the identification of communities that would potentially need help in being able to prepare for, or recover from, a disaster which could dramtically afffect its public health and well-being.
@@ -21,20 +21,20 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
    **ADD SCREENSHOT OF DATA HERE**
 
-   B. Medium For Delivery
+   *B. Medium For Delivery*
 
    The final deliverable will be a web-browser based application making use of HTML, CSS, JavaScript, and [Leaflet](https://leafletjs.com/).  
    
-   C. Application Layout
+   *C. Application Layout*
     
    Something I've definitely neglected to really think about  
    
-   D. Thematic Representation
+   *D. Thematic Representation*
    
    WNV and SLEV surveillance data will be represented as points while vulnerable census tracts and CA counties will be polygons.
    
    
-   E. User Interaction
+   *E. User Interaction*
 
    1. Time series map with slider to display WNV & SLE Data.
       - User will move slider to display data for give year (or date range)
@@ -52,6 +52,6 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
    I've tended to like darker themes since there tends to be more pop with the data displayed.  I've also used the [Vollkhorn](https://fonts.google.com/specimen/Vollkorn) font in a lot (or probably most) of my mapping projects and am leaning that way for a font but could be persuaded to venuture out.  
   
-   G. Conclusion
-   
+   *G. Conclusion*
+
    There have been [efforts](https://verily.com/projects/interventions/debug/) in California to reduce the population of the invasive Aedes aegypti mosquitoes which can transmit Dengue, Zika, Chikungunya and Yellow Fever by releasing sterile male mosquitoes.  WNV and SLEV are transmitted by the native Culex mosquitoes in California.  One of the easiest preventative measures that can be taken is the removal of any standing water that would allow the Culex mosquitoes to breed easily in densely populated areas.  This mapping project could possibly help identify census tracts where residents are especially vulnerable and potentially aid in education campaigns in these areas to help reduce the Culex populations. 
