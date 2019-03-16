@@ -18,8 +18,9 @@ In the web map linked in the data sources section below we can see where WNV/SLE
    ![California Surveillance Gateway Map](./images/csgMap.PNG)
    
    Data was cleaned and manipulated using [Pandas](https://pandas.pydata.org/), [Geopandas](http://geopandas.org/), and [Jupyter Notebooks](https://jupyter.org/).  Point-in-polygon analysis was performed on data using [PostgreSQL](https://www.postgresql.org/)/[PostGIS](https://postgis.net/).  The anticpated format for the finalized and cleaned data will be GeoJSON.  
-
-   **ADD SCREENSHOT OF DATA HERE**
+  
+  *Example of cleaned up data:*  
+  ![SLEV Cleaned Data](./images/sleCleanedData.png)
 
    *B. Medium For Delivery*
 
