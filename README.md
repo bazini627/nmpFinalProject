@@ -28,7 +28,7 @@ In the web map linked in the data sources section below we can see where WNV/SLE
    
    *C. Application Layout*
     
-   Something I've definitely neglected to really think about  
+  ![Wireframe of potential layout](./images/wireFrame.jpg) 
    
    *D. Thematic Representation*
    
