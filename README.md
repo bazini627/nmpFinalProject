@@ -47,7 +47,7 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
    *F. Aesthetics and design considerations*
 
-   I've tended to like darker themes in many of my projects since there tends to be more pop with the data displayed.  I've also used the [Vollkhorn](https://fonts.google.com/specimen/Vollkorn) font in a lot (or probably most) of my mapping projects and am leaning that way for a font but could be persuaded to venuture out.  Below is an example of a previous project where a similar theme ([Stamen Toner](http://maps.stamen.com/toner/#12/37.7706/-122.3782)) may work well: 
+   I've tended to like darker themes in many of my projects since there tends to be more pop with the data displayed.  I've also used the [Vollkhorn](https://fonts.google.com/specimen/Vollkorn) font in a lot (or probably most) of my mapping projects and am leaning that way for a font but could be persuaded to venuture out.  Below is an example of a previous [project](https://bazini627.github.io/richGeoTracker) where a similar theme ([Stamen Toner](http://maps.stamen.com/toner/#12/37.7706/-122.3782)) may work well: 
 
    ![geotracker map](./images/geotracker.png)    
   
