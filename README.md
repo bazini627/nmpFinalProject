@@ -1,4 +1,4 @@
-# [West Nile Virus](https://www.cdc.gov/westnile/index.html) and [St. Louis Encephalitis](https://www.cdc.gov/sle/) In California's Vulnerable Communities
+# <a target = '_blank' href="https://www.cdc.gov/westnile/index.html">West Nile Virus</a> and [St. Louis Encephalitis](https://www.cdc.gov/sle/) In California's Vulnerable Communities
 
 **I. Introduction**
 
