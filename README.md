@@ -24,7 +24,7 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
    *B. Medium For Delivery*
 
-   The final deliverable will be a web-browser based application making use of HTML, CSS, JavaScript, and [Leaflet](https://leafletjs.com/).  
+   The final deliverable will be a web-browser based application making use of HTML, CSS, JavaScript, and [Leaflet](https://leafletjs.com/).  Currently point-in-polygon analyis is being done on the back-end with [PostgreSQL](https://www.postgresql.org/)/[PostGIS](https://postgis.net/), but [Turf.js](https://turfjs.org/) could possibly be used to allow the user to perfrom the point-in-polygon analysis.    
    
    *C. Application Layout*
     
@@ -32,26 +32,24 @@ In the web map linked in the data sources section below we can see where WNV/SLE
    
    *D. Thematic Representation*
    
-   WNV and SLEV surveillance data will be represented as points while vulnerable census tracts and CA counties will be polygons.
+   WNV and SLEV surveillance data in the time series map will be represented as points with separate colors for each virus.  California counties will be represented with polygons so as to give a better idea where positive detections have been occurring within California.  CDC identified vulnerable census tracts will be represented in static maps (although a more interactive map may be possiblity) with poloygons.  Vulnerable census tracts have been identified by the CDC for 2010, 2014, and 2016 and a density for each of these viruses in these tracts will be reprepresented using hexbin mapping.  WNV data goes back to 2003 and each of these years will have a static map, but SLEV data only goes back to 2015 which means there will only be a map for 2016 for this virus.     
    
    
    *E. User Interaction*
 
    1. Time series map with slider to display WNV & SLE Data.
-      - User will move slider to display data for give year (or date range)
-      - Possible maual entry of a data range
+   
+      Users will be able to move a slider to view the positive detections of WNV and SLEV throughout 2003 -2018 in California.  The individual point data will also be able to be interacted with by giving the user the option to click on a point to view more in depth information.  The data that will be available for a given point will be the city, county, collection dates, specimen type (Mosquito or Sentinel Chicken), virus.  
     
    2. Individual maps for 2016, 2014, and 2010 showing detections overlayed with CDC layer for vulnerable census tracts.
-      - Static maps for each year so no interactivity most likely
-    
-   3. Point in polygon analysis for these years?
-      - Most likely easiest done on back-end in Postgres/PostGIS but open to working with Turf.js
    
-   4. Hexbin map for these years possibly?
+      Static maps for each year so no interactivity most likely.
 
    *F. Aesthetics and design considerations*
 
-   I've tended to like darker themes since there tends to be more pop with the data displayed.  I've also used the [Vollkhorn](https://fonts.google.com/specimen/Vollkorn) font in a lot (or probably most) of my mapping projects and am leaning that way for a font but could be persuaded to venuture out.  
+   I've tended to like darker themes in many of my projects since there tends to be more pop with the data displayed.  I've also used the [Vollkhorn](https://fonts.google.com/specimen/Vollkorn) font in a lot (or probably most) of my mapping projects and am leaning that way for a font but could be persuaded to venuture out.  Below is an example of a previous project where a similar theme ([Stamen Toner](http://maps.stamen.com/toner/#12/37.7706/-122.3782)) may work well: 
+
+   ![geotracker map](./images/geotracker.png)    
   
    *G. Conclusion*
 
