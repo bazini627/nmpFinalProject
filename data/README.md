@@ -17,6 +17,10 @@ ALTER TABLE data.sle_2015_2018
 ALTER COLUMN date TYPE date using to_date(date, 'MM/DD/YYYY');
 ```
 
+#### Change date field unix timestamps
+```
+extract(EPOCH from data.sle_2015_2018.date) as date_timestamp
+```
 
 #### Reproject point geometry in SLE table to  CA Albers
 ```sql
