@@ -1,4 +1,4 @@
-### PostGIS Analysis For SLE Positives In Vulnerable Census Tracts For 2016
+### PostGIS Analysis For SLEV/WNV Positives In Vulnerable Census Tracts For 2016
 
 #### Add CDC 2016 GeoJSON to PostGIS
 
