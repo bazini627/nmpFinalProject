@@ -5,12 +5,12 @@
 `ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" cdcSVI2016.geojson -nln data.cdc_svi_2016`
 
 
-#### Add SLE GeoJSON to PostGIS
+#### Add SLEV GeoJSON to PostGIS
 
 `ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018_cleaned.geojson -nln data.sle_2015_2018`
 
 
-#### Change date column in SLE table to date type from string
+#### Change date column in SLEV table to date type from string
 
 ```sql
 ALTER TABLE data.sle_2015_2018
@@ -23,7 +23,7 @@ ALTER COLUMN date TYPE date using to_date(date, 'MM/DD/YYYY');
 extract(EPOCH from data.sle_2015_2018.date) as date_timestamp
 ```
 
-#### Reproject point geometry in SLE table to  CA Albers
+#### Reproject point geometry in SLEV table to  CA Albers
 
 ```sql
 alter table data.sle_2015_2018
@@ -79,7 +79,7 @@ RENAME TO sle_2015_2018_3310;
 
 `ogr2ogr -t_srs EPSG:4326 -s_srs EPSG:3310 -f GeoJSON sle_2016_cdc_svi_gt75.geojson "PG:host=localhost dbname=california user=postgres password=123" -sql "SELECT * FROM data.sle_2016_cdc_svi"`
 
-#### Working with the WNV data was similar to the SLE commands above with one exception.
+#### Working with the WNV data was similar to the SLEV commands above with one exception.
 #### Since the date column was a list of strings (e.g. `8-19-2003, 9-2-2003`) a new `date_array` column was created to work with instead of manipulating the original column.
 ```sql
 -- Add a data_array column to hold a copy of the date column to manipulate as an array type
@@ -113,7 +113,7 @@ alter table data.wnv_2003_2018_3310 alter date_array set default '{}';
      JOIN data.cdc_svi_2010_3310 ON st_dwithin(year_2010.wkb_geometry, cdc_svi_2010_3310.wkb_geometry, 0::double precision)
 ```
 
-#### Counts of detections by city for 2016 from sle table
+#### Counts of detections by city for 2016 from SLEV table
 
 ```sql
  SELECT count(*) AS thecount,
