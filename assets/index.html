@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- CARTO.js -->
+  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+  <!-- latest version of jquery -->
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+  
+  <!-- style sheet for CARTO.js -->
+  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  <!-- style sheet for google fonts -->
+  <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: whitesmoke;
+    font-family: "Vollkorn";
+    color: #0D0000;
+  }
+  header {
+    padding:6px 10%;
+  }
+  #map {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+  }
+  h1 {
+    position: absolute; /* Postion relative to parent element (body) */
+    z-index: 650; /* Ensures element will be higher in stacking order */
+    top: 10px;
+    left: 15px;
+    padding: 8px 15px;
+    margin: 0;
+    color: whitesmoke;
+    font-size: 1.5em;
+    background: gray;
+    border-radius: 5px
+  }
+  </style>
+</head>
+<body>
+  <h1>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</h1>
+
+  <div id='map'></div>
+
+  <!-- Styling For points-->
+  <script type="cartocss/html" id="site-styles">
+    #sle_sites {
+      marker-fill-opacity: 0.9;
+      marker-line-color: #000000;
+      marker-line-width: 1.25;
+      marker-line-opacity: 1;
+      marker-placement: point;
+      marker-type: ellipse;
+      marker-width: 7;
+      marker-allow-overlap: true;
+      [zoom > 12]{
+        marker-width: 9;
+      }
+    }
+  </script>
+
+  <script>
+  // Object to hold map options
+  var options = {
+    center: [37.9200, -121.89],
+    zoom: 6,
+    minZoom: 6,
+    maxZoom: 19,
+    zoomControl: false,
+  },
+  // Create map object and pass it our options
+  map = L.map('map', options);
+
+  // Load map tiles from CARTO and add to map
+  var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a> | Map Authored by <a href="https://bazini627.github.io/" target="blank">Matthew Bacinskas</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Move zoom controls to bottom left
+  L.control.zoom({
+    position:'topright'
+  }).addTo(map);
+
+  // SLE layer to be added to map
+  var layerSource = {
+        user_name: 'mjbmaps',
+        type: 'cartodb',
+        sublayers: [{
+        sql: "SELECT * FROM mjbmaps.sle2015_2018_cleaned",
+        cartocss: $("#site-styles").text()
+      }]
+    }
+
+  // Add layer to map
+  cartodb.createLayer(map, layerSource, { https: true }).addTo(map)
+
+  </script>
+</body>
+</html>
