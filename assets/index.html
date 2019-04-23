@@ -110,7 +110,20 @@
     }
 
   // Add layer to map
-  cartodb.createLayer(map, layerSource, { https: true }).addTo(map)
+  var sublayers = []; // Array to hold our layers
+  
+  cartodb.createLayer(map, layerSource, { https: true })
+    .addTo(map)
+    .done(function(layer) {
+      for (var i = 0; i < layer.getSubLayerCount(); i++) {
+        sublayers[i] = layer.getSubLayer(i);
+        cartodb.vis.Vis.addInfowindow(map, sublayers[i], ['city','spectype','virus','date']);
+        }
+      })
+      .error(function(err) {
+        console.log("An error occurred: " + err);
+      });
+    console.log(sublayers)
 
   </script>
 </body>
