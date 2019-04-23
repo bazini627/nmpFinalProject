@@ -53,7 +53,7 @@
 
   <!-- Styling For points-->
   <script type="cartocss/html" id="site-styles">
-    #sle_sites {
+    #positive_sites {
       marker-fill-opacity: 0.9;
       marker-line-color: #000000;
       marker-line-width: 1.25;
@@ -66,9 +66,13 @@
         marker-width: 9;
       }
     }
+    #positive_sites[virus="WNV"] {
+      marker-fill: 'yellow';
+    }
   </script>
 
   <script>
+
   // Object to hold map options
   var options = {
     center: [37.9200, -121.89],
@@ -92,14 +96,17 @@
     position:'topright'
   }).addTo(map);
 
-  // SLE layer to be added to map
+  // SLEV/WNV layers to be added to map
   var layerSource = {
         user_name: 'mjbmaps',
         type: 'cartodb',
         sublayers: [{
         sql: "SELECT * FROM mjbmaps.sle2015_2018_cleaned",
         cartocss: $("#site-styles").text()
-      }]
+      },
+      { sql: "SELECT * FROM mjbmaps.wnv2003_2018_cleaned",
+        cartocss: $("#site-styles").text()}
+      ]
     }
 
   // Add layer to map
