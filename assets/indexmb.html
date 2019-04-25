@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Module 05</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin:0;
+            padding:0;
+        }
+        #map {
+            position:absolute;
+            top:0; bottom:0;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+<script>
+
+  mapboxgl.accessToken = '<MAPBOX TOKEN>';
+
+  var map = new mapboxgl.Map({
+      container: 'map', 
+      style: 'mapbox://styles/mapbox/dark-v9', 
+      center: [-120.38, 37.98], 
+      zoom: 5.5 
+  });
+
+  map.on('load', function() {
+      // SLEV Layer
+      map.addLayer({
+          'id': 'sle2015_2018_cleaned',
+          'type': 'circle',
+          'source': {
+              type: 'vector',
+              url: 'mapbox://bazini627.cjuu96jwa00ey2wo9d6hljxbh-5smzt'
+          },
+          'source-layer': 'sle2015_2018_cleaned',
+          'layout': {},
+          "paint": {
+              'circle-color': '#8dd3c7'
+          } 
+      });
+      // WNV Layer
+      map.addLayer({
+          'id': 'original',
+          'type': 'circle',
+          'source': {
+              type: 'vector',
+              url: 'mapbox://bazini627.wnv2003_2018_cleaned'
+          },
+          'source-layer': 'original',
+          'layout': {},
+          "paint": {
+              'circle-color': '#ffffb3'
+          } 
+      });
+
+  });
+</script>
+
+</body>
+</html>
