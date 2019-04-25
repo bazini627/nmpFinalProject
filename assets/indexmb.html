@@ -24,7 +24,7 @@
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
 <script>
 
-  mapboxgl.accessToken = '<MAPBOX TOKEN>';
+  mapboxgl.accessToken = '<MAPBOX TOKEN>>';
 
   var map = new mapboxgl.Map({
       container: 'map', 
@@ -34,6 +34,20 @@
   });
 
   map.on('load', function() {
+    // CA County Layer
+    map.addLayer({
+          'id': 'caCountiesNoChannelIslands-85jvh9',
+          'type': 'line',
+          'source': {
+              type: 'vector',
+              url: 'mapbox://bazini627.cvxgh4hd'
+          },
+          'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+          'layout': {},
+          "paint": {
+              'line-color': '#d3d3d3'
+          } 
+      });
       // SLEV Layer
       map.addLayer({
           'id': 'sle2015_2018_cleaned',
@@ -62,6 +76,7 @@
               'circle-color': '#ffffb3'
           } 
       });
+      
 
   });
 </script>
