@@ -61,7 +61,7 @@
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
 <script>
 
-  mapboxgl.accessToken = 'MAPBOX KEY';
+  mapboxgl.accessToken = '<MAPBOX TOKEN>';
 
   var map = new mapboxgl.Map({
       container: 'map', 
@@ -102,8 +102,6 @@
         },
         "paint": {
             'circle-color': '#ffffb3'
-            //'circle-stroke-color': '#000000', 
-            //'circle-stroke-width': 1
         },
         'source-layer': 'original', 
     });
@@ -121,13 +119,11 @@
         },
         "paint": {
             'circle-color': '#8dd3c7'
-            //'circle-stroke-color': '#000000',
-            //'circle-stroke-width': 1
         },
         'source-layer': 'sle2015_2018_cleaned', 
     });
 
-    var toggleableLayerIds = [ 'Counties', 'WNV','SLEV' ];
+    var toggleableLayerIds = ['WNV','SLEV'];
     
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
