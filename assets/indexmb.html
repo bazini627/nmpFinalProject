@@ -61,7 +61,7 @@
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
 <script>
 
-  mapboxgl.accessToken = '<MAPBOX TOKEN>';
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYmF6aW5pNjI3IiwiYSI6ImVmZTNiM2VlZTlhMjk0NzE3MjU5YmEzZWVkYjUwNjAzIn0.idDK-FJKJn3Q7StDtBOX-g';
 
   var map = new mapboxgl.Map({
       container: 'map', 
@@ -71,6 +71,7 @@
   });
 
   map.on('load', function() {
+    
     // CA County Layer
     map.addSource('Counties', {
         type: 'vector',
@@ -88,6 +89,7 @@
           },
           'source-layer': 'caCountiesNoChannelIslands-85jvh9', 
     }); 
+    
     // WNV Layer
     map.addSource('WNV', {
         type: 'vector',
@@ -105,6 +107,7 @@
         },
         'source-layer': 'original', 
     });
+    
     // SLEV Layer
     map.addSource('SLEV', {
         type: 'vector',
@@ -123,13 +126,23 @@
         'source-layer': 'sle2015_2018_cleaned', 
     });
 
+    // Create layer toggle
     var toggleableLayerIds = ['WNV','SLEV'];
     
+    // Loop through previously declared toggleableLayerIds array 
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
+        
+        // Creates an anchor element (a<>)
         var link = document.createElement('a');
+        
+        // Equvialent to <a href=#>
         link.href = '#';
+        
+        // Equvialent to <a href=#> class=active>
         link.className = 'active';
+        
+        // Sets text in box for layer switcher to WNV and SLEV
         link.textContent = id;
         
         link.onclick = function (e) {
@@ -138,18 +151,23 @@
             e.preventDefault();
             e.stopPropagation();
             
+            // Looks at visibilty property declared above in map.addLayer
             var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-            
+        
+            // If property is visible then a click will remove the layer from being displayed
             if (visibility === 'visible') {
                 map.setLayoutProperty(clickedLayer, 'visibility', 'none');
                 this.className = '';
             } 
+            
+            // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
             else {
                 this.className = 'active';
                 map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
             }
         };
     
+    // Get the nav menu element and append the class and href to it
     var layers = document.getElementById('menu');
     layers.appendChild(link);
     }
