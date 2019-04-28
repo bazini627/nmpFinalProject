@@ -203,11 +203,37 @@
         };
     
     // Get the nav menu element and append the class and href to it
-    var layers = document.getElementById('menu');
-    layers.appendChild(link);
+    var tileLayers = document.getElementById('menu');
+    tileLayers.appendChild(link);
     }
-      
 
+    // Create popup but hold off on adding to the map
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
+
+    // Works  
+    map.on('mouseenter', 'places', function(e) {
+        var features = map.queryRenderedFeatures(e.point);
+        console.log(features);
+    });
+    
+    // ??? Doesn't work but seems like it should
+    // // Add an event listener event for when the mouse enters the map
+    // map.on('mouseenter', function(e) {
+        
+    //     // Query all the rendered points in the view
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ['WNV'] });
+        
+    //     // Change the cursor to a point to notify user some interactivity may be available
+    //     map.getCanvas().style.cursor = 'pointer';
+
+    //     console.log(features)
+
+    //     // Populate popup based on the coordinantes of the feature
+    //     pop.setLngLat(e.features[0].geometry.coordinates)
+    // });
   });
 </script>
 
