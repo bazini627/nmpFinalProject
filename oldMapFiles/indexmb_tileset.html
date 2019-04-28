@@ -135,7 +135,7 @@
         'type': 'circle',
         'source': 'WNV',
         'layout': {
-        'visibility': 'visible'
+        'visibility': 'visible',
         },
         "paint": {
             'circle-color': '#ffffb3'
@@ -153,7 +153,7 @@
         'type': 'circle',
         'source': 'SLEV',
         'layout': {
-        'visibility': 'visible'
+        'visibility': 'visible',
         },
         "paint": {
             'circle-color': '#8dd3c7'
@@ -213,27 +213,24 @@
         closeOnClick: false
     });
 
-    // Works  
-    map.on('mouseenter', 'WNV', function(e) {
-        var features = map.queryRenderedFeatures(e.point);
-        console.log(features);
-    });
-    
-    // ??? Doesn't work but seems like it should
-    // // Add an event listener event for when the mouse enters the map
-    // map.on('mouseenter', function(e) {
+    // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
+    var f = function(e) {
         
-    //     // Query all the rendered points in the view
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ['WNV', 'SLEV] });
+        // Query all the rendered points in the view
+        var features = map.queryRenderedFeatures(e.point, { layers: ['WNV', 'SLEV'] });
         
-    //     // Change the cursor to a point to notify user some interactivity may be available
-    //     map.getCanvas().style.cursor = 'pointer';
+        // Change the cursor to a point to notify user some interactivity may be available
+        map.getCanvas().style.cursor = 'pointer';
 
-    //     console.log(features)
+        console.log(features)
 
-    //     // Populate popup based on the coordinantes of the feature
-    //     pop.setLngLat(e.features[0].geometry.coordinates)
-    // });
+        // Populate popup based on the coordinantes of the feature
+        //pop.setLngLat(e.features[0].geometry.coordinates)
+
+    }
+
+    map.on('mouseenter', 'WNV', f)
+    map.on('mouseenter', 'SLEV', f)
   });
 </script>
 
