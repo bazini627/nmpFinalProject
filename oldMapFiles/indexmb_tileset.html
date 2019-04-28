@@ -214,7 +214,7 @@
     });
 
     // Works  
-    map.on('mouseenter', 'places', function(e) {
+    map.on('mouseenter', 'WNV', function(e) {
         var features = map.queryRenderedFeatures(e.point);
         console.log(features);
     });
@@ -224,7 +224,7 @@
     // map.on('mouseenter', function(e) {
         
     //     // Query all the rendered points in the view
-    //     var features = map.queryRenderedFeatures(e.point, { layers: ['WNV'] });
+    //     var features = map.queryRenderedFeatures(e.point, { layers: ['WNV', 'SLEV] });
         
     //     // Change the cursor to a point to notify user some interactivity may be available
     //     map.getCanvas().style.cursor = 'pointer';
