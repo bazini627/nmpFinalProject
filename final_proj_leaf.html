@@ -47,6 +47,42 @@
                 margin-right: 5px;
                 width: 10px;
             }
+            #layer_selector {
+                background: #3887be;
+                position: absolute;
+                z-index: 400;
+                top: 10px;
+                right: 10px;
+                width: 120px;
+                border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.4);
+                font-family: 'Vollkorn';
+            }
+            #layer_selector ul {
+                padding: 0; margin: 0;
+                list-style-type: none;
+            }
+            #layer_selector li {
+                font-size: 13px;
+                color: #404040;
+                display: block;
+                margin: 0;
+                padding: 0;
+                padding: 10px;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(0,0,0,0.25);
+                text-align: center;
+            }
+            #layer_selector li:hover {
+                background-color: #f8f8f8;
+                cursor: pointer;
+            }
+            #layer_selector li.selected {
+                background-color: #3887be;
+            }
+            #layer_selector li.selected:hover {
+            background: #3074a4;
+            }
         </style>
 
     </head>
@@ -60,6 +96,13 @@
             <div><span style='background-color: #ffffb3'></span>WNV</div>
             <div><span style='background-color: #8dd3c7'></span>SLEV</div>
         </div>
+
+        <div id="layer_selector" class="switcher">
+                <ul>
+                  <li data="WNV">WNV</li>
+                  <li data="SLEV">SLEV</li>
+                </ul>
+              </div>
 
         <!-- Source for latest leaflet subresource integrity enabled -->
         <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
