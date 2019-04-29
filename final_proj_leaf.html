@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>/
+
+        <!-- Style sheet for Leaflet with subresource integrity enabled-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""
+        />
+
+        <!-- style sheet for google fonts -->
+        <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                position: absolute;
+                top:0;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- Div element for map -->
+        <div id='map'></div>
+
+        <!-- Source for latest leaflet subresource integrity enabled -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""
+        ></script>
+
+        <!--Source for latest jquery with subresource integrity enabled -->
+        <script
+        src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+        crossorigin="anonymous"
+        ></script>
+
+        <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+  
+
+        </script>
+        <script>
+            var map;
+            var targetDiv = 'map';
+            
+            // Options for map
+            var options = {
+               center: [37.98, -120.38],
+               zoomControl: false,
+               zoom: 6
+            }
+
+            // Map object we'll pass some items to
+            map = L.map(targetDiv, options);
+
+            // Our tile layer
+            var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            });
+            map.addLayer(tiles);
+
+            // Use jquery to pull in our GeoJSON files
+            $.when(
+                $.getJSON('/data/caCounties/caCountiesNoChannelIslands.geojson'),
+                $.getJSON('/data/wnv/output/wnv2003_2018_cleaned.geojson'),
+                $.getJSON('/data/sle/output/sle2015_2018_cleaned.geojson')
+            ).done(function(counties, wnv, slev) {
+                
+                console.log(counties)
+
+                counties = counties[0];
+                wnv = wnv[0];
+                slev = slev[0]
+
+                console.log(counties)
+
+                // Create layer group for county data
+                var countyLayerGroup = L.geoJson(counties, {
+                style: function(feature) {
+                    return {
+                        color: 'whitesmoke',
+                        weight: 1,
+                    }
+                }}).addTo(map);
+
+                // Create layer group for WNV data
+                var wnvLayerGroup = L.vectorGrid.slicer(wnv, { 
+                    vectorTileLayerStyles: {
+                        sliced: {
+                            radius: 1,
+                            color: '#ffffb3',
+                        }
+                    }
+                }).addTo(map);
+
+                 // Create layer group for SLEV data
+                 var wnvLayerGroup = L.vectorGrid.slicer(slev, { 
+                    vectorTileLayerStyles: {
+                        sliced: {
+                            radius: 1,
+                            color: '#8dd3c7',
+                        }
+                    }
+                }).addTo(map);
+            });
+
+            
+
+
+        </script> 
+    </body>
+</html>
