@@ -181,7 +181,7 @@
                 console.log(wnvLayerGroup)
 
                  // Create layer group for SLEV data
-                 var wnvLayerGroup = L.vectorGrid.slicer(slev, {
+                 var slevLayerGroup = L.vectorGrid.slicer(slev, {
                     rendererFactory: L.canvas.tile, 
                     vectorTileLayerStyles: {
                         sliced: {
@@ -191,10 +191,6 @@
                     }
                 }).addTo(map);
             });
-
-            
-
-
         </script> 
     </body>
 </html>
