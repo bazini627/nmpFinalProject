@@ -101,7 +101,6 @@
         <div id="layer_selector" class="switcher">
                 <ul>
                   <li data="all" class="selected">All Viruses</li>
-                  <li data="Counties">Counties</li>
                   <li data="WNV">WNV</li>
                   <li data="SLEV">SLEV</li>
                 </ul>
@@ -138,6 +137,19 @@
             // Map object we'll pass some items to
             map = L.map(targetDiv, options);
 
+            // Make layers groups accessible globally
+            var countyLayerGroup, wnvLayerGroup, slevLayerGroup;
+
+            // Add an empty data layer group to map
+            var dataLayers = L.layerGroup().addTo(map);
+
+            // Create panes for data layers
+            map.createPane('wnvPane')
+            map.getPane('wnvPane').style.zIndex = 650;
+            map.createPane('slevPane')
+            map.getPane('slevPane').style.zIndex = 700;
+
+
             // Our tile layer
             var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -153,62 +165,53 @@
                 $.getJSON('/data/sle/output/sle2015_2018_cleaned.geojson')
             ).done(function(counties, wnv, slev) {
                 
-                //console.log(counties)
-
-                counties = counties[0];
-                wnv = wnv[0];
-                slev = slev[0]
-
-                //console.log(counties)
-
                 // Create layer group for county data
-                var countyLayerGroup = L.geoJson(counties, {
+                countyLayerGroup = L.geoJson(counties[0], {
                 style: function(feature) {
                     return {
                         color: 'whitesmoke',
                         weight: 1,
                     }
                 }}).addTo(map);
-                //console.log(countyLayerGroup)
 
                 // Create layer group for WNV data
-                var wnvLayerGroup = L.vectorGrid.slicer(wnv, { 
+                wnvLayerGroup = L.vectorGrid.slicer(wnv[0], { 
                     rendererFactory: L.canvas.tile,
                     vectorTileLayerStyles: {
                         sliced: {
                             radius: 1,
                             color: '#ffffb3',
                         }
-                    }
-                }).addTo(map);
-                //console.log(wnvLayerGroup)
+                    },
+                    pane: 'wnvPane'
+                }).addTo(dataLayers);
 
                  // Create layer group for SLEV data
-                 var slevLayerGroup = L.vectorGrid.slicer(slev, {
+                 slevLayerGroup = L.vectorGrid.slicer(slev[0], {
                     rendererFactory: L.canvas.tile, 
                     vectorTileLayerStyles: {
                         sliced: {
                             radius: 1,
                             color: '#8dd3c7',
                         }
-                    }
-                }).addTo(map);
+                    },
+                    pane: 'slevPane'
+                }).addTo(dataLayers);
 
-                createSelector(countyLayerGroup);
+                createSelector();
             });
 
             // Create layer selector
-            function createSelector(layer) {
+            function createSelector() {
                 // JQuery Object for the layer selector ID li element
                 var $options = $('#layer_selector li');
-                console.log(options);
 
                 // Click listener
                 $options.click(function(e) {
                     // Get the virus type of the selection using a JQuery object
                     var $li = $(e.target);
                     var virusType = $li.attr('data');
-                    console.log(virusType)
+                    updateMap(virusType)
 
                     // Deselect all and select the clicked layer
                     // Remove the selected class from all layers
@@ -216,9 +219,33 @@
 
                     // Add selected class to clicked layer
                     $li.addClass('selected') 
-                    console.log($li.attr('class'));
 
                 });
+            }
+
+            function updateMap(virusType) {
+
+                if (virusType == 'WNV') {
+                    // Clear out dataLayers group
+                    dataLayers.clearLayers();
+
+                    // Add only the wnv layer back in
+                    dataLayers.addLayer(wnvLayerGroup);
+                }
+                else if (virusType == 'SLEV') {
+                    // Clear out dataLayers group
+                    dataLayers.clearLayers();
+
+                    // Add only the slev layer back in
+                    dataLayers.addLayer(slevLayerGroup);
+
+                }
+                else {
+                    // Add all the layers
+                    dataLayers.addLayer(wnvLayerGroup);
+                    dataLayers.addLayer(slevLayerGroup);
+                }
+
             }
         </script> 
     </body>
