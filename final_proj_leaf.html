@@ -150,6 +150,10 @@
             map.createPane('slevPane')
             map.getPane('slevPane').style.zIndex = 700;
 
+             // Move zoom controls to bottom left
+             L.control.zoom({
+                 position:'bottomleft'
+            }).addTo(map);
 
             // Our tile layer
             var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
