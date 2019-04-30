@@ -138,6 +138,9 @@
             // Map object we'll pass some items to
             map = L.map(targetDiv, options);
 
+            // make these global for now to access in updateMap
+            var countyLayerGroup, wnvLayerGroup, slevLayerGroup;
+
             // Our tile layer
             var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -146,6 +149,9 @@
             });
             map.addLayer(tiles);
 
+            // add empty layer group to the map
+            var dataLayers = L.layerGroup().addTo(map);
+
             // Use jquery to pull in our GeoJSON files
             $.when(
                 $.getJSON('/data/caCounties/caCountiesNoChannelIslands.geojson'),
@@ -153,26 +159,17 @@
                 $.getJSON('/data/sle/output/sle2015_2018_cleaned.geojson')
             ).done(function(counties, wnv, slev) {
                 
-                //console.log(counties)
-
-                counties = counties[0];
-                wnv = wnv[0];
-                slev = slev[0]
-
-                //console.log(counties)
-
                 // Create layer group for county data
-                var countyLayerGroup = L.geoJson(counties, {
+                countyLayerGroup = L.geoJson(counties[0], {
                 style: function(feature) {
                     return {
                         color: 'whitesmoke',
                         weight: 1,
                     }
-                }}).addTo(map);
-                //console.log(countyLayerGroup)
+                }}).addTo(dataLayers);
 
                 // Create layer group for WNV data
-                var wnvLayerGroup = L.vectorGrid.slicer(wnv, { 
+                wnvLayerGroup = L.vectorGrid.slicer(wnv[0], { 
                     rendererFactory: L.canvas.tile,
                     vectorTileLayerStyles: {
                         sliced: {
@@ -180,11 +177,10 @@
                             color: '#ffffb3',
                         }
                     }
-                }).addTo(map);
-                //console.log(wnvLayerGroup)
-
+                }).addTo(dataLayers);
+           
                  // Create layer group for SLEV data
-                 var slevLayerGroup = L.vectorGrid.slicer(slev, {
+                 slevLayerGroup = L.vectorGrid.slicer(slev[0], {
                     rendererFactory: L.canvas.tile, 
                     vectorTileLayerStyles: {
                         sliced: {
@@ -192,13 +188,13 @@
                             color: '#8dd3c7',
                         }
                     }
-                }).addTo(map);
+                }).addTo(dataLayers);
 
-                createSelector(countyLayerGroup);
+                createSelector();
             });
 
             // Create layer selector
-            function createSelector(layer) {
+            function createSelector() {
                 // JQuery Object for the layer selector ID li element
                 var $options = $('#layer_selector li');
                 console.log(options);
@@ -208,7 +204,8 @@
                     // Get the virus type of the selection using a JQuery object
                     var $li = $(e.target);
                     var virusType = $li.attr('data');
-                    console.log(virusType)
+                    
+                    updateMap(virusType);
 
                     // Deselect all and select the clicked layer
                     // Remove the selected class from all layers
@@ -216,9 +213,27 @@
 
                     // Add selected class to clicked layer
                     $li.addClass('selected') 
-                    console.log($li.attr('class'));
 
                 });
+            }
+
+            function updateMap(virusType) {
+  
+                if(virusType == 'Counties') {
+                    dataLayers.clearLayers();
+                    dataLayers.addLayer(countyLayerGroup);
+                } else if(virusType == 'WNV') {
+                    dataLayers.clearLayers();
+                    dataLayers.addLayer(wnvLayerGroup);
+                } else if (virusType == 'SLEV') {
+                    dataLayers.clearLayers();
+                    dataLayers.addLayer(slevLayerGroup);
+                } else {
+                    dataLayers.addLayer(countyLayerGroup);
+                    dataLayers.addLayer(wnvLayerGroup);
+                    dataLayers.addLayer(slevLayerGroup);
+                }
+                    
             }
         </script> 
     </body>
