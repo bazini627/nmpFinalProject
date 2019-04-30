@@ -122,7 +122,6 @@
 
         <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
   
-
         </script>
         <script>
             var map;
@@ -203,6 +202,7 @@
                     pane: 'slevPane'
                 }).addTo(dataLayers);
 
+                // Function to create the layer selector
                 createSelector();
             });
 
@@ -224,10 +224,10 @@
 
                     // Add selected class to clicked layer
                     $li.addClass('selected') 
-
                 });
             }
 
+            // Function to update map with layer when selector is clicked
             function updateMap(virusType) {
 
                 if (virusType == 'WNV') {
@@ -243,14 +243,12 @@
 
                     // Add only the slev layer back in
                     dataLayers.addLayer(slevLayerGroup);
-
                 }
                 else {
                     // Add all the layers
                     dataLayers.addLayer(wnvLayerGroup);
                     dataLayers.addLayer(slevLayerGroup);
                 }
-
             }
         </script> 
     </body>
