@@ -81,7 +81,7 @@
                 background-color: #3887be;
             }
             #layer_selector li.selected:hover {
-            background: #3074a4;
+                background: #3074a4;
             }
         </style>
 
@@ -99,6 +99,8 @@
 
         <div id="layer_selector" class="switcher">
                 <ul>
+                  <li data="all" class="selected">All Viruses</li>
+                  <li data="Counties">Counties</li>
                   <li data="WNV">WNV</li>
                   <li data="SLEV">SLEV</li>
                 </ul>
@@ -156,7 +158,7 @@
                 wnv = wnv[0];
                 slev = slev[0]
 
-                console.log(counties)
+                //console.log(counties)
 
                 // Create layer group for county data
                 var countyLayerGroup = L.geoJson(counties, {
@@ -166,7 +168,7 @@
                         weight: 1,
                     }
                 }}).addTo(map);
-                console.log(countyLayerGroup)
+                //console.log(countyLayerGroup)
 
                 // Create layer group for WNV data
                 var wnvLayerGroup = L.vectorGrid.slicer(wnv, { 
@@ -178,7 +180,7 @@
                         }
                     }
                 }).addTo(map);
-                console.log(wnvLayerGroup)
+                //console.log(wnvLayerGroup)
 
                  // Create layer group for SLEV data
                  var slevLayerGroup = L.vectorGrid.slicer(slev, {
@@ -190,7 +192,33 @@
                         }
                     }
                 }).addTo(map);
+
+                createSelector(countyLayerGroup);
             });
+
+            // Create layer selector
+            function createSelector(layer) {
+                // JQuery Object for the layer selector ID li element
+                var $options = $('#layer_selector li');
+                console.log(options);
+
+                // Click listener
+                $options.click(function(e) {
+                    // Get the virus type of the selection using a JQuery object
+                    var $li = $(e.target);
+                    var virusType = $li.attr('data');
+                    console.log(virusType)
+
+                    // Deselect all and select the clicked layer
+                    // Remove the selected class from all layers
+                    $options.removeClass('selected')
+
+                    // Add selected class to clicked layer
+                    $li.addClass('selected') 
+                    console.log($li.attr('class'));
+
+                });
+            }
         </script> 
     </body>
 </html>
