@@ -27,9 +27,9 @@
             }
             .legend {
                 background: #f8f8f8;
-                /*background: rgba(255, 255, 255,0.8);*/
                 border-radius: 3px;
-                top: 118px;
+                top: 10px;
+                right: 10px;
                 width: 100px;
                 font: 12px/20px 'Vollkorn';
                 padding: 10px;
@@ -53,8 +53,8 @@
                 background: #f8f8f8;
                 position: absolute;
                 z-index: 400;
-                top: 10px;
-                right: 10px;
+                top: 90px;
+                right: 0px;
                 width: 120px;
                 border-radius: 3px;
                 border: 1px solid rgba(0,0,0,0.4);
@@ -92,21 +92,22 @@
         <!-- Div element for map -->
         <div id='map'></div>
         
-        <!-- Layer selector div -->
-        <div id="layer_selector" class="switcher">
-                <ul>
-                  <li data="all" class="selected">All Viruses</li>
-                  <li data="WNV">WNV</li>
-                  <li data="SLEV">SLEV</li>
-                </ul>
-                <!-- Legend Div-->
+        <!-- Legend Div-->
         <div id='virus-legend' class='legend'>
                 <h4>Virus</h4>
                 <div><span style='background-color: #ffffb3'></span>WNV</div>
                 <div><span style='background-color: #8dd3c7'></span>SLEV</div>
-            </div>
-        </div>
 
+                <!-- Layer selector div -->
+                <div id="layer_selector" class="switcher">
+                    <ul>
+                        <li data="all" class="selected">All Viruses</li>
+                        <li data="WNV">WNV</li>
+                        <li data="SLEV">SLEV</li>
+                    </ul>
+                </div>
+        </div>
+        
         <!-- Source for latest leaflet subresource integrity enabled -->
         <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
         integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
