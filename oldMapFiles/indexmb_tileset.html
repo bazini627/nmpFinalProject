@@ -207,12 +207,6 @@
     tileLayers.appendChild(link);
     }
 
-    // Create popup but hold off on adding to the map
-    var popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-    });
-
     // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
     var f = function(e) {
         
@@ -222,15 +216,16 @@
         // Change the cursor to a point to notify user some interactivity may be available
         map.getCanvas().style.cursor = 'pointer';
 
-        // Populate popup based on the coordinantes of the feature
-        // latLon = pop.setLngLat(e.features[0].geometry.coordinates)
-        // console.log(latLon);
-
+        // Locate popups on map by class name
+        var popUps = document.getElementsByClassName('mapboxgl-popup');
+        
+        // Check if there is already a popup and then get rid of it since we only want one popup at a time on the map
+        if (popUps[0]) popUps[0].remove();
+        
         var popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(e.features[0].geometry.coordinates)
         .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0].properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
         .addTo(map);
-
     }
 
     map.on('mouseenter', 'WNV', f)
