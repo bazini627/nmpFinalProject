@@ -159,7 +159,7 @@
             var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 subdomains: 'abcd',
-                maxZoom: 19
+                maxZoom: 22
             });
             map.addLayer(tiles);
 
@@ -188,7 +188,9 @@
                             color: '#ffffb3',
                         }
                     },
-                    pane: 'wnvPane'
+                    maxZoom: 22,
+                    pane: 'wnvPane',
+                    intractive: true,
                 }).addTo(dataLayers);
 
                  // Create layer group for SLEV data
@@ -200,11 +202,16 @@
                             color: '#8dd3c7',
                         }
                     },
-                    pane: 'slevPane'
+                    maxZoom: 22,
+                    pane: 'slevPane',
+                    interactive: true,
                 }).addTo(dataLayers);
 
                 // Function to create the layer selector
                 createSelector();
+
+                // Pop-up window function
+                popUpWindow(dataLayers)
             });
 
             // Create layer selector
@@ -250,6 +257,20 @@
                     dataLayers.addLayer(wnvLayerGroup);
                     dataLayers.addLayer(slevLayerGroup);
                 }
+            }
+
+            // Function for pop-up
+            function popUpWindow(layers) {
+
+                layers.eachLayer(function(layer) {
+                    
+                    layer.on('mouseover', function(e) {
+                        
+                        console.log(e); // nothing
+                        getLatLong = e.target.getLatLng();
+                        console.log(getLatLong); //nothing
+                    })
+                })
             }
         </script> 
     </body>
