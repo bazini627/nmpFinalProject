@@ -165,9 +165,9 @@
 
             // Use jquery to pull in our GeoJSON files
             $.when(
-                $.getJSON('/data/caCounties/caCountiesNoChannelIslands.geojson'),
-                $.getJSON('/data/wnv/output/wnv2003_2018_cleaned.geojson'),
-                $.getJSON('/data/sle/output/sle2015_2018_cleaned.geojson')
+                $.getJSON('./data/caCounties/caCountiesNoChannelIslands.geojson'),
+                $.getJSON('./data/wnv/output/wnv2003_2018_cleaned.geojson'),
+                $.getJSON('./data/sle/output/sle2015_2018_cleaned.geojson')
             ).done(function(counties, wnv, slev) {
                 
                 // Create layer group for county data
