@@ -228,7 +228,7 @@
 
         var popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(e.features[0].geometry.coordinates)
-        .setHTML(e.features[0].properties.virus)
+        .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0].properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
         .addTo(map);
 
     }
