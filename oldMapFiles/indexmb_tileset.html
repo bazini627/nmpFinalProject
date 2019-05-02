@@ -222,10 +222,14 @@
         // Change the cursor to a point to notify user some interactivity may be available
         map.getCanvas().style.cursor = 'pointer';
 
-        console.log(features)
-
         // Populate popup based on the coordinantes of the feature
-        //pop.setLngLat(e.features[0].geometry.coordinates)
+        // latLon = pop.setLngLat(e.features[0].geometry.coordinates)
+        // console.log(latLon);
+
+        var popup = new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(e.features[0].properties.virus)
+        .addTo(map);
 
     }
 
