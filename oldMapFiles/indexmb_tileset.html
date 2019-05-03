@@ -245,6 +245,40 @@ crossorigin="anonymous"
 
     map.on('click', 'WNV', f)
     map.on('click', 'SLEV', f)
+
+    // Array of data layers to loop through
+    var toggleableLayerIds = ['WNV','SLEV'];
+
+    // Loop through previously declared toggleableLayerIds array 
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+        
+        var id = toggleableLayerIds[i];
+        console.log(id);
+
+        // Working on WNV For Now
+        $('#switch1').on('change', function(e) {
+            
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Looks at visibilty property declared above in map.addLayer'
+            var visibility = map.getLayoutProperty(id, 'visibility');
+            console.log(visibility);
+
+            // If property is visible then a click will remove the layer from being displayed
+            if (visibility === 'visible') {
+                map.setLayoutProperty(id, 'visibility', 'none');
+            } 
+            // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
+            else {
+                map.setLayoutProperty(id, 'visibility', 'visible');
+            }
+
+
+        });
+    }
+
+
   });
 </script>
 
