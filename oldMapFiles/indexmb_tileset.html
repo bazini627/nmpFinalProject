@@ -218,9 +218,9 @@
     });
 
     // Create layer toggle
-    // var toggleableLayerIds = ['WNV','SLEV'];
+    var toggleableLayerIds = ['WNV','SLEV'];
     
-    // // Loop through previously declared toggleableLayerIds array 
+    // Loop through previously declared toggleableLayerIds array 
     // for (var i = 0; i < toggleableLayerIds.length; i++) {
     //     var id = toggleableLayerIds[i];
         
@@ -284,8 +284,8 @@
         .addTo(map);
     }
 
-    map.on('mouseenter', 'WNV', f)
-    map.on('mouseenter', 'SLEV', f)
+    map.on('click', 'WNV', f)
+    map.on('click', 'SLEV', f)
   });
 </script>
 
