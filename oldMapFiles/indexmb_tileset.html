@@ -69,6 +69,14 @@
             width: 120px;
             border: 2px solid #ffffb3;
             font-family: 'Vollkorn';
+            color: white;
+        }
+        #layer-switch1 input:checked + .switch {
+            background-color: #ffffb3;
+            border-color: black;
+        }
+        #layer-switch1 input:checked + .switch::after {
+            background-color: black;
         }
         #layer-switch2 {
             position: absolute;
@@ -79,6 +87,14 @@
             width: 120px;
             border: 2px solid  #8dd3c7;
             font-family: 'Vollkorn';
+            color: white;
+        }
+        #layer-switch2 input:checked + .switch {
+            background-color:  #8dd3c7;
+            border-color: black;
+        }
+        #layer-switch2 input:checked + .switch::after {
+            background-color: black;
         }
         .legend {
             background-color:#d3d3d3;
@@ -119,7 +135,7 @@
 <label id= 'layer-switch1' class='switch-container'>
         <input type='checkbox' />
         <div class='switch switch--l mr6'></div>
-        <span>WNV</span>
+        WNV
 </label>
 
 <label id= 'layer-switch2' class='switch-container'>
