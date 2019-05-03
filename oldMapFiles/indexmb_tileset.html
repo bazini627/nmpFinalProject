@@ -131,13 +131,13 @@
 </div>
 
 <label id= 'layer-switch1' class='switch-container'>
-        <input type='checkbox' />
+        <input type='checkbox' id='switch1'/>
         <div class='switch switch--l mr6'></div>
         WNV
 </label>
 
 <label id= 'layer-switch2' class='switch-container'>
-        <input type='checkbox' />
+        <input type='checkbox' id='switch2'/>
         <div class='switch switch--l mr6'></div>
         SLEV
 </label>
@@ -147,6 +147,13 @@
 
 <!-- Assembly source -->
 <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js"></script>
+
+<!--Source for latest jquery with subresource integrity enabled -->
+<script
+src="https://code.jquery.com/jquery-3.4.0.min.js"
+integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+crossorigin="anonymous"
+></script>
 
 <script>
 
@@ -214,52 +221,6 @@
         },
         'source-layer': 'sle2015_2018_cleaned', 
     });
-
-    // Create layer toggle
-    var toggleableLayerIds = ['WNV','SLEV'];
-    
-    // Loop through previously declared toggleableLayerIds array 
-    // for (var i = 0; i < toggleableLayerIds.length; i++) {
-    //     var id = toggleableLayerIds[i];
-        
-    //     // Creates an anchor element (a<>)
-    //     var link = document.createElement('a');
-        
-    //     // Equvialent to <a href=#>
-    //     link.href = '#';
-        
-    //     // Equvialent to <a href=#> class=active>
-    //     link.className = 'active';
-        
-    //     // Sets text in box for layer switcher to WNV and SLEV
-    //     link.textContent = id;
-        
-    //     link.onclick = function (e) {
-            
-    //         var clickedLayer = this.textContent;
-    //         e.preventDefault();
-    //         e.stopPropagation();
-            
-    //         // Looks at visibilty property declared above in map.addLayer
-    //         var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-        
-    //         // If property is visible then a click will remove the layer from being displayed
-    //         if (visibility === 'visible') {
-    //             map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-    //             this.className = '';
-    //         } 
-            
-    //         // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
-    //         else {
-    //             this.className = 'active';
-    //             map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-    //         }
-    //     };
-    
-    // // Get the nav menu element and append the class and href to it
-    // var tileLayers = document.getElementById('menu');
-    // tileLayers.appendChild(link);
-    // }
 
     // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
     var f = function(e) {
