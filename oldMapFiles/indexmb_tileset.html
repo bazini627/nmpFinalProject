@@ -258,8 +258,8 @@ crossorigin="anonymous"
         // Working on WNV For Now
         $('#switch1').on('change', function(e) {
             
-            e.preventDefault();
-            e.stopPropagation();
+            //e.preventDefault();
+            //e.stopPropagation();
 
             // Looks at visibilty property declared above in map.addLayer'
             var visibility = map.getLayoutProperty(id, 'visibility');
@@ -273,8 +273,6 @@ crossorigin="anonymous"
             else {
                 map.setLayoutProperty(id, 'visibility', 'visible');
             }
-
-
         });
     }
 
