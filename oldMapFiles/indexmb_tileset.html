@@ -27,6 +27,7 @@
             bottom: 0;
             width: 100%;
         }
+
         #layer-switch1 {
             position: absolute;
             z-index: 1;
@@ -106,14 +107,16 @@
         <div><span style='background-color: #8dd3c7'></span>SLEV</div>
     </div>
 
+    <!-- Switch Toggle (WNV) -->
     <label id='layer-switch1' class='switch-container'>
-        <input type='checkbox' id='switch1' />
+        <input type='checkbox' id='switch1' checked/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
+    <!-- Switch Toggle (SLEV) -->
     <label id='layer-switch2' class='switch-container'>
-        <input type='checkbox' id='switch2' />
+        <input type='checkbox' id='switch2' checked/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -213,7 +216,7 @@
                 if (popUps[0]) popUps[0].remove();
 
                 var popup = new mapboxgl.Popup({
-                        closeOnClick: false
+                        closeOnClick: true
                     })
                     .setLngLat(e.features[0].geometry.coordinates)
                     .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
