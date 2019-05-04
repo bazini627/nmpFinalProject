@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>/
+
+        <!-- Style sheet for Leaflet with subresource integrity enabled-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""
+        />
+
+        <!-- style sheet for google fonts -->
+        <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                position: absolute;
+                top:0;
+                bottom: 0;
+                width: 100%;
+            }
+            .legend {
+                background: #f8f8f8;
+                border-radius: 3px;
+                top: 10px;
+                right: 10px;
+                width: 100px;
+                font: 12px/20px 'Vollkorn';
+                padding: 10px;
+                position: absolute;
+                z-index: 400;
+            }
+            .legend h4 {
+                margin: 0 0 10px;
+                text-align: center;
+
+            }
+            .legend div span {
+                border-radius: 50%;
+                display: inline-block;
+                height: 10px;
+                margin-right: 5px;
+                width: 10px;
+                border: 1px solid rgba(0,0,0,0.4);
+            }
+            #layer_selector {
+                background: #f8f8f8;
+                position: absolute;
+                z-index: 400;
+                top: 90px;
+                right: 0px;
+                width: 120px;
+                border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.4);
+                font-family: 'Vollkorn';
+            }
+            #layer_selector ul {
+                padding: 0; margin: 0;
+                list-style-type: none;
+            }
+            #layer_selector li {
+                font-size: 13px;
+                color: #404040;
+                display: block;
+                margin: 0;
+                padding: 0;
+                padding: 10px;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(0,0,0,0.25);
+                text-align: center;
+            }
+            #layer_selector li:hover {
+                background-color: #f8f8f8;
+                cursor: pointer;
+            }
+            #layer_selector li.selected {
+                background-color: #3887be;
+            }
+            #layer_selector li.selected:hover {
+                background: #3074a4;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- Div element for map -->
+        <div id='map'></div>
+        
+        <!-- Legend Div-->
+        <div id='virus-legend' class='legend'>
+                <h4>Virus</h4>
+                <div><span style='background-color: #ffffb3'></span>WNV</div>
+                <div><span style='background-color: #8dd3c7'></span>SLEV</div>
+
+                <!-- Layer selector div -->
+                <div id="layer_selector" class="switcher">
+                    <ul>
+                        <li data="all" class="selected">All Viruses</li>
+                        <li data="WNV">WNV</li>
+                        <li data="SLEV">SLEV</li>
+                    </ul>
+                </div>
+        </div>
+        
+        <!-- Source for latest leaflet subresource integrity enabled -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""
+        ></script>
+
+        <!--Source for latest jquery with subresource integrity enabled -->
+        <script
+        src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+        crossorigin="anonymous"
+        ></script>
+
+        <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+  
+        </script>
+        <script>
+            var map;
+            var targetDiv = 'map';
+            
+            // Options for map
+            var options = {
+               center: [37.98, -120.38],
+               zoomControl: false,
+               zoom: 6
+            }
+
+            // Map object we'll pass some items to
+            map = L.map(targetDiv, options);
+
+            // Make layers groups accessible globally
+            var countyLayerGroup, wnvLayerGroup, slevLayerGroup;
+
+            // Add an empty data layer group to map
+            var dataLayers = L.layerGroup().addTo(map);
+
+            // Create panes for data layers
+            map.createPane('wnvPane')
+            map.getPane('wnvPane').style.zIndex = 650;
+            map.createPane('slevPane')
+            map.getPane('slevPane').style.zIndex = 700;
+
+             // Move zoom controls to bottom left
+             L.control.zoom({
+                 position:'bottomleft'
+            }).addTo(map);
+
+            // Our tile layer
+            var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 22
+            });
+            map.addLayer(tiles);
+
+            // Use jquery to pull in our GeoJSON files
+            $.when(
+                $.getJSON('./data/caCounties/caCountiesNoChannelIslands.geojson'),
+                $.getJSON('./data/wnv/output/wnv2003_2018_cleaned.geojson'),
+                $.getJSON('./data/sle/output/sle2015_2018_cleaned.geojson')
+            ).done(function(counties, wnv, slev) {
+                
+                // Create layer group for county data
+                countyLayerGroup = L.geoJson(counties[0], {
+                style: function(feature) {
+                    return {
+                        color: 'whitesmoke',
+                        weight: 1,
+                    }
+                }}).addTo(map);
+
+                // Create layer group for WNV data
+                wnvLayerGroup = L.vectorGrid.slicer(wnv[0], { 
+                    rendererFactory: L.canvas.tile,
+                    vectorTileLayerStyles: {
+                        sliced: {
+                            radius: 1,
+                            color: '#ffffb3',
+                        }
+                    },
+                    maxZoom: 22,
+                    pane: 'wnvPane',
+                    intractive: true,
+                }).addTo(dataLayers);
+
+                 // Create layer group for SLEV data
+                 slevLayerGroup = L.vectorGrid.slicer(slev[0], {
+                    rendererFactory: L.canvas.tile, 
+                    vectorTileLayerStyles: {
+                        sliced: {
+                            radius: 1,
+                            color: '#8dd3c7',
+                        }
+                    },
+                    maxZoom: 22,
+                    pane: 'slevPane',
+                    interactive: true,
+                }).addTo(dataLayers);
+
+                // Function to create the layer selector
+                createSelector();
+
+                // Pop-up window function
+                popUpWindow(dataLayers)
+            });
+
+            // Create layer selector
+            function createSelector() {
+                // JQuery Object for the layer selector ID li element
+                var $options = $('#layer_selector li');
+
+                // Click listener
+                $options.click(function(e) {
+                    // Get the virus type of the selection using a JQuery object
+                    var $li = $(e.target);
+                    var virusType = $li.attr('data');
+                    updateMap(virusType)
+
+                    // Deselect all and select the clicked layer
+                    // Remove the selected class from all layers
+                    $options.removeClass('selected')
+
+                    // Add selected class to clicked layer
+                    $li.addClass('selected') 
+                });
+            }
+
+            // Function to update map with layer when selector is clicked
+            function updateMap(virusType) {
+
+                if (virusType == 'WNV') {
+                    // Clear out dataLayers group
+                    dataLayers.clearLayers();
+
+                    // Add only the wnv layer back in
+                    dataLayers.addLayer(wnvLayerGroup);
+                }
+                else if (virusType == 'SLEV') {
+                    // Clear out dataLayers group
+                    dataLayers.clearLayers();
+
+                    // Add only the slev layer back in
+                    dataLayers.addLayer(slevLayerGroup);
+                }
+                else {
+                    // Add all the layers
+                    dataLayers.addLayer(wnvLayerGroup);
+                    dataLayers.addLayer(slevLayerGroup);
+                }
+            }
+
+            // Function for pop-up
+            function popUpWindow(layers) {
+
+                layers.eachLayer(function(layer) {
+                    
+                    layer.on('mouseover', function(e) {
+                        
+                        console.log(e); // nothing
+                        getLatLong = e.target.getLatLng();
+                        console.log(getLatLong); //nothing
+                    })
+                })
+            }
+        </script> 
+    </body>
+</html>
