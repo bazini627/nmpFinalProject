@@ -28,10 +28,23 @@
             width: 100%;
         }
 
+        h1 {
+            position: absolute;
+            z-index: 650;
+            top: 10px;
+            left: 15px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: gray;
+            border-radius: 5px
+        }
+
         #layer-switch1 {
             position: absolute;
             z-index: 1;
-            top: 10px;
+            top: 75px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -51,7 +64,7 @@
         #layer-switch2 {
             position: absolute;
             z-index: 1;
-            top: 50px;
+            top: 125px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -97,15 +110,16 @@
 
 <body>
 
+    <h1> West Nile Virus & St Louis Encephalitis In California's Vulnerable Communities (2003 -2018)</h1>
     <nav id="menu"></nav>
     <div id='map'></div>
 
-    <!-- Legend Div-->
+    <!-- Legend Div
     <div id='virus-legend' class='legend'>
         <h4>Virus</h4>
         <div><span style='background-color: #ffffb3'></span>WNV</div>
         <div><span style='background-color: #8dd3c7'></span>SLEV</div>
-    </div>
+    </div> -->
 
     <!-- Switch Toggle (WNV) -->
     <label id='layer-switch1' class='switch-container'>
@@ -131,6 +145,7 @@
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"
         integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
     <script>
         mapboxgl.accessToken =
             'pk.eyJ1IjoiYmF6aW5pNjI3IiwiYSI6ImNqdXhuMXFmMjBvdmMzemxqdHhsMzJvbDcifQ.gHwEMfos0CNbKkYbOtd95w'; // ¯\_(ツ)_/¯ 
@@ -197,6 +212,27 @@
                 },
                 'source-layer': 'sle2015_2018_cleaned',
             });
+            
+            // var bbox = [32.529521,42.009502,-124.48200,-114.13077]
+            // var grid = turf.hexGrid(bbox, 0.005);
+            // var grid = turf.count(grid, pts, 'pt_count');
+
+            // var hex = L.geoJson(grid, {
+            //     style: function(feature){
+            //         var fillColor,
+            //         ptcount = feature.properties.pt_count;
+            //         if (ptcount > 20) fillColor = "#006837", fillOpacity = 0.7;
+            //         else if (ptcount > 10) fillColor = "#31a354", fillOpacity = 0.7;
+            //         else if (ptcount > 6) fillColor = "#78c679", fillOpacity = 0.7;
+            //         else if (ptcount > 1) fillColor = "#c2e699", fillOpacity = 0.7;
+            //         else if (ptcount > 0) fillColor = "#ffffcc", fillOpacity = 0.7;
+            //         else fillColor = "#000000", fillOpacity = 0; // no data
+            //         return { color: false, weight: 0.5, fillColor: fillColor, fillOpacity: fillOpacity };
+            //     },
+            //     onEachFeature: function( feature, layer ){
+            //         layer.bindPopup( "<strong>" + feature.properties.pt_count + "</strong>")
+            //     }
+            // }).addTo(layerGroup);
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
             var f = function (e) {
