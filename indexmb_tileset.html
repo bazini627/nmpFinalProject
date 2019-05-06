@@ -200,7 +200,7 @@
                 'source-layer': 'original',
             });
             // Set min zoom where will first appear
-            map.setLayerZoomRange('WNV', 5.5);
+            map.setLayerZoomRange('WNV', 8);
 
             // SLEV Layer
             map.addSource('SLEV', {
@@ -220,7 +220,7 @@
                 'source-layer': 'sle2015_2018_cleaned',
             });
             // Set min zoom where will first appear
-            map.setLayerZoomRange('SLEV', 5.5);
+            map.setLayerZoomRange('SLEV', 8);
 
              // WNV Hex Bin Layer
              map.addSource('wnv-hex', {
@@ -234,13 +234,27 @@
                 'layout': {
                     'visibility': 'visible'
                 },
-                "paint": {
-                    'fill-color': '#088',
+                //"paint": {
+                //    'fill-color': '#088',
+                //    'fill-opacity': 0.4
+                //},
+                'paint': {
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'wnv'],
+                        0, '#edf8fb',
+                        12, '#ccece6',
+                        52, '#99d8c9',
+                        132, '#66c2a4',
+                        224, '#2ca25f',
+                        340, '#006d2c',
+                    ],
                     'fill-opacity': 0.4
-                },
+                }
             }); 
              // Set min/max zoom where will first appear/disappear
-             map.setLayerZoomRange('wnv-hex', 5.5, 10);
+             map.setLayerZoomRange('wnv-hex', 5.5, 8);
 
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
@@ -248,7 +262,7 @@
 
                 // Query all the rendered points in the view
                 var features = map.queryRenderedFeatures(e.point, {
-                    layers: ['WNV', 'SLEV']
+                    layers: ['WNV', 'SLEV', 'wnv-hex']
                 });
 
                 // Change the cursor to a point to notify user some interactivity may be available
