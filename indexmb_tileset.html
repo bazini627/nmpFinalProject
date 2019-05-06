@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!-- style sheet for Mapbox GL -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- style sheet for google fonts -->
+    <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+
+    <!-- style sheet for Assembly-->
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.min.css" rel="stylesheet">
+
+     <!-- Style sheet for Leaflet with subresource integrity enabled-->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+     crossorigin=""
+     />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h1 {
+            position: absolute;
+            z-index: 650;
+            top: 10px;
+            left: 15px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: gray;
+            border-radius: 5px
+        }
+
+        #layer-switch1 {
+            position: absolute;
+            z-index: 1;
+            top: 75px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch1 input:checked+.switch {
+            background-color: #ffffb3;
+            border-color: black;
+        }
+
+        #layer-switch1 input:checked+.switch::after {
+            background-color: black;
+        }
+
+        #layer-switch2 {
+            position: absolute;
+            z-index: 1;
+            top: 125px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch2 input:checked+.switch {
+            background-color: #8dd3c7;
+            border-color: black;
+        }
+
+        #layer-switch2 input:checked+.switch::after {
+            background-color: black;
+        }
+
+        .legend {
+            background-color: #d3d3d3;
+            border-radius: 3px;
+            top: 100px;
+            left: 15px;
+            font: 12px/20px 'Vollkorn';
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .legend h4 {
+            margin: 0 0 10px;
+            text-align: center;
+
+        }
+
+        .legend div span {
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1> West Nile Virus & St Louis Encephalitis In California's Vulnerable Communities (2003 -2018)</h1>
+    <nav id="menu"></nav>
+    <div id='map'></div>
+
+    <!-- Legend Div
+    <div id='virus-legend' class='legend'>
+        <h4>Virus</h4>
+        <div><span style='background-color: #ffffb3'></span>WNV</div>
+        <div><span style='background-color: #8dd3c7'></span>SLEV</div>
+    </div> -->
+
+    <!-- Switch Toggle (WNV) -->
+    <label id='layer-switch1' class='switch-container'>
+        <input type='checkbox' id='switch1' checked/>
+        <div class='switch switch--l mr6'></div>
+        WNV
+    </label>
+
+    <!-- Switch Toggle (SLEV) -->
+    <label id='layer-switch2' class='switch-container'>
+        <input type='checkbox' id='switch2' checked/>
+        <div class='switch switch--l mr6'></div>
+        SLEV
+    </label>
+
+    <!-- Mapbox GL source-->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+
+    <!-- Assembly source -->
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js"></script>
+
+    <!--Source for latest jquery with subresource integrity enabled -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiYmF6aW5pNjI3IiwiYSI6ImNqdXhuMXFmMjBvdmMzemxqdHhsMzJvbDcifQ.gHwEMfos0CNbKkYbOtd95w'; // ¯\_(ツ)_/¯ 
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v9',
+            center: [-120.38, 37.98],
+            zoom: 5.5
+        });
+
+        map.on('load', function () {
+
+            // CA County Layer
+            map.addSource('Counties', {
+                type: 'vector',
+                url: 'mapbox://bazini627.cvxgh4hd'
+            });
+            map.addLayer({
+                'id': 'Counties',
+                'type': 'line',
+                'source': 'Counties',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                "paint": {
+                    'line-color': '#d3d3d3'
+                },
+                'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+            });
+            
+            // WNV Layer
+            map.addSource('WNV', {
+                type: 'vector',
+                url: 'mapbox://bazini627.wnv2003_2018_cleaned'
+            });
+            map.addLayer({
+                'id': 'WNV',
+                'type': 'circle',
+                'source': 'WNV',
+                'layout': {
+                    'visibility': 'visible',
+                },
+                "paint": {
+                    'circle-color': '#ffffb3'
+                },
+                'source-layer': 'original',
+            });
+            // Set min zoom where will first appear
+            map.setLayerZoomRange('WNV', 5.5);
+
+            // SLEV Layer
+            map.addSource('SLEV', {
+                type: 'vector',
+                url: 'mapbox://bazini627.cjuu96jwa00ey2wo9d6hljxbh-5smzt'
+            });
+            map.addLayer({
+                'id': 'SLEV',
+                'type': 'circle',
+                'source': 'SLEV',
+                'layout': {
+                    'visibility': 'visible',
+                },
+                "paint": {
+                    'circle-color': '#8dd3c7'
+                },
+                'source-layer': 'sle2015_2018_cleaned',
+            });
+            // Set min zoom where will first appear
+            map.setLayerZoomRange('SLEV', 5.5);
+
+             // WNV Hex Bin Layer
+             map.addSource('wnv-hex', {
+                type: 'geojson',
+                data: './data/wnv/output/wnv2003_2018_cleaned_hex.geojson'
+            });
+            map.addLayer({
+                'id': 'wnv-hex',
+                'type': 'fill',
+                'source': 'wnv-hex',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                "paint": {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.4
+                },
+            }); 
+             // Set min/max zoom where will first appear/disappear
+             map.setLayerZoomRange('wnv-hex', 5.5, 10);
+
+
+            // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
+            var f = function (e) {
+
+                // Query all the rendered points in the view
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['WNV', 'SLEV']
+                });
+
+                // Change the cursor to a point to notify user some interactivity may be available
+                map.getCanvas().style.cursor = 'pointer';
+
+                // Locate popups on map by class name
+                var popUps = document.getElementsByClassName('mapboxgl-popup');
+
+                // Check if there is already a popup and then get rid of it since we only want one popup at a time on the map
+                if (popUps[0]) popUps[0].remove();
+
+                var popup = new mapboxgl.Popup({
+                        closeOnClick: true
+                    })
+                    .setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
+                        .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
+                    .addTo(map);
+            }
+
+            map.on('click', 'WNV', f)
+            map.on('click', 'SLEV', f)
+
+            // Array of data layers to loop through
+            var toggleableLayerIds = ['WNV', 'SLEV'];
+
+
+            // Working on WNV For Now
+            $('#switch1').on('change', function (e) {
+
+                // Looks at visibilty property declared above in map.addLayer'
+                var visibility = map.getLayoutProperty('WNV', 'visibility');
+
+
+                // If property is visible then a click will remove the layer from being displayed
+                if (visibility === 'visible') {
+                    map.setLayoutProperty('WNV', 'visibility', 'none');
+                }
+                // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
+                else {
+                    map.setLayoutProperty('WNV', 'visibility', 'visible');
+                }
+
+            });
+
+            // Working on SLEV For Now
+            $('#switch2').on('change', function (e) {
+
+                // Looks at visibilty property declared above in map.addLayer'
+                var visibility = map.getLayoutProperty('SLEV', 'visibility');
+
+
+                // If property is visible then a click will remove the layer from being displayed
+                if (visibility === 'visible') {
+                    map.setLayoutProperty('SLEV', 'visibility', 'none');
+                }
+                // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
+                else {
+                    map.setLayoutProperty('SLEV', 'visibility', 'visible');
+                }
+
+            });
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>
