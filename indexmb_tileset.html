@@ -66,7 +66,7 @@
         #layer-switch1 input:checked+.switch::after {
             background-color: black;
         }
-        /* Hex */
+        /* WNV/SLEV Hex */
         #layer-switch2 {
             position: absolute;
             z-index: 1;
@@ -86,27 +86,29 @@
         #layer-switch2 input:checked+.switch::after {
             background-color: black;
         }
-        /* WNV */
-        #layer-switch3 {
+
+         /* WNV Hex */
+         #layer-switch3 {
             position: absolute;
             z-index: 1;
             top: 125px;
             left: 15px;
             border-radius: 3px;
-            width: 120px;
+            width: 175px;
             font-family: 'Vollkorn';
             color: white;
         }
 
         #layer-switch3 input:checked+.switch {
-            background-color: #ffffb3;
-            border-color: black;
+            background-color:#006d2c;
+            border-color : black;
         }
 
         #layer-switch3 input:checked+.switch::after {
             background-color: black;
         }
-        /* SLEV */
+
+        /* WNV */
         #layer-switch4 {
             position: absolute;
             z-index: 1;
@@ -119,11 +121,32 @@
         }
 
         #layer-switch4 input:checked+.switch {
-            background-color: #8dd3c7;
+            background-color: #ffffb3;
             border-color: black;
         }
 
         #layer-switch4 input:checked+.switch::after {
+            background-color: black;
+        }
+
+        /* SLEV */
+        #layer-switch5 {
+            position: absolute;
+            z-index: 1;
+            top: 175px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch5 input:checked+.switch {
+            background-color: #8dd3c7;
+            border-color: black;
+        }
+
+        #layer-switch5 input:checked+.switch::after {
             background-color: black;
         }
 
@@ -174,23 +197,30 @@
         Counties
     </label>
 
-      <!-- Switch Toggle (Hex Layer) -->
-      <label id='layer-switch2' class='switch-container'>
+    <!-- Switch Toggle (WNV/SLEV Hex Layer) -->
+    <label id='layer-switch2' class='switch-container'>
         <input type='checkbox' id='switch2' value='wnv-slev-hex' checked/>
         <div class='switch switch--l mr6'></div>
         WNV/SLEV Ratio
     </label>
 
-    <!-- Switch Toggle (WNV) -->
+    <!-- Switch Toggle (WNV Hex Layer) -->
     <label id='layer-switch3' class='switch-container'>
-        <input type='checkbox' id='switch3' value='WNV' checked/>
+        <input type='checkbox' id='switch3' value='wnv-hex' checked/>
+        <div class='switch switch--l mr6'></div>
+        WNV Hex Layer
+    </label>
+
+    <!-- Switch Toggle (WNV) -->
+    <label id='layer-switch4' class='switch-container'>
+        <input type='checkbox' id='switch4' value='WNV' checked/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
     <!-- Switch Toggle (SLEV) -->
-    <label id='layer-switch4' class='switch-container' >
-        <input type='checkbox' id='switch4' value='SLEV' checked/>
+    <label id='layer-switch5' class='switch-container' >
+        <input type='checkbox' id='switch5' value='SLEV' checked/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -276,8 +306,8 @@
             // Set min zoom where will first appear
             map.setLayerZoomRange('SLEV', 8);
 
-             // WNV Hex Bin Layer
-             map.addSource('wnv-slev-hex', {
+            // WNV/SLEV Hex Bin Layer
+            map.addSource('wnv-slev-hex', {
                 type: 'geojson',
                 data: './data/hexLayers/wnv_slev_cleaned_ratio_hex.geojson'
             });
@@ -288,10 +318,6 @@
                 'layout': {
                     'visibility': 'visible'
                 },
-                //"paint": {
-                //    'fill-color': '#088',
-                //    'fill-opacity': 0.4
-                //},
                 'paint': {
                     'fill-color': [
                         'interpolate',
@@ -304,12 +330,43 @@
                         18, '#fc8d59',
                         96, '#d73027',
                     ],
-                    'fill-opacity': 0.4,
+                    'fill-opacity': 0.6,
                     'fill-outline-color' : 'black'
                 }
             }); 
              // Set min/max zoom where will first appear/disappear
              map.setLayerZoomRange('wnv-slev-hex', 5.5, 8);
+
+            // WNV Hex Bin Layer
+            map.addSource('wnv-hex', {
+                type: 'geojson',
+                data: './data/hexLayers/wnv2003_2018_cleaned_hex.geojson'
+            });
+            map.addLayer({
+                'id': 'wnv-hex',
+                'type': 'fill',
+                'source': 'wnv-hex',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'wnv'],
+                        0, '#edf8fb',
+                        3.5, '#ccece6',
+                        5.1, '#99d8c9',
+                        8.4, '#66c2a4',
+                        18, '#2ca25f',
+                        96, '#006d2c',
+                    ],
+                    'fill-opacity': 0.6,
+                    'fill-outline-color' : 'black'
+                }
+            }); 
+             // Set min/max zoom where will first appear/disappear
+             map.setLayerZoomRange('wnv-hex', 5.5, 8);
 
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
@@ -342,7 +399,7 @@
             map.on('click', 'SLEV', f)
 
             // Array of toggle ids to loop through
-            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4'];
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4', 'switch5'];
 
             // Loop through the toggle ids and link it to a layer
             for (var i = 0; i < toggleableLayerIds.length; i++) {
