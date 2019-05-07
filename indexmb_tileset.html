@@ -46,7 +46,7 @@
             background: gray;
             border-radius: 5px
         }
-
+        /* County */
         #layer-switch1 {
             position: absolute;
             z-index: 1;
@@ -66,27 +66,27 @@
         #layer-switch1 input:checked+.switch::after {
             background-color: black;
         }
-
+        /* Hex */
         #layer-switch2 {
             position: absolute;
             z-index: 1;
             top: 100px;
             left: 15px;
             border-radius: 3px;
-            width: 120px;
+            width: 175px;
             font-family: 'Vollkorn';
             color: white;
         }
 
         #layer-switch2 input:checked+.switch {
-            background-color: #ffffb3;
-            border-color: black;
+            background-color: #d73027;
+            border-color : black;
         }
 
         #layer-switch2 input:checked+.switch::after {
             background-color: black;
         }
-
+        /* WNV */
         #layer-switch3 {
             position: absolute;
             z-index: 1;
@@ -99,11 +99,31 @@
         }
 
         #layer-switch3 input:checked+.switch {
-            background-color: #8dd3c7;
+            background-color: #ffffb3;
             border-color: black;
         }
 
         #layer-switch3 input:checked+.switch::after {
+            background-color: black;
+        }
+        /* SLEV */
+        #layer-switch4 {
+            position: absolute;
+            z-index: 1;
+            top: 150px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch4 input:checked+.switch {
+            background-color: #8dd3c7;
+            border-color: black;
+        }
+
+        #layer-switch4 input:checked+.switch::after {
             background-color: black;
         }
 
@@ -154,16 +174,23 @@
         Counties
     </label>
 
+      <!-- Switch Toggle (Hex Layer) -->
+      <label id='layer-switch2' class='switch-container'>
+        <input type='checkbox' id='switch2' value='wnv-slev-hex' checked/>
+        <div class='switch switch--l mr6'></div>
+        WNV/SLEV Ratio
+    </label>
+
     <!-- Switch Toggle (WNV) -->
-    <label id='layer-switch2' class='switch-container'>
-        <input type='checkbox' id='switch2' value='WNV' checked/>
+    <label id='layer-switch3' class='switch-container'>
+        <input type='checkbox' id='switch3' value='WNV' checked/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
     <!-- Switch Toggle (SLEV) -->
-    <label id='layer-switch3' class='switch-container' >
-        <input type='checkbox' id='switch3' value='SLEV' checked/>
+    <label id='layer-switch4' class='switch-container' >
+        <input type='checkbox' id='switch4' value='SLEV' checked/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -227,7 +254,7 @@
                 'source-layer': 'original',
             });
             // Set min zoom where will first appear
-            map.setLayerZoomRange('WNV', 8);
+            //map.setLayerZoomRange('WNV', 8);
 
             // SLEV Layer
             map.addSource('SLEV', {
@@ -247,17 +274,17 @@
                 'source-layer': 'sle2015_2018_cleaned',
             });
             // Set min zoom where will first appear
-            map.setLayerZoomRange('SLEV', 8);
+            //map.setLayerZoomRange('SLEV', 8);
 
              // WNV Hex Bin Layer
-             map.addSource('wnv-hex', {
+             map.addSource('wnv-slev-hex', {
                 type: 'geojson',
-                data: './data/wnv/output/wnv2003_2018_cleaned_hex.geojson'
+                data: './data/hexLayers/wnv_slev_cleaned_ratio_hex.geojson'
             });
             map.addLayer({
-                'id': 'wnv-hex',
+                'id': 'wnv-slev-hex',
                 'type': 'fill',
-                'source': 'wnv-hex',
+                'source': 'wnv-slev-hex',
                 'layout': {
                     'visibility': 'visible'
                 },
@@ -270,19 +297,19 @@
                         'interpolate',
                         ['linear'],
                         ['get', 'wnv'],
-                        0, '#edf8fb',
-                        12, '#ccece6',
-                        52, '#99d8c9',
-                        132, '#66c2a4',
-                        224, '#2ca25f',
-                        340, '#006d2c',
+                        0, '#4575b4',
+                        3.5, '#91bfdb',
+                        5.1, '#e0f3f8',
+                        8.4, '#fee090',
+                        18, '#fc8d59',
+                        96, '#d73027',
                     ],
                     'fill-opacity': 0.4,
                     'fill-outline-color' : 'black'
                 }
             }); 
              // Set min/max zoom where will first appear/disappear
-             map.setLayerZoomRange('wnv-hex', 5.5, 8);
+             map.setLayerZoomRange('wnv-slev-hex', 5.5, 8);
 
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
@@ -290,7 +317,7 @@
 
                 // Query all the rendered points in the view
                 var features = map.queryRenderedFeatures(e.point, {
-                    layers: ['WNV', 'SLEV', 'wnv-hex']
+                    layers: ['WNV', 'SLEV']
                 });
 
                 // Change the cursor to a point to notify user some interactivity may be available
@@ -315,7 +342,7 @@
             map.on('click', 'SLEV', f)
 
             // Array of toggle ids to loop through
-            var toggleableLayerIds = ['switch1', 'switch2', 'switch3'];
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4'];
 
             // Loop through the toggle ids and link it to a layer
             for (var i = 0; i < toggleableLayerIds.length; i++) {
