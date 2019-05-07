@@ -322,13 +322,13 @@
                     'fill-color': [
                         'interpolate',
                         ['linear'],
-                        ['get', 'wnv'],
-                        0, '#4575b4',
+                        ['/',['get', 'wnv'],['get', 'slev']], // divide wnv by slev to get a ratio; 
+                        0, '#4575b4', // more slev
                         3.5, '#91bfdb',
                         5.1, '#e0f3f8',
                         8.4, '#fee090',
                         18, '#fc8d59',
-                        96, '#d73027',
+                        96, '#d73027', // more WNV
                     ],
                     'fill-opacity': 0.6,
                     'fill-outline-color' : 'black'
