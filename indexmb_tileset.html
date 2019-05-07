@@ -59,7 +59,7 @@
         }
 
         #layer-switch1 input:checked+.switch {
-            background-color: #ffffb3;
+            background-color: #d3d3d3;
             border-color: black;
         }
 
@@ -70,7 +70,7 @@
         #layer-switch2 {
             position: absolute;
             z-index: 1;
-            top: 125px;
+            top: 100px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -79,11 +79,31 @@
         }
 
         #layer-switch2 input:checked+.switch {
-            background-color: #8dd3c7;
+            background-color: #ffffb3;
             border-color: black;
         }
 
         #layer-switch2 input:checked+.switch::after {
+            background-color: black;
+        }
+
+        #layer-switch3 {
+            position: absolute;
+            z-index: 1;
+            top: 125px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch3 input:checked+.switch {
+            background-color: #8dd3c7;
+            border-color: black;
+        }
+
+        #layer-switch3 input:checked+.switch::after {
             background-color: black;
         }
 
@@ -127,16 +147,23 @@
         <div><span style='background-color: #8dd3c7'></span>SLEV</div>
     </div> -->
 
+     <!-- Switch Toggle (Counties) -->
+     <label id='layer-switch1' class='switch-container'>
+        <input type='checkbox' id='switch1' value='Counties' checked/>
+        <div class='switch switch--l mr6'></div>
+        Counties
+    </label>
+
     <!-- Switch Toggle (WNV) -->
-    <label id='layer-switch1' class='switch-container'>
-        <input type='checkbox' id='switch1' checked/>
+    <label id='layer-switch2' class='switch-container'>
+        <input type='checkbox' id='switch2' value='WNV' checked/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
     <!-- Switch Toggle (SLEV) -->
-    <label id='layer-switch2' class='switch-container'>
-        <input type='checkbox' id='switch2' checked/>
+    <label id='layer-switch3' class='switch-container' >
+        <input type='checkbox' id='switch3' value='SLEV' checked/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -287,48 +314,27 @@
             map.on('click', 'WNV', f)
             map.on('click', 'SLEV', f)
 
-            // Array of data layers to loop through
-            var toggleableLayerIds = ['WNV', 'SLEV'];
+            // Array of toggle ids to loop through
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3'];
 
+            // Loop through the toggle ids and link it to a layer
+            for (var i = 0; i < toggleableLayerIds.length; i++) {
 
-            // Working on WNV For Now
-            $('#switch1').on('change', function (e) {
-
-                // Looks at visibilty property declared above in map.addLayer'
-                var visibility = map.getLayoutProperty('WNV', 'visibility');
-
-
-                // If property is visible then a click will remove the layer from being displayed
-                if (visibility === 'visible') {
-                    map.setLayoutProperty('WNV', 'visibility', 'none');
+                var toggleElement = document.getElementById(toggleableLayerIds[i]);
+                toggleElement.onclick = function(e) {
+                    // Looks at visibilty property declared above in map.addLayer'
+                    var visibility = map.getLayoutProperty(this.value, 'visibility');
+                    
+                    // If property is visible then a click will remove the layer from being displayed
+                    if (visibility === 'visible') {
+                        map.setLayoutProperty(this.value, 'visibility', 'none');
+                    }
+                    // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
+                    else {
+                        map.setLayoutProperty(this.value, 'visibility', 'visible');
+                    }
                 }
-                // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
-                else {
-                    map.setLayoutProperty('WNV', 'visibility', 'visible');
-                }
-
-            });
-
-            // Working on SLEV For Now
-            $('#switch2').on('change', function (e) {
-
-                // Looks at visibilty property declared above in map.addLayer'
-                var visibility = map.getLayoutProperty('SLEV', 'visibility');
-
-
-                // If property is visible then a click will remove the layer from being displayed
-                if (visibility === 'visible') {
-                    map.setLayoutProperty('SLEV', 'visibility', 'none');
-                }
-                // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
-                else {
-                    map.setLayoutProperty('SLEV', 'visibility', 'visible');
-                }
-
-            });
-
-
-
+            }
         });
     </script>
 
