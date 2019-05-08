@@ -87,8 +87,8 @@
             background-color: black;
         }
 
-         /* WNV Hex */
-         #layer-switch3 {
+        /* WNV Hex */
+        #layer-switch3 {
             position: absolute;
             z-index: 1;
             top: 135px;
@@ -108,28 +108,28 @@
             background-color: black;
         }
 
-        /* WNV */
+        /* SLEV Hex */
         #layer-switch4 {
             position: absolute;
             z-index: 1;
             top: 165px;
             left: 15px;
             border-radius: 3px;
-            width: 120px;
+            width: 175px;
             font-family: 'Vollkorn';
             color: white;
         }
 
         #layer-switch4 input:checked+.switch {
-            background-color: #ffffb3;
-            border-color: black;
+            background-color: #045a8d;
+            border-color : black;
         }
 
         #layer-switch4 input:checked+.switch::after {
             background-color: black;
         }
 
-        /* SLEV */
+        /* WNV */
         #layer-switch5 {
             position: absolute;
             z-index: 1;
@@ -142,11 +142,32 @@
         }
 
         #layer-switch5 input:checked+.switch {
-            background-color: #8dd3c7;
+            background-color: #ffffb3;
             border-color: black;
         }
 
         #layer-switch5 input:checked+.switch::after {
+            background-color: black;
+        }
+
+        /* SLEV */
+        #layer-switch6 {
+            position: absolute;
+            z-index: 1;
+            top: 225px;
+            left: 15px;
+            border-radius: 3px;
+            width: 120px;
+            font-family: 'Vollkorn';
+            color: white;
+        }
+
+        #layer-switch6 input:checked+.switch {
+            background-color: #8dd3c7;
+            border-color: black;
+        }
+
+        #layer-switch6 input:checked+.switch::after {
             background-color: black;
         }
 
@@ -211,16 +232,23 @@
         WNV Hex Layer
     </label>
 
-    <!-- Switch Toggle (WNV) -->
+    <!-- Switch Toggle (SLEV Hex Layer) -->
     <label id='layer-switch4' class='switch-container'>
-        <input type='checkbox' id='switch4' value='WNV' checked/>
+        <input type='checkbox' id='switch4' value='slev-hex' checked/>
+        <div class='switch switch--l mr6'></div>
+        WNV Hex Layer
+    </label>
+
+    <!-- Switch Toggle (WNV) -->
+    <label id='layer-switch5' class='switch-container'>
+        <input type='checkbox' id='switch5' value='WNV' checked/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
     <!-- Switch Toggle (SLEV) -->
-    <label id='layer-switch5' class='switch-container' >
-        <input type='checkbox' id='switch5' value='SLEV' checked/>
+    <label id='layer-switch6' class='switch-container' >
+        <input type='checkbox' id='switch6' value='SLEV' checked/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -322,7 +350,7 @@
                     'fill-color': [
                         'interpolate',
                         ['linear'],
-                        ['/',['get', 'wnv'],['get', 'slev']], // divide wnv by slev to get a ratio; 
+                        ['/',['get', 'wnv'],['get', 'slev']], // divide wnv by slev to get a ratio; Quantile breaks 
                         0, '#4575b4', // more slev
                         3.5, '#91bfdb',
                         5.1, '#e0f3f8',
@@ -354,12 +382,43 @@
                         'interpolate',
                         ['linear'],
                         ['get', 'wnv'],
-                        0, '#edf8fb',
+                        0, '#edf8fb', // Jenks breaks
                         18, '#ccece6',
                         56, '#99d8c9',
                         114, '#66c2a4',
                         215, '#2ca25f',
                         340, '#006d2c',
+                    ],
+                    'fill-opacity': 0.6,
+                    'fill-outline-color' : 'black'
+                }
+            }); 
+             // Set min/max zoom where will first appear/disappear
+             map.setLayerZoomRange('wnv-hex', 5.5, 8);
+
+             // SLEV Hex Bin Layer
+             map.addSource('slev-hex', {
+                type: 'geojson',
+                data: './data/hexLayers/slev2015_2018_cleaned_hex.geojson'
+            });
+            map.addLayer({
+                'id': 'slev-hex',
+                'type': 'fill',
+                'source': 'slev-hex',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'slev'], // Jenks breaks
+                        0, '#f1eef6',
+                        1, '#d0d1e6',
+                        8, '#a6bddb',
+                        30, '#74a9cf',
+                        85, '#2b8cbe',
+                        100, '#045a8d',
                     ],
                     'fill-opacity': 0.6,
                     'fill-outline-color' : 'black'
@@ -399,7 +458,7 @@
             map.on('click', 'SLEV', f)
 
             // Array of toggle ids to loop through
-            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4', 'switch5'];
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4', 'switch5', 'switch6'];
 
             // Loop through the toggle ids and link it to a layer
             for (var i = 0; i < toggleableLayerIds.length; i++) {
