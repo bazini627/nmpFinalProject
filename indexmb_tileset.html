@@ -46,11 +46,36 @@
             background: gray;
             border-radius: 5px
         }
-        /* County */
+
+        /* WNV Hex Layer Radio */
+        #layer-radio1 {
+            position: absolute;
+            top: 75px;
+            left: 15px;
+            color: white;
+        }
+
+        #layer-radio1 input:checked+.radio {
+            color: #006d2c;
+        }
+
+        /* SLEV Hex Layer Radio */
+        #layer-radio2 {
+            position: absolute;
+            top: 105px;
+            left: 15px;
+            color: white;
+        }
+
+        #layer-radio2 input:checked+.radio {
+            color: #045a8d;
+        }
+
+        /* County Layer Switch*/
         #layer-switch1 {
             position: absolute;
             z-index: 1;
-            top: 75px;
+            top: 135px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -66,71 +91,30 @@
         #layer-switch1 input:checked+.switch::after {
             background-color: black;
         }
-        /* WNV/SLEV Hex */
+
+        /* WNV Point Layer Switch*/
         #layer-switch2 {
             position: absolute;
             z-index: 1;
-            top: 105px;
+            top: 165px;
             left: 15px;
             border-radius: 3px;
-            width: 175px;
+            width: 120px;
             font-family: 'Vollkorn';
             color: white;
         }
 
         #layer-switch2 input:checked+.switch {
-            background-color: #d73027;
-            border-color : black;
+            background-color: #ffffb3;
+            border-color: black;
         }
 
         #layer-switch2 input:checked+.switch::after {
             background-color: black;
         }
 
-        /* WNV Hex */
+        /* SLEV Point Layer Switch*/
         #layer-switch3 {
-            position: absolute;
-            z-index: 1;
-            top: 135px;
-            left: 15px;
-            border-radius: 3px;
-            width: 175px;
-            font-family: 'Vollkorn';
-            color: white;
-        }
-
-        #layer-switch3 input:checked+.switch {
-            background-color:#006d2c;
-            border-color : black;
-        }
-
-        #layer-switch3 input:checked+.switch::after {
-            background-color: black;
-        }
-
-        /* SLEV Hex */
-        #layer-switch4 {
-            position: absolute;
-            z-index: 1;
-            top: 165px;
-            left: 15px;
-            border-radius: 3px;
-            width: 175px;
-            font-family: 'Vollkorn';
-            color: white;
-        }
-
-        #layer-switch4 input:checked+.switch {
-            background-color: #045a8d;
-            border-color : black;
-        }
-
-        #layer-switch4 input:checked+.switch::after {
-            background-color: black;
-        }
-
-        /* WNV */
-        #layer-switch5 {
             position: absolute;
             z-index: 1;
             top: 195px;
@@ -141,33 +125,12 @@
             color: white;
         }
 
-        #layer-switch5 input:checked+.switch {
-            background-color: #ffffb3;
-            border-color: black;
-        }
-
-        #layer-switch5 input:checked+.switch::after {
-            background-color: black;
-        }
-
-        /* SLEV */
-        #layer-switch6 {
-            position: absolute;
-            z-index: 1;
-            top: 225px;
-            left: 15px;
-            border-radius: 3px;
-            width: 120px;
-            font-family: 'Vollkorn';
-            color: white;
-        }
-
-        #layer-switch6 input:checked+.switch {
+        #layer-switch3 input:checked+.switch {
             background-color: #8dd3c7;
             border-color: black;
         }
 
-        #layer-switch6 input:checked+.switch::after {
+        #layer-switch3 input:checked+.switch::after {
             background-color: black;
         }
 
@@ -211,44 +174,35 @@
         <div><span style='background-color: #8dd3c7'></span>SLEV</div>
     </div> -->
 
-     <!-- Switch Toggle (Counties) -->
+    <label id='layer-radio1' class='radio-container'>
+        <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
+        <div class='radio mr6'></div>
+        WNV Hex Layer
+    </label>
+
+    <label id='layer-radio2' class='radio-container'>
+        <input name='radio-basic' id='radio2' value='slev-hex' type='radio' checked>
+        <div class='radio mr6'></div>
+        SLEV Hex Layer
+    </label>
+
+    <!-- Switch Toggle (Counties) -->
      <label id='layer-switch1' class='switch-container'>
         <input type='checkbox' id='switch1' value='Counties' checked/>
         <div class='switch switch--l mr6'></div>
         Counties
     </label>
 
-    <!-- Switch Toggle (WNV/SLEV Hex Layer) -->
-    <label id='layer-switch2' class='switch-container'>
-        <input type='checkbox' id='switch2' value='wnv-slev-hex' checked/>
-        <div class='switch switch--l mr6'></div>
-        WNV/SLEV Ratio
-    </label>
-
-    <!-- Switch Toggle (WNV Hex Layer) -->
-    <label id='layer-switch3' class='switch-container'>
-        <input type='checkbox' id='switch3' value='wnv-hex' checked/>
-        <div class='switch switch--l mr6'></div>
-        WNV Hex Layer
-    </label>
-
-    <!-- Switch Toggle (SLEV Hex Layer) -->
-    <label id='layer-switch4' class='switch-container'>
-        <input type='checkbox' id='switch4' value='slev-hex' checked/>
-        <div class='switch switch--l mr6'></div>
-        WNV Hex Layer
-    </label>
-
     <!-- Switch Toggle (WNV) -->
-    <label id='layer-switch5' class='switch-container'>
-        <input type='checkbox' id='switch5' value='WNV' checked/>
+    <label id='layer-switch2' class='switch-container'>
+        <input type='checkbox' id='switch2' value='WNV'/>
         <div class='switch switch--l mr6'></div>
         WNV
     </label>
 
     <!-- Switch Toggle (SLEV) -->
-    <label id='layer-switch6' class='switch-container' >
-        <input type='checkbox' id='switch6' value='SLEV' checked/>
+    <label id='layer-switch3' class='switch-container' >
+        <input type='checkbox' id='switch3' value='SLEV'/>
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
@@ -304,15 +258,13 @@
                 'type': 'circle',
                 'source': 'WNV',
                 'layout': {
-                    'visibility': 'visible',
+                    'visibility': 'none',
                 },
                 "paint": {
                     'circle-color': '#ffffb3'
                 },
                 'source-layer': 'original',
             });
-            // Set min zoom where will first appear
-            map.setLayerZoomRange('WNV', 8);
 
             // SLEV Layer
             map.addSource('SLEV', {
@@ -324,46 +276,13 @@
                 'type': 'circle',
                 'source': 'SLEV',
                 'layout': {
-                    'visibility': 'visible',
+                    'visibility': 'none',
                 },
                 "paint": {
                     'circle-color': '#8dd3c7'
                 },
                 'source-layer': 'sle2015_2018_cleaned',
             });
-            // Set min zoom where will first appear
-            map.setLayerZoomRange('SLEV', 8);
-
-            // WNV/SLEV Hex Bin Layer
-            map.addSource('wnv-slev-hex', {
-                type: 'geojson',
-                data: './data/hexLayers/wnv_slev_cleaned_ratio_hex.geojson'
-            });
-            map.addLayer({
-                'id': 'wnv-slev-hex',
-                'type': 'fill',
-                'source': 'wnv-slev-hex',
-                'layout': {
-                    'visibility': 'visible'
-                },
-                'paint': {
-                    'fill-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['/',['get', 'wnv'],['get', 'slev']], // divide wnv by slev to get a ratio; Quantile breaks 
-                        0, '#4575b4', // more slev
-                        3.5, '#91bfdb',
-                        5.1, '#e0f3f8',
-                        8.4, '#fee090',
-                        18, '#fc8d59',
-                        96, '#d73027', // more WNV
-                    ],
-                    'fill-opacity': 0.6,
-                    'fill-outline-color' : 'black'
-                }
-            }); 
-             // Set min/max zoom where will first appear/disappear
-             map.setLayerZoomRange('wnv-slev-hex', 5.5, 8);
 
             // WNV Hex Bin Layer
             map.addSource('wnv-hex', {
@@ -393,8 +312,6 @@
                     'fill-outline-color' : 'black'
                 }
             }); 
-             // Set min/max zoom where will first appear/disappear
-             map.setLayerZoomRange('wnv-hex', 5.5, 8);
 
              // SLEV Hex Bin Layer
              map.addSource('slev-hex', {
@@ -424,9 +341,6 @@
                     'fill-outline-color' : 'black'
                 }
             }); 
-             // Set min/max zoom where will first appear/disappear
-             map.setLayerZoomRange('slev-hex', 5.5, 8);
-
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
             var f = function (e) {
@@ -458,7 +372,7 @@
             map.on('click', 'SLEV', f)
 
             // Array of toggle ids to loop through
-            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'switch4', 'switch5', 'switch6'];
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'radio1', 'radio2'];
 
             // Loop through the toggle ids and link it to a layer
             for (var i = 0; i < toggleableLayerIds.length; i++) {
