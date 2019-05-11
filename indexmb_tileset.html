@@ -301,14 +301,14 @@
                         'interpolate',
                         ['linear'],
                         ['get', 'wnv'],
-                        0, '#edf8fb', // Jenks breaks
+                        1, '#edf8fb', // Jenks breaks
                         18, '#ccece6',
                         56, '#99d8c9',
                         114, '#66c2a4',
                         215, '#2ca25f',
                         340, '#006d2c',
                     ],
-                    'fill-opacity': 0.6,
+                    'fill-opacity': 1,
                     'fill-outline-color' : 'black'
                 }
             }); 
@@ -323,21 +323,20 @@
                 'type': 'fill',
                 'source': 'slev-hex',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
                 'paint': {
                     'fill-color': [
                         'interpolate',
                         ['linear'],
-                        ['get', 'slev'], // Jenks breaks
-                        0, '#f1eef6',
-                        1, '#d0d1e6',
-                        8, '#a6bddb',
-                        30, '#74a9cf',
-                        85, '#2b8cbe',
+                        ['get', 'slev'], // Natural Breaks
+                        1, '#f1eef6',
+                        4, '#bdc9e1',
+                        12, '#74a9cf',
+                        30, '#2b8cbe',
                         100, '#045a8d',
                     ],
-                    'fill-opacity': 0.6,
+                    'fill-opacity': 1,
                     'fill-outline-color' : 'black'
                 }
             }); 
