@@ -62,7 +62,7 @@
         /* SLEV Hex Layer Radio */
         #layer-radio2 {
             position: absolute;
-            top: 105px;
+            top: 285px;
             left: 15px;
             color: white;
         }
@@ -75,7 +75,7 @@
         #layer-switch1 {
             position: absolute;
             z-index: 1;
-            top: 135px;
+            top: 500px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -96,7 +96,7 @@
         #layer-switch2 {
             position: absolute;
             z-index: 1;
-            top: 165px;
+            top: 530px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -117,7 +117,7 @@
         #layer-switch3 {
             position: absolute;
             z-index: 1;
-            top: 195px;
+            top: 560px;
             left: 15px;
             border-radius: 3px;
             width: 120px;
@@ -134,24 +134,49 @@
             background-color: black;
         }
 
-        .legend {
+        #wnv-hex-legend {
             background-color: #d3d3d3;
             border-radius: 3px;
-            top: 100px;
-            left: 15px;
+            top: 105px;
+            left: 39px;
             font: 12px/20px 'Vollkorn';
             padding: 10px;
             position: absolute;
             z-index: 1;
         }
 
-        .legend h4 {
+        #wnv-hex-legend h4 {
             margin: 0 0 10px;
             text-align: center;
 
         }
 
-        .legend div span {
+        #wnv-hex-legend div span {
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+
+        #slev-hex-legend {
+            background-color: #d3d3d3;
+            border-radius: 3px;
+            top: 315px;
+            left: 39px;
+            font: 12px/20px 'Vollkorn';
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #slev-hex-legend h4 {
+            margin: 0 0 10px;
+            text-align: center;
+
+        }
+
+        #slev-hex-legend div span {
             border-radius: 50%;
             display: inline-block;
             height: 10px;
@@ -167,24 +192,38 @@
     <nav id="menu"></nav>
     <div id='map'></div>
 
-    <!-- Legend Div
-    <div id='virus-legend' class='legend'>
-        <h4>Virus</h4>
-        <div><span style='background-color: #ffffb3'></span>WNV</div>
-        <div><span style='background-color: #8dd3c7'></span>SLEV</div>
-    </div> -->
-
     <label id='layer-radio1' class='radio-container'>
         <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
         <div class='radio mr6'></div>
         WNV Hex Layer
     </label>
 
+    <!-- WNV Hex Legend Div -->
+    <div id='wnv-hex-legend' class='legend'>
+        <h4>WNV Hex Layer</h4>
+        <div><span style='background-color: #edf8fb'></span>1</div>
+        <div><span style='background-color: #ccece6'></span>18</div>
+        <div><span style='background-color: #99d8c9'></span>56</div>
+        <div><span style='background-color: #66c2a4'></span>114</div>
+        <div><span style='background-color: #2ca25f'></span>215</div>
+        <div><span style='background-color: #006d2c'></span>340</div>
+    </div>
+
     <label id='layer-radio2' class='radio-container'>
         <input name='radio-basic' id='radio2' value='slev-hex' type='radio' checked>
         <div class='radio mr6'></div>
         SLEV Hex Layer
     </label>
+
+     <!-- SLEV Hex Legend Div -->
+     <div id='slev-hex-legend' class='legend'>
+        <h4>SLEV Hex Layer</h4>
+        <div><span style='background-color: #edf8fb'></span>1</div>
+        <div><span style='background-color:#bdc9e1'></span>4</div>
+        <div><span style='background-color: #74a9cf'></span>12</div>
+        <div><span style='background-color: #2b8cbe'></span>30</div>
+        <div><span style='background-color: #045a8d'></span>100</div>
+    </div>
 
     <!-- Switch Toggle (Counties) -->
      <label id='layer-switch1' class='switch-container'>
