@@ -267,7 +267,11 @@
             zoom: 5.5
         });
 
+        var zoomThreshold = 5.5;
+
         map.on('load', function () {
+
+            console.log(map.getZoom())
 
             // CA County Layer
             map.addSource('Counties', {
@@ -300,7 +304,15 @@
                     'visibility': 'none',
                 },
                 "paint": {
-                    'circle-color': '#ffffb3'
+                    'circle-color': '#ffffb3',
+                    'circle-radius' : [
+                        "interpolate", ["linear"], ["zoom"],
+                        // zoom <= 5.5 radius will be 5px
+                        5.5, 5,
+
+                        // zoom >= 6 radius will be 2.5
+                        6,2.5
+                    ]
                 },
                 'source-layer': 'original',
             });
@@ -318,7 +330,15 @@
                     'visibility': 'none',
                 },
                 "paint": {
-                    'circle-color': '#8dd3c7'
+                    'circle-color': '#8dd3c7',
+                    'circle-radius' : [
+                        "interpolate", ["linear"], ["zoom"],
+                        // zoom <= 5.5 radius will be 5px
+                        5.5, 5,
+
+                        // zoom >= 6 radius will be 2.5
+                        6,2.5
+                    ]
                 },
                 'source-layer': 'sle2015_2018_cleaned',
             });
