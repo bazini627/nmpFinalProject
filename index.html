@@ -447,14 +447,19 @@
                     map.setLayoutProperty('slev-hex', 'visibility', 'none');
                     map.setLayoutProperty('wnv-hex', 'visibility', 'visible');
                     map.setLayoutProperty('WNV','visibility', 'none')
-                    $('input[type=checkbox]').prop('checked', false);
+                    map.setLayoutProperty('SLEV','visibility', 'none')
+                    $('input[id=switch2]').prop('checked', false); // WNV
+                    $('input[id=switch3]').prop('checked', false); //SLEV
+
                 } 
                 else {
                     
                     map.setLayoutProperty('wnv-hex', 'visibility', 'none');
                     map.setLayoutProperty('slev-hex', 'visibility', 'visible');
                     map.setLayoutProperty('SLEV','visibility', 'none')
-                    $('input[type=checkbox]').prop('checked', false);
+                    map.setLayoutProperty('WNV','visibility', 'none')
+                    $('input[id=switch2]').prop('checked', false); // WNV
+                    $('input[id=switch3]').prop('checked', false); //SLEV
                 }
             });
 
