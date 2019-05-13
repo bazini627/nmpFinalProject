@@ -210,7 +210,7 @@
     </div>
 
     <label id='layer-radio2' class='radio-container'>
-        <input name='radio-basic' id='radio2' value='slev-hex' type='radio' checked>
+        <input name='radio-basic' id='radio2' value='slev-hex' type='radio'>
         <div class='radio mr6'></div>
         SLEV Hex Layer
     </label>
@@ -410,7 +410,7 @@
             map.on('click', 'SLEV', f)
 
             // Array of toggle ids to loop through
-            var toggleableLayerIds = ['switch1', 'switch2', 'switch3', 'radio1', 'radio2'];
+            var toggleableLayerIds = ['switch1', 'switch2', 'switch3'];
 
             // Loop through the toggle ids and link it to a layer
             for (var i = 0; i < toggleableLayerIds.length; i++) {
@@ -427,9 +427,37 @@
                     // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
                     else {
                         map.setLayoutProperty(this.value, 'visibility', 'visible');
+
+                        if (this.value == 'WNV' || this.value == 'SLEV')
+                        {
+                            map.setLayoutProperty('wnv-hex', 'visibility', 'none')
+                            map.setLayoutProperty('slev-hex', 'visibility', 'none')
+                            $('input[type=radio]').prop('checked', false);
+
+                        }
                     }
                 }
             }
+
+            // Switcher for the hex layer radios
+            $('input[type=radio]').click(function() {
+                
+                if (this.value === 'wnv-hex') {
+                    
+                    map.setLayoutProperty('slev-hex', 'visibility', 'none');
+                    map.setLayoutProperty('wnv-hex', 'visibility', 'visible');
+                    map.setLayoutProperty('WNV','visibility', 'none')
+                    $('input[type=checkbox]').prop('checked', false);
+                } 
+                else {
+                    
+                    map.setLayoutProperty('wnv-hex', 'visibility', 'none');
+                    map.setLayoutProperty('slev-hex', 'visibility', 'visible');
+                    map.setLayoutProperty('SLEV','visibility', 'none')
+                    $('input[type=checkbox]').prop('checked', false);
+                }
+            });
+
         });
     </script>
 
