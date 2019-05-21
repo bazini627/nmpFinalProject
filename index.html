@@ -237,7 +237,7 @@
 
     <!-- Slider For Years -->
     <div class='range range--s' id=year-slider>
-        <h2>Test Slider</h2>
+        <h2>Positive Detections By Year</h2>
         <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2003' />
     </div>
 
@@ -315,7 +315,7 @@
             // SLEV Layer
             map.addSource('SLEV', {
                 type: 'vector',
-                url: 'mapbox://bazini627.cjuu96jwa00ey2wo9d6hljxbh-5smzt'
+                url: 'mapbox://bazini627.cjvy2k76g02co2inf0onudfgu-8mnpi'
             });
             map.addLayer({
                 'id': 'SLEV',
@@ -335,7 +335,7 @@
                         6,2.5
                     ]
                 },
-                'source-layer': 'sle2015_2018_cleaned',
+                'source-layer': 'sle_2015_2018_cleaned',
             });
 
             // WNV Hex Bin Layer
@@ -478,15 +478,15 @@
                 }
             });
 
-            // // For slider funcionality
-            // document.getElementById('slider').addEventListener('input', function(e) {
-            //     var year= parseInt(e.target.value);
-            //     console.log(year)
-            //     // Update map with appropriate year
-            //     map.setFilter('SLEV', ['==', ['string', ['get', 'date'.slice(-4)]], toString(year)]);
+            // For slider funcionality
+            document.getElementById('slider').addEventListener('input', function(e) {
+                var year= parseInt(e.target.value);
+                //console.log(year)
                 
-            // });
-            map.setFilter('SLEV', ['==', ['string', ['get', 'date']], '07/22/2016']);
+                // Update map with appropriate year
+                map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
+                
+            });
 
         });
     </script>
