@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8' />
-    <title>West Nile Virus and St. Louis Encephalitis In California's Vulnerable Communities</title>
+    <title>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California's Vulnerable Communities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <!-- style sheet for Mapbox GL -->
@@ -36,7 +36,7 @@
             border-radius: 10px;
         }
 
-        h1 {
+        #map h1 {
             position: absolute;
             z-index: 650;
             top: 10px;
@@ -44,7 +44,8 @@
             padding: 8px 15px;
             margin: 0;
             color: #f5f5f5;
-            font-size: 1em;
+            font-family: 'Vollkorn';
+            font-size: 1.3em;
             background: #7e7e7e;
             border-radius: 5px
         }
@@ -55,6 +56,7 @@
             top: 75px;
             left: 15px;
             color: #ffffff;
+            font-family: 'Vollkorn';
         }
 
         #layer-radio1 input:checked+.radio {
@@ -67,6 +69,7 @@
             top: 105px;
             left: 15px;
             color: #ffffff;
+            font-family: 'Vollkorn';
         }
 
         #layer-radio2 input:checked+.radio {
@@ -178,15 +181,15 @@
         {
             bottom: 25px;
             position: absolute;
+            font-family: 'Vollkorn';
         }
     </style>
 </head>
 
 <body>
-
-    <h1> West Nile Virus & St Louis Encephalitis In California's Vulnerable Communities (2003 -2018)</h1>
     <nav id="menu"></nav>
     <div id='map'>
+        <h1>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California (2003-2018)</h1>
             <div id='wnv-hex-legend' class='legend'>
                     <h4>WNV Hex Layer</h4>
                     <div><span style='background-color: #edf8fb'></span>1</div>
@@ -218,8 +221,6 @@
         <div class='radio mr6'></div>
         SLEV Hex Layer
     </label>
-
-    
 
     <!-- Switch Toggle (WNV) -->
     <label id='layer-switch1' class='switch-container'>
