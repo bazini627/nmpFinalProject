@@ -164,6 +164,21 @@
             margin-right: 5px;
             width: 10px;
         }
+
+        #year-slider
+        {
+            position: absolute;
+            bottom: 50px;
+            z-index: 700;
+            color: #d3d3de;
+            background-color: #d3d3d3;
+        }
+
+        #year-slider h2
+        {
+            bottom: 25px;
+            position: absolute;
+        }
     </style>
 </head>
 
@@ -219,6 +234,12 @@
         <div class='switch switch--l mr6'></div>
         SLEV
     </label>
+
+    <!-- Slider For Years -->
+    <div class='range range--s' id=year-slider>
+        <h2>Test Slider</h2>
+        <input id='slider' class='row' type='range' min='0' max='18' step='1' value='2003' />
+    </div>
 
     <!-- Mapbox GL source-->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
@@ -455,6 +476,15 @@
                     $('input[id=switch2]').prop('checked', false); // WNV
                     $('input[id=switch3]').prop('checked', false); //SLEV
                 }
+            });
+
+            // For slider funcionality
+            document.getElementById('slider').addEventListener('input', function(e) {
+                var year= parseInt(e.target.value);
+                console.log(year)
+                // update the map
+                map.setFilter('SLEV', ['==', ['number', ['get', 'date']], year]);
+                
             });
 
         });
