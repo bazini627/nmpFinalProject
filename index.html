@@ -482,8 +482,8 @@
             document.getElementById('slider').addEventListener('input', function(e) {
                 var year= parseInt(e.target.value);
                 console.log(year)
-                // update the map
-                map.setFilter('SLEV', ['==', ['string', ['get', 'date']], toString(year.slice(-4))]);
+                // Update map with appropriate year
+                map.setFilter('SLEV', ['==', ['string', ['get', 'date'.slice(-4)]], toString(year)]);
                 
             });
 
