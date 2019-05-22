@@ -291,7 +291,7 @@
             // WNV Layer
             map.addSource('WNV', {
                 type: 'vector',
-                url: 'mapbox://bazini627.cjvycv9oe07062ppoktuwxlmd-7o90y'
+                url: 'mapbox://bazini627.cjvyqzs0x0ani2onfqa6ez9bc-8roev'
             });
             map.addLayer({
                 'id': 'WNV',
@@ -487,7 +487,7 @@
                 
                 // Update map with appropriate year
                 map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
-                
+                map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
             });
 
         });
