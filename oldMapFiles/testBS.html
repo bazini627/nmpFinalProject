@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8' />
+    <title>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California's Vulnerable Communities</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    <!-- style sheet for Mapbox GL -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    
+    <!-- style sheet for google fonts -->
+    <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+    
+    <!-- style sheet for Assembly-->
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.min.css" rel="stylesheet">
+    
+    <!-- Style sheet for Leaflet with subresource integrity enabled-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""
+    />
+    
+    <!-- Style sheet for JQuery UI-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-C++cugH8+Uf86JbNOnQoBweHHAe/wVKN/mb0lTybu/NZ9sEYbd+BbbYtNpWYAsNP" crossorigin="anonymous">
+  
+  <style>
+    #map {
+      width: 100%;
+      height: calc(40vh);
+    }
+
+    #about {
+      max-height: calc(80vh);
+      overflow-y: scroll;
+    }
+
+    /* Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) {}
+
+    /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) {
+      #map {
+        height: calc(60vh);
+      }
+    }
+
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) {
+
+      #map {
+        height: calc(80vh);
+      }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {}
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <header class="row py-3 bg-dark text-white">
+      <div class="col mx-2">
+        <h1 class="h1">West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California (2003-2018)</h1>
+      </div>
+    </header>
+
+    <section class="row bg-secondary">
+      <div class="col-12 col-md-7 col-lg-8 px-0">
+        <div id="map" class="bg-light position-relative"></div>
+      </div>
+      <aside id="about" class="col-12 col-md-5 col-lg-4 text-dark py-2">
+        <section>
+          <h2 class="h2 text-dark">About this map</h2>
+          <p>A fan brush is a fantastic piece of equipment. Use it. Make friends with it. We're not trying to teach you
+            a thing to copy. We're just here to teach you a technique, then let you loose into the world. We'll put a
+            happy little sky in here.</p>
+          <p>We'll paint one happy little tree right here. The secret to doing anything is believing that you can do it.
+            Anything that you believe you can do strong enough, you can do. Anything. As long as you believe. Let's make
+            a nice big leafy tree.</p>
+          <p>Lorem Ipsum by <a href="https://www.bobrosslipsum.com/index.html">Bob Ross quotes generator</a>.</p>
+          <p>Everything's not great in life, but we can still find beauty in it. I'll go over the colors one more time
+            that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad
+            yellow, and Permanent red. Only think about one thing at a time. Don't get greedy. In painting, you have
+            unlimited power. You have the ability to move mountains. You can bend rivers. But when I get home, the only
+            thing I have power over is the garbage. I get carried away with this brush cleaning.</p>
+        </section>
+      </aside>
+    </section>
+    <footer class="row bg-dark text-white py-3">
+      <div class="col mx-2">
+        <ul class="list-unstyled">
+          <li>Author: Matthew Bacinskas</li>
+          <li>Date: 05/21/19</li>
+          <li><a href="#">meta data</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div> <!-- end .container-fluid -->
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <!-- Mapbox GL source-->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+
+  <!-- Assembly source -->
+  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js"></script>
+
+  <!--Source for latest jquery with subresource integrity enabled -->
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+  <!-- Jquery UI-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+    // custom ES6 JavaScript
+    $( function() {
+            $( "#accordion" ).accordion();
+        } );
+
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiYmF6aW5pNjI3IiwiYSI6ImNqdXhuMXFmMjBvdmMzemxqdHhsMzJvbDcifQ.gHwEMfos0CNbKkYbOtd95w'; // ¯\_(ツ)_/¯ 
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v9',
+            center: [-120.38, 37.98],
+            zoom: 5.5
+        });
+
+        var zoomThreshold = 5.5;
+
+        map.on('load', function () {
+
+            console.log(map.getZoom())
+
+            // CA County Layer
+            map.addSource('Counties', {
+                type: 'vector',
+                url: 'mapbox://bazini627.cvxgh4hd'
+            });
+            map.addLayer({
+                'id': 'Counties',
+                'type': 'line',
+                'source': 'Counties',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                "paint": {
+                    'line-color': '#d3d3d3'
+                },
+                'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+            });
+            
+            // WNV Layer
+            map.addSource('WNV', {
+                type: 'vector',
+                url: 'mapbox://bazini627.cjvyqzs0x0ani2onfqa6ez9bc-8roev'
+            });
+            map.addLayer({
+                'id': 'WNV',
+                'type': 'circle',
+                'source': 'WNV',
+                'layout': {
+                    'visibility': 'none',
+                },
+                "paint": {
+                    'circle-color': '#ffffb3',
+                    'circle-radius' : [
+                        "interpolate", ["linear"], ["zoom"],
+                        // zoom <= 5.5 radius will be 5px
+                        5.5, 5,
+
+                        // zoom >= 6 radius will be 2.5
+                        6,2.5
+                    ]
+                },
+                'source-layer': 'wnv_2003_2018_cleaned',
+            });
+            // Start off only displaying WNV data for 2018
+            map.setFilter('WNV', ['==', ['number', ['get', 'year']], 2018]);
+
+            // SLEV Layer
+            map.addSource('SLEV', {
+                type: 'vector',
+                url: 'mapbox://bazini627.cjvy2k76g02co2inf0onudfgu-8mnpi'
+            });
+            map.addLayer({
+                'id': 'SLEV',
+                'type': 'circle',
+                'source': 'SLEV',
+                'layout': {
+                    'visibility': 'none',
+                },
+                "paint": {
+                    'circle-color': '#8dd3c7',
+                    'circle-radius' : [
+                        "interpolate", ["linear"], ["zoom"],
+                        // zoom <= 5.5 radius will be 5px
+                        5.5, 5,
+
+                        // zoom >= 6 radius will be 2.5
+                        6,2.5
+                    ]
+                },
+                'source-layer': 'sle_2015_2018_cleaned',
+            });
+            // Start off only displaying WNV data for 2018
+            map.setFilter('SLEV', ['==', ['number', ['get', 'year']], 2018]);
+
+
+            // WNV Hex Bin Layer
+            map.addSource('wnv-hex', {
+                type: 'geojson',
+                data: './data/hexLayers/wnv2003_2018_cleaned_hex.geojson'
+            });
+            map.addLayer({
+                'id': 'wnv-hex',
+                'type': 'fill',
+                'source': 'wnv-hex',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'wnv'],
+                        1, '#edf8fb', // Jenks breaks
+                        18, '#ccece6',
+                        56, '#99d8c9',
+                        114, '#66c2a4',
+                        215, '#2ca25f',
+                        340, '#006d2c',
+                    ],
+                    'fill-opacity': 1,
+                    'fill-outline-color' : 'black'
+                },
+            }); 
+
+             // SLEV Hex Bin Layer
+             map.addSource('slev-hex', {
+                type: 'geojson',
+                data: './data/hexLayers/slev2015_2018_cleaned_hex.geojson'
+            });
+            map.addLayer({
+                'id': 'slev-hex',
+                'type': 'fill',
+                'source': 'slev-hex',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'slev'], // Natural Breaks
+                        1, '#f1eef6',
+                        4, '#bdc9e1',
+                        12, '#74a9cf',
+                        30, '#2b8cbe',
+                        100, '#045a8d',
+                    ],
+                    'fill-opacity': 1,
+                    'fill-outline-color' : 'black'
+                }
+            }); 
+
+            // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
+            var f = function (e) {
+
+                // Query all the rendered points in the view
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['WNV', 'SLEV']
+                });
+
+                // Change the cursor to a point to notify user some interactivity may be available
+                map.getCanvas().style.cursor = 'pointer';
+
+                // Locate popups on map by class name
+                var popUps = document.getElementsByClassName('mapboxgl-popup');
+
+                // Check if there is already a popup and then get rid of it since we only want one popup at a time on the map
+                if (popUps[0]) popUps[0].remove();
+
+                var popup = new mapboxgl.Popup({
+                        closeOnClick: true
+                    })
+                    .setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
+                        .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
+                    .addTo(map);
+            }
+
+            map.on('click', 'WNV', f)
+            map.on('click', 'SLEV', f)
+
+            // Array of toggle ids to loop through
+            var toggleableLayerIds = ['switch1', 'switch2'];
+
+            // Loop through the toggle ids and link it to a layer
+            for (var i = 0; i < toggleableLayerIds.length; i++) {
+
+                var toggleElement = document.getElementById(toggleableLayerIds[i]);
+                toggleElement.onclick = function(e) {
+                    // Looks at visibilty property declared above in map.addLayer'
+                    var visibility = map.getLayoutProperty(this.value, 'visibility');
+                    
+                    // If property is visible then a click will remove the layer from being displayed
+                    if (visibility === 'visible') {
+                        map.setLayoutProperty(this.value, 'visibility', 'none');
+                    }
+                    // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
+                    else {
+                        map.setLayoutProperty(this.value, 'visibility', 'visible');
+
+                        if (this.value == 'WNV' || this.value == 'SLEV')
+                        {
+                            map.setLayoutProperty('wnv-hex', 'visibility', 'none')
+                            map.setLayoutProperty('slev-hex', 'visibility', 'none')
+                            $('input[type=radio]').prop('checked', false);
+
+                        }
+                    }
+                }
+            }
+
+            // Switcher for the hex layer radios
+            $('input[type=radio]').click(function() {
+                
+                if (this.value === 'wnv-hex') {
+                    
+                    map.setLayoutProperty('slev-hex', 'visibility', 'none');
+                    map.setLayoutProperty('wnv-hex', 'visibility', 'visible');
+                    map.setLayoutProperty('WNV','visibility', 'none')
+                    map.setLayoutProperty('SLEV','visibility', 'none')
+                    $('input[id=switch2]').prop('checked', false); // WNV
+                    $('input[id=switch3]').prop('checked', false); //SLEV
+
+                } 
+                else {
+                    
+                    map.setLayoutProperty('wnv-hex', 'visibility', 'none');
+                    map.setLayoutProperty('slev-hex', 'visibility', 'visible');
+                    map.setLayoutProperty('SLEV','visibility', 'none')
+                    map.setLayoutProperty('WNV','visibility', 'none')
+                    $('input[id=switch2]').prop('checked', false); // WNV
+                    $('input[id=switch3]').prop('checked', false); //SLEV
+                }
+            });
+
+            // For slider funcionality
+            document.getElementById('slider').addEventListener('input', function(e) {
+                var year= parseInt(e.target.value);
+                //console.log(year)
+                
+                // Update map with appropriate year
+                map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
+                map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
+            });
+
+        });
+  </script>
+</body>
+
+</html>
