@@ -240,7 +240,7 @@
     <!-- Slider For Years -->
     <div class='range range--s' id=year-slider>
         <h2>Positive Detections By Year</h2>
-        <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2003' />
+        <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2018' />
     </div>
 
     <!-- Mapbox GL source-->
@@ -313,6 +313,8 @@
                 },
                 'source-layer': 'wnv_2003_2018_cleaned',
             });
+            // Start off only displaying WNV data for 2018
+            map.setFilter('WNV', ['==', ['number', ['get', 'year']], 2018]);
 
             // SLEV Layer
             map.addSource('SLEV', {
@@ -339,6 +341,9 @@
                 },
                 'source-layer': 'sle_2015_2018_cleaned',
             });
+            // Start off only displaying WNV data for 2018
+            map.setFilter('SLEV', ['==', ['number', ['get', 'year']], 2018]);
+
 
             // WNV Hex Bin Layer
             map.addSource('wnv-hex', {
@@ -366,7 +371,7 @@
                     ],
                     'fill-opacity': 1,
                     'fill-outline-color' : 'black'
-                }
+                },
             }); 
 
              // SLEV Hex Bin Layer
