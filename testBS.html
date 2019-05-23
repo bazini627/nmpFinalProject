@@ -303,13 +303,13 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+  </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+  </script>
 
   <!-- Mapbox GL source-->
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
@@ -379,7 +379,8 @@
         "paint": {
           'circle-color': '#ffffb3',
           'circle-radius': [
-            "interpolate", ["linear"], ["zoom"],
+            "interpolate", ["linear"],
+            ["zoom"],
             // zoom <= 5.5 radius will be 5px
             5.5, 5,
 
@@ -407,7 +408,8 @@
         "paint": {
           'circle-color': '#8dd3c7',
           'circle-radius': [
-            "interpolate", ["linear"], ["zoom"],
+            "interpolate", ["linear"],
+            ["zoom"],
             // zoom <= 5.5 radius will be 5px
             5.5, 5,
 
@@ -496,8 +498,8 @@
         if (popUps[0]) popUps[0].remove();
 
         var popup = new mapboxgl.Popup({
-          closeOnClick: true
-        })
+            closeOnClick: true
+          })
           .setLngLat(e.features[0].geometry.coordinates)
           .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
             .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
@@ -548,8 +550,7 @@
           $('input[id=switch2]').prop('checked', false); // WNV
           $('input[id=switch3]').prop('checked', false); //SLEV
 
-        }
-        else {
+        } else {
 
           map.setLayoutProperty('wnv-hex', 'visibility', 'none');
           map.setLayoutProperty('slev-hex', 'visibility', 'visible');
