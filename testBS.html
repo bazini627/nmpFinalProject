@@ -4,8 +4,9 @@
 <head>
   <meta charset='utf-8' />
   <title>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California's Vulnerable Communities</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-
+  <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
   <!-- style sheet for Mapbox GL -->
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -318,7 +319,8 @@
   <script>
     // custom ES6 JavaScript
     $(function () {
-      $("#accordion").accordion();
+      $("#accordion").accordion(
+      );
     });
 
     mapboxgl.accessToken =
@@ -327,8 +329,8 @@
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v9',
-      center: [-120.38, 37.98],
-      zoom: 5.5
+      center: [-120.38, 37.50],
+      zoom: 5.4
     });
 
     var zoomThreshold = 5.5;
