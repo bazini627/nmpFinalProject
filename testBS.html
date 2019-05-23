@@ -6,7 +6,7 @@
   <title>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California's Vulnerable Communities</title>
   <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no' />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
   <!-- style sheet for Mapbox GL -->
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -240,7 +240,7 @@
         </div>
 
         <div id="accordion">
-          <h3>Hex Layers</h3>
+          <h3 id="hexHeader">Hex Layers</h3>
           <div>
             <label id='layer-radio1' class='radio-container'>
               <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
@@ -255,7 +255,7 @@
             </label>
           </div>
 
-          <h3>Point Layers</h3>
+          <h3 id=pointHeader>Point Layers</h3>
           <div>
             <!-- Switch Toggle (WNV) -->
             <label id='layer-switch1' class='switch-container'>
@@ -306,7 +306,7 @@
   <!--Source for latest jquery with subresource integrity enabled -->
   <script src="https://code.jquery.com/jquery-3.4.0.min.js"
     integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous">
-  </script>
+    </script>
 
   <!-- Jquery UI -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -314,15 +314,28 @@
   <!-- Bootstrap source-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+    </script>
 
   <script>
     // custom ES6 JavaScript
     $(function () {
       $("#accordion").accordion(
-        //$("#accordion h3:first").addClass( "ui-state-disabled" )
       );
     });
+
+    // $(function () {
+    //   $("#accordion").accordion({
+    //     collapsible: false,
+    //     active: true
+    //   });
+    //   $("#hexHeader").on("click", function () {
+    //     $("#pointHeader").addClass("ui-state-disabled")
+    //   });
+    //   $("#pointHeader").on("click", function () {
+    //     $("#hexHeader").addClass("ui-state-disabled")
+    //     $("#hexHeader").removeClass("ui-state-disabled")
+    //   });
+    // });
 
     mapboxgl.accessToken =
       'pk.eyJ1IjoiYmF6aW5pNjI3IiwiYSI6ImNqdXhuMXFmMjBvdmMzemxqdHhsMzJvbDcifQ.gHwEMfos0CNbKkYbOtd95w'; // ¯\_(ツ)_/¯ 
@@ -492,8 +505,8 @@
         if (popUps[0]) popUps[0].remove();
 
         var popup = new mapboxgl.Popup({
-            closeOnClick: true
-          })
+          closeOnClick: true
+        })
           .setLngLat(e.features[0].geometry.coordinates)
           .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
             .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
