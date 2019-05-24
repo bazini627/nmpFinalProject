@@ -183,6 +183,10 @@
       background: #545454;
     }
 
+    .map-overlay {
+      font-family: 'Vollkorn';
+    }
+
     /* Small devices (landscape phones, 576px and up) */
     @media (min-width: 576px) {}
 
@@ -219,6 +223,7 @@
     <section class="row bg-secondary">
       <div class="col-12 col-md-7 col-lg-8 px-0">
         <div id="map" class="bg-light position-relative">
+          <div id='map-overlay' class='map-overlay'></div>
           <div id='wnv-hex-legend' class='legend'>
             <h4>WNV Hex Layer</h4>
             <div><span style='background-color: #edf8fb'></span>1</div>
@@ -347,11 +352,15 @@
       zoom: 5.4
     });
 
-    var zoomThreshold = 5.5;
+    // Declare popup to be used later for layers
+    var popup = new mapboxgl.Popup({
+      closeButton: false
+    })
+
+    // Overlay that will hold our county name
+    var overlay = document.getElementById('map-overlay');
 
     map.on('load', function () {
-
-      console.log(map.getZoom())
 
       // CA County Layer
       map.addSource('Counties', {
@@ -360,15 +369,63 @@
       });
       map.addLayer({
         'id': 'Counties',
-        'type': 'line',
+        'type': 'fill',
         'source': 'Counties',
         'layout': {
           'visibility': 'visible'
         },
         "paint": {
-          'line-color': '#d3d3d3'
+          'fill-opacity': .2,
+          'fill-outline-color': '#d3d3d3',
         },
         'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+      });
+
+      map.addLayer({
+        'id': 'CountiesHighlghted',
+        'type': 'line',
+        'source': 'Counties',
+        'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+        "paint": {
+          "line-color": "yellow",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+        "filter": ['in', 'NAME', '']
+      });
+
+      // Mouse over to highligt county
+      map.on('mousemove', 'Counties', function (e) {
+
+        // Change to a pointer
+        map.getCanvas().style.cursor = 'pointer';
+        
+        // Short hand for hovered feature
+        var feature = e.features[0];
+
+        // Empty overlay that will eventually hold the county name
+        overlay.innerHTML = '';
+
+        // Make overlay text bold
+        var title = document.createElement('strong');
+        // Content of overlay
+        title.textContent = feature.properties.NAME + " County";
+
+        // Add the content to the overlay
+        overlay.appendChild(title);
+        overlay.style.display = 'block';
+
+        // Filter on NAME (county) in the tileset
+        map.setFilter('CountiesHighlghted',
+          ['in', "NAME", feature.properties.NAME]
+        );
+      });
+
+      // Reset things once mouse has left polygon
+      map.on('mouseleave', 'Counties', function () {
+        map.getCanvas().style.cursor = '';
+        map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
+        overlay.style.display = 'none';
       });
 
       // WNV Layer
@@ -504,10 +561,8 @@
         // Check if there is already a popup and then get rid of it since we only want one popup at a time on the map
         if (popUps[0]) popUps[0].remove();
 
-        var popup = new mapboxgl.Popup({
-          closeOnClick: true
-        })
-          .setLngLat(e.features[0].geometry.coordinates)
+
+        popup.setLngLat(e.features[0].geometry.coordinates)
           .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
             .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
           .addTo(map);
