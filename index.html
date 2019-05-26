@@ -280,7 +280,7 @@
 
         <!-- Slider For Years -->
         <div class='range range--s' id=year-slider>
-          <h2>Positive Detections By Year</h2>
+          <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
           <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2018' />
         </div>
       </div>
@@ -631,6 +631,9 @@
         // Update map with appropriate year
         map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
         map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
+
+         // Update year in slider
+      document.getElementById('active-year').innerText = year;
       });
 
     });
