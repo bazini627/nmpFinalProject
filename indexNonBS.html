@@ -178,6 +178,19 @@
             border: 1px solid #000000;
             background: #545454;
         }
+
+        .map-overlay {
+            font-family: 'Vollkorn';
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
+            border-radius: 3px;
+            position: absolute;
+            width: 10%;
+            top: 500px;
+            left: 10px;
+            padding: 10px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -239,10 +252,12 @@
         </div>
     </div>
 
-    <!-- Slider For Years -->
+    <div id='map-overlay' class='map-overlay'></div>
+
     <div class='range range--s' id=year-slider>
-        <h2>Positive Detections By Year</h2>
+        <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
         <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2018' />
+    </div>
     </div>
 
     <!-- Mapbox GL source-->
@@ -275,6 +290,10 @@
 
         var zoomThreshold = 5.5;
 
+        // Overlay that will hold our county name
+        var overlay = document.getElementById('map-overlay');
+
+
         map.on('load', function () {
 
             console.log(map.getZoom())
@@ -286,15 +305,63 @@
             });
             map.addLayer({
                 'id': 'Counties',
-                'type': 'line',
+                'type': 'fill',
                 'source': 'Counties',
                 'layout': {
                     'visibility': 'visible'
                 },
                 "paint": {
-                    'line-color': '#d3d3d3'
+                    'fill-opacity': .2,
+                    'fill-outline-color': '#d3d3d3',
                 },
                 'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+            });
+
+            map.addLayer({
+                'id': 'CountiesHighlghted',
+                'type': 'line',
+                'source': 'Counties',
+                'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+                "paint": {
+                    "line-color": "yellow",
+                    "line-width": 2,
+                    "line-opacity": 1,
+                },
+                "filter": ['in', 'NAME', '']
+            });
+
+            // Mouse over to highligt county
+            map.on('mousemove', 'Counties', function (e) {
+
+                // Change to a pointer
+                map.getCanvas().style.cursor = 'pointer';
+
+                // Short hand for hovered feature
+                var feature = e.features[0];
+
+                // Empty overlay that will eventually hold the county name
+                overlay.innerHTML = '';
+
+                // Make overlay text bold
+                var title = document.createElement('strong');
+                // Content of overlay
+                title.textContent = feature.properties.NAME + " County";
+
+                // Add the content to the overlay
+                overlay.appendChild(title);
+                overlay.style.display = 'block';
+
+                // Filter on NAME (county) in the tileset
+                map.setFilter('CountiesHighlghted',
+                    ['in', "NAME", feature.properties.NAME]
+                );
+            });
+
+            // Reset things once mouse has left polygon
+            map.on('mouseleave', 'Counties', function () {
+                map.getCanvas().style.cursor = '';
+                map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
+                overlay.style.display = 'none';
             });
 
             // WNV Layer
@@ -431,8 +498,8 @@
                 if (popUps[0]) popUps[0].remove();
 
                 var popup = new mapboxgl.Popup({
-                        closeOnClick: true
-                    })
+                    closeOnClick: true
+                })
                     .setLngLat(e.features[0].geometry.coordinates)
                     .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
                         .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
@@ -502,6 +569,19 @@
                 // Update map with appropriate year
                 map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
                 map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
+            });
+
+            // For slider funcionality
+            document.getElementById('slider').addEventListener('input', function (e) {
+                var year = parseInt(e.target.value);
+                //console.log(year)
+
+                // Update map with appropriate year
+                map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
+                map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
+
+                // Update year in slider
+                document.getElementById('active-year').innerText = year;
             });
 
         });
