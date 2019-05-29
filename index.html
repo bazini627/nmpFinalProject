@@ -253,6 +253,7 @@
     </div>
 
     <div id='map-overlay' class='map-overlay'></div>
+    <div id='point-overlay' class='map-overlay'></div>
 
     <!-- Div of slider which is disabled on first load -->
     <div class='range range--s' id=year-slider>
@@ -289,10 +290,13 @@
             zoom: 5.5
         });
 
-        var zoomThreshold = 5.5;
-
         // Overlay that will hold our county name
         var overlay = document.getElementById('map-overlay');
+
+        // Declare popup to be used later for layers
+        var popUp = new mapboxgl.Popup({
+            closeButton: false
+        })
 
 
         map.on('load', function () {
@@ -331,7 +335,7 @@
                 "filter": ['in', 'NAME', '']
             });
 
-            // Mouse over to highligt county
+            // Mouse over to highlight county
             map.on('mousemove', 'Counties', function (e) {
 
                 // Change to a pointer
@@ -421,8 +425,7 @@
                 'source-layer': 'sle_2015_2018_cleaned',
             });
             // Start off only displaying WNV data for 2018
-            map.setFilter('SLEV', ['==', ['number', ['get', 'year']], 2018]);
-
+            map.setFilter('SLEV', ['==', ['number', ['get', 'year']], 2018])
 
             // WNV Hex Bin Layer
             map.addSource('wnv-hex', {
@@ -482,7 +485,7 @@
             });
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
-            var f = function (e) {
+            var pointerEnter = function (e) {
 
                 // Query all the rendered points in the view
                 var features = map.queryRenderedFeatures(e.point, {
@@ -492,23 +495,35 @@
                 // Change the cursor to a point to notify user some interactivity may be available
                 map.getCanvas().style.cursor = 'pointer';
 
-                // Locate popups on map by class name
-                var popUps = document.getElementsByClassName('mapboxgl-popup');
+                var tooltip_msg = '<strong><u>Collection Details</strong></u></br>';
+                tooltip_msg += `<strong>City:</strong> ${e.features[0].properties.city}<br/>`;
+                tooltip_msg += `<strong>Specimen Type:</strong> ${e.features[0].properties.spectype}<br/>`;
+                tooltip_msg += `<strong>Virus:</strong> ${e.features[0].properties.virus}<br/>`;
+                tooltip_msg += `<strong>Collection Date(s):</strong> ${e.features[0].properties.date}`;
 
-                // Check if there is already a popup and then get rid of it since we only want one popup at a time on the map
-                if (popUps[0]) popUps[0].remove();
-
-                var popup = new mapboxgl.Popup({
-                    closeOnClick: true
-                })
-                    .setLngLat(e.features[0].geometry.coordinates)
-                    .setHTML("Virus: " + e.features[0].properties.virus + "<br>" + "City : " + e.features[0]
-                        .properties.city + "<br>" + "Collection Dates: " + e.features[0].properties.date)
+                // Populate the popup and set its coordinates based on the feature found.
+                popUp.setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML(tooltip_msg)
                     .addTo(map);
             }
 
-            map.on('click', 'WNV', f)
-            map.on('click', 'SLEV', f)
+            // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
+            var pointerLeave = function (e) {
+
+                // Query all the rendered points in the view
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['WNV', 'SLEV']
+                });
+
+                // Change the cursor to a point to notify user some interactivity may be available
+                map.getCanvas().style.cursor = '';
+                popUp.remove()
+            }
+
+            map.on('mouseenter', 'WNV', pointerEnter)
+            map.on('mouseenter', 'SLEV', pointerEnter)
+            map.on('mouseleave', 'WNV', pointerLeave)
+            map.on('mouseleave', 'SLEV', pointerLeave)
 
             // Array of toggle ids to loop through
             var toggleableLayerIds = ['switch1', 'switch2'];
@@ -575,20 +590,20 @@
                 document.getElementById('active-year').innerText = year;
             });
 
-            
+
             // Disable/Enable the slider depending on what header is clicked in the accordion
             $("h3").on("click", function () {
                 var $id = $(this).attr("id");
-                
+
                 // 'ui-id-3 means the point Layer header in accordion has been clicked so remove the disabled prop for the slider
-                if ($id == 'ui-id-3'){
+                if ($id == 'ui-id-3') {
 
                     $('#slider').removeAttr('disabled')
                 }
                 // Otherwise the hex layer header has been clicked so disable the slider
                 else {
-                    
-                    $('#slider').prop('disabled',true)
+
+                    $('#slider').prop('disabled', true)
                 }
 
             });
