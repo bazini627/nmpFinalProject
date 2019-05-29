@@ -6,17 +6,20 @@
     <title>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California's Vulnerable Communities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-    <!-- style sheet for Mapbox GL -->
+    <!-- Style sheet for Mapbox GL -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
 
-    <!-- style sheet for google fonts -->
+    <!-- Style sheet for google fonts -->
     <link href='//fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 
-    <!-- style sheet for Assembly-->
+    <!-- Style sheet for Assembly-->
     <link href="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.min.css" rel="stylesheet">
 
     <!-- Style sheet for JQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- Style sheet for Mapbox GL Geocoder-->
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
 
     <style>
         body {
@@ -96,7 +99,7 @@
         #wnv-hex-legend {
             background-color: #d3d3d3;
             border-radius: 3px;
-            top: 5px;
+            top: 50px;
             right: 20px;
             font: 12px/20px 'Vollkorn';
             padding: 10px;
@@ -122,7 +125,7 @@
         #slev-hex-legend {
             background-color: #d3d3d3;
             border-radius: 3px;
-            top: 195px;
+            top: 225px;
             right: 20px;
             font: 12px/20px 'Vollkorn';
             padding: 10px;
@@ -192,7 +195,7 @@
             display: none;
         }
 
-        .mapboxgl-popup { 
+        .mapboxgl-popup {
             font-family: 'Vollkorn';
             max-width: 250px;
         }
@@ -267,8 +270,11 @@
     </div>
     </div>
 
-    <!-- Mapbox GL source-->
+    <!-- Mapbox GL source -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+
+    <!-- Mapbox GL Geocoder source -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
 
     <!-- Assembly source -->
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.23.2/assembly.js"></script>
@@ -277,7 +283,7 @@
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"
         integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
-    <!-- Jquery UI-->
+    <!-- Jquery UI source-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
@@ -301,7 +307,13 @@
         // Declare popup to be used later for layers
         var popUp = new mapboxgl.Popup({
             closeButton: false
-        })
+        });
+
+        // Add search capability
+        map.addControl(new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        }));
 
 
         map.on('load', function () {
