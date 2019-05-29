@@ -191,6 +191,11 @@
             padding: 10px;
             display: none;
         }
+
+        .mapboxgl-popup { 
+            font-family: 'Vollkorn';
+            max-width: 250px;
+        }
     </style>
 </head>
 
@@ -495,7 +500,7 @@
                 // Change the cursor to a point to notify user some interactivity may be available
                 map.getCanvas().style.cursor = 'pointer';
 
-                var tooltip_msg = '<strong><u>Collection Details</strong></u></br>';
+                var tooltip_msg = '<h1>Collection Details</h1></br></br>';
                 tooltip_msg += `<strong>City:</strong> ${e.features[0].properties.city}<br/>`;
                 tooltip_msg += `<strong>Specimen Type:</strong> ${e.features[0].properties.spectype}<br/>`;
                 tooltip_msg += `<strong>Virus:</strong> ${e.features[0].properties.virus}<br/>`;
