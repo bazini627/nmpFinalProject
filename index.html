@@ -254,9 +254,10 @@
 
     <div id='map-overlay' class='map-overlay'></div>
 
+    <!-- Dive of slider which is disabled on first load -->
     <div class='range range--s' id=year-slider>
         <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
-        <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2018' />
+        <input id='slider' class='row' disabled type='range' min='2003' max='2018' step='1' value='2018' />
     </div>
     </div>
 
@@ -572,6 +573,24 @@
 
                 // Update year in slider
                 document.getElementById('active-year').innerText = year;
+            });
+
+            
+            // Disable/Enable the slider depending on what header is clicked in the accordion
+            $("h3").on("click", function () {
+                var $id = $(this).attr("id");
+                
+                // 'ui-id-3 means the point Layer header in accordion has been clicked so remove the disabled prop for the slider
+                if ($id == 'ui-id-3'){
+
+                    $('#slider').removeAttr('disabled')
+                }
+                // Otherwise the hex layer header has been clicked so disable the slider
+                else {
+                    
+                    $('#slider').prop('disabled',true)
+                }
+
             });
 
         });
