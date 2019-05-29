@@ -569,16 +569,6 @@
                 // Update map with appropriate year
                 map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
                 map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
-            });
-
-            // For slider funcionality
-            document.getElementById('slider').addEventListener('input', function (e) {
-                var year = parseInt(e.target.value);
-                //console.log(year)
-
-                // Update map with appropriate year
-                map.setFilter('SLEV', ['==', ['number', ['get', 'year']], year]);
-                map.setFilter('WNV', ['==', ['number', ['get', 'year']], year]);
 
                 // Update year in slider
                 document.getElementById('active-year').innerText = year;
