@@ -315,7 +315,6 @@
             mapboxgl: mapboxgl
         }));
 
-
         map.on('load', function () {
 
             console.log(map.getZoom())
@@ -337,53 +336,6 @@
                     'fill-outline-color': '#d3d3d3',
                 },
                 'source-layer': 'caCountiesNoChannelIslands-85jvh9',
-            });
-
-            map.addLayer({
-                'id': 'CountiesHighlghted',
-                'type': 'line',
-                'source': 'Counties',
-                'source-layer': 'caCountiesNoChannelIslands-85jvh9',
-                "paint": {
-                    "line-color": "yellow",
-                    "line-width": 2,
-                    "line-opacity": 1,
-                },
-                "filter": ['in', 'NAME', '']
-            });
-
-            // Mouse over to highlight county
-            map.on('mousemove', 'Counties', function (e) {
-
-                // Change to a pointer
-                map.getCanvas().style.cursor = 'pointer';
-
-                // Short hand for hovered feature
-                var feature = e.features[0];
-
-                // Empty overlay that will eventually hold the county name
-                overlay.innerHTML = '';
-
-                // Make overlay text bold
-                var title = document.createElement('strong');
-                // Content of overlay
-                title.textContent = feature.properties.NAME + " County";
-
-                // Add the content to the overlay
-                overlay.appendChild(title);
-                overlay.style.display = 'block';
-
-                // Filter on NAME (county) in the tileset
-                map.setFilter('CountiesHighlghted',
-                    ['in', "NAME", feature.properties.NAME]
-                );
-            });
-
-            // Reset things once mouse has left polygon
-            map.on('mouseleave', 'Counties', function () {
-                map.getCanvas().style.cursor = '';
-                map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
-                overlay.style.display = 'none';
             });
 
             // WNV Layer
@@ -500,6 +452,54 @@
                     'fill-outline-color': 'black'
                 }
             });
+
+            map.addLayer({
+                'id': 'CountiesHighlghted',
+                'type': 'line',
+                'source': 'Counties',
+                'source-layer': 'caCountiesNoChannelIslands-85jvh9',
+                "paint": {
+                    "line-color": "yellow",
+                    "line-width": 2,
+                    "line-opacity": 1,
+                },
+                "filter": ['in', 'NAME', '']
+            });
+
+            // Mouse over to highlight county
+            map.on('mousemove', 'Counties', function (e) {
+
+                // Change to a pointer
+                map.getCanvas().style.cursor = 'pointer';
+
+                // Short hand for hovered feature
+                var feature = e.features[0];
+
+                // Empty overlay that will eventually hold the county name
+                overlay.innerHTML = '';
+
+                // Make overlay text bold
+                var title = document.createElement('strong');
+                // Content of overlay
+                title.textContent = feature.properties.NAME + " County";
+
+                // Add the content to the overlay
+                overlay.appendChild(title);
+                overlay.style.display = 'block';
+
+                // Filter on NAME (county) in the tileset
+                map.setFilter('CountiesHighlghted',
+                    ['in', "NAME", feature.properties.NAME]
+                );
+            });
+
+            // Reset things once mouse has left polygon
+            map.on('mouseleave', 'Counties', function () {
+                map.getCanvas().style.cursor = '';
+                map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
+                overlay.style.display = 'none';
+            });
+
 
             // Function within varible to get mouseenter to work with both WNV and SLEV layers to be used below with map.on
             var pointerEnter = function (e) {
