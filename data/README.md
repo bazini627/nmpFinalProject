@@ -99,7 +99,7 @@ alter table data.wnv_2003_2018_3310 alter date_array set default '{}';
 #### Table was then queried similar to the SLEV table to get WNV points in vulnerable census tracts for a given year.
 #### The `where` clause in the subquery was changed to be able to access the first element of the entry in the `date_array` column to pick out a particular year. 
 ```sql
- SELECT year_2010.city,
+  SELECT year_2010.city,
     year_2010.spectype,
     year_2010.wkb_geometry
    FROM ( SELECT wnv_2003_2018_3310.ogc_fid,
@@ -109,8 +109,9 @@ alter table data.wnv_2003_2018_3310 alter date_array set default '{}';
             wnv_2003_2018_3310.spectype,
             wnv_2003_2018_3310.wkb_geometry
            FROM data.wnv_2003_2018_3310
-          WHERE wnv_2003_2018_3310.date[1] ~~ '%2010%'::text) year_2010
+          WHERE wnv_2003_2018_3310.date_array[1] ~~ '%2010%'::text) year_2010
      JOIN data.cdc_svi_2010_3310 ON st_dwithin(year_2010.wkb_geometry, cdc_svi_2010_3310.wkb_geometry, 0::double precision)
+  WHERE cdc_svi_2010_3310.r_pl_theme >= 0.75::double precision;
 ```
 
 #### Counts of detections by city for 2016 from SLEV table
