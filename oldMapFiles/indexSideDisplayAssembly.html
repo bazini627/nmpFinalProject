@@ -28,7 +28,7 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 58%;
+            width: 50%;
             border-radius: 10px;
         }
 
@@ -172,111 +172,134 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
             border-radius: 3px;
             position: absolute;
-            width: 16%;
+            width: 10%;
             top: 500px;
             left: 10px;
             padding: 10px;
             display: none;
-            z-index: 700;
         }
 
         .mapboxgl-popup {
             font-family: 'Vollkorn';
             max-width: 250px;
         }
-
-        .col--2 h1 {
-            text-align: center;
-        }
-
-        .col--6 {
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
-    <div class='grid grid--gut12'>
-        <div class='col col--2'>
-            <div class='border border--darken10'>
-                <h1><b>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California(2003-2018)</b></h1>
+    <div class='flex-parent viewport-full relative scroll-hidden'>
+        <div class='flex-child w-full w240-ml absolute static-ml left bottom'>
+            <div class='flex-parent flex-parent--column viewport-third h-full hmax-full bg-white'>
+                <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
+                    <h3 class='txt-m txt-bold mb6'>West Nile Virus (WNV) and St. Louis Encephalitis (SLEV) In California
+                        (2003-2018)</h3>
+                    <p>Blurb ... Blurb ... Blurb ... </p>
+                </div>
+                <footer class='px12 py12 bg-gray-faint txt-s'>
+                    Footer content here
+                </footer>
             </div>
         </div>
-        <div class='col col--4'>
-            <div class='border border--darken10'>
-                <div id='map'>
-                    <div id="accordion">
-                        <h3>Hex Layers</h3>
-                        <div>
-                            <label id='layer-radio1' class='radio-container'>
-                                <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
-                                <div class='radio mr6'></div>
-                                WNV Hex Layer
-                            </label>
+        <div class='flex-child flex-child--grow bg-darken10 viewport-twothirds viewport-full-ml'>
+            <div id='map'>
+                <div id="accordion">
+                    <h3>Hex Layers</h3>
+                    <div>
+                        <label id='layer-radio1' class='radio-container'>
+                            <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
+                            <div class='radio mr6'></div>
+                            WNV Hex Layer
+                        </label>
 
-                            <label id='layer-radio2' class='radio-container'>
-                                <input name='radio-basic' id='radio2' value='slev-hex' type='radio'>
-                                <div class='radio mr6'></div>
-                                SLEV Hex Layer
-                            </label>
-                        </div>
-
-                        <h3>Point Layers</h3>
-                        <div>
-                            <!-- Switch Toggle (WNV) -->
-                            <label id='layer-switch1' class='switch-container'>
-                                <input type='checkbox' id='switch1' value='WNV' />
-                                <div class='switch switch--l mr6'></div>
-                                WNV
-                            </label>
-
-                            <!-- Switch Toggle (SLEV) -->
-                            <label id='layer-switch2' class='switch-container'>
-                                <input type='checkbox' id='switch2' value='SLEV' />
-                                <div class='switch switch--l mr6'></div>
-                                SLEV
-                            </label>
-                        </div>
+                        <label id='layer-radio2' class='radio-container'>
+                            <input name='radio-basic' id='radio2' value='slev-hex' type='radio'>
+                            <div class='radio mr6'></div>
+                            SLEV Hex Layer
+                        </label>
                     </div>
 
-                    <div id='wnv-hex-legend' class='legend'>
-                        <h4>WNV Hex Layer</h4>
-                        <div><span style='background-color: #edf8fb'></span>1</div>
-                        <div><span style='background-color: #ccece6'></span>18</div>
-                        <div><span style='background-color: #99d8c9'></span>56</div>
-                        <div><span style='background-color: #66c2a4'></span>114</div>
-                        <div><span style='background-color: #2ca25f'></span>215</div>
-                        <div><span style='background-color: #006d2c'></span>340</div>
-                    </div>
-                    
-                    <!-- SLEV Hex Legend Div -->
-                    <div id='slev-hex-legend' class='legend'>
-                        <h4>SLEV Hex Layer</h4>
-                        <div><span style='background-color: #edf8fb'></span>1</div>
-                        <div><span style='background-color:#bdc9e1'></span>4</div>
-                        <div><span style='background-color: #74a9cf'></span>12</div>
-                        <div><span style='background-color: #2b8cbe'></span>30</div>
-                        <div><span style='background-color: #045a8d'></span>100</div>
-                    </div>
+                    <h3>Point Layers</h3>
+                    <div>
+                        <!-- Switch Toggle (WNV) -->
+                        <label id='layer-switch1' class='switch-container'>
+                            <input type='checkbox' id='switch1' value='WNV' />
+                            <div class='switch switch--l mr6'></div>
+                            WNV
+                        </label>
 
-                    <div id='map-overlay' class='map-overlay'></div>
-
-                    <!-- Div of slider which is disabled on first load -->
-                    <div class='range range--s' id=year-slider>
-                        <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
-                        <input id='slider' class='row' disabled type='range' min='2003' max='2018' step='1'
-                            value='2018' />
+                        <!-- Switch Toggle (SLEV) -->
+                        <label id='layer-switch2' class='switch-container'>
+                            <input type='checkbox' id='switch2' value='SLEV' />
+                            <div class='switch switch--l mr6'></div>
+                            SLEV
+                        </label>
                     </div>
+                </div>
+                <div id='wnv-hex-legend' class='legend'>
+                    <h4>WNV Hex Layer</h4>
+                    <div><span style='background-color: #edf8fb'></span>1</div>
+                    <div><span style='background-color: #ccece6'></span>18</div>
+                    <div><span style='background-color: #99d8c9'></span>56</div>
+                    <div><span style='background-color: #66c2a4'></span>114</div>
+                    <div><span style='background-color: #2ca25f'></span>215</div>
+                    <div><span style='background-color: #006d2c'></span>340</div>
+                </div>
+                <!-- SLEV Hex Legend Div -->
+                <div id='slev-hex-legend' class='legend'>
+                    <h4>SLEV Hex Layer</h4>
+                    <div><span style='background-color: #edf8fb'></span>1</div>
+                    <div><span style='background-color:#bdc9e1'></span>4</div>
+                    <div><span style='background-color: #74a9cf'></span>12</div>
+                    <div><span style='background-color: #2b8cbe'></span>30</div>
+                    <div><span style='background-color: #045a8d'></span>100</div>
+                </div>
+
+                <div id='map-overlay' class='map-overlay'></div>
+                <div id='point-overlay' class='map-overlay'></div>
+
+                <!-- Div of slider which is disabled on first load -->
+                <div class='range range--s' id=year-slider>
+                    <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
+                    <input id='slider' class='row' disabled type='range' min='2003' max='2018' step='1' value='2018' />
                 </div>
             </div>
         </div>
-        <div class='col col--6'>
-            <div class='col col--6 col--offl6 border border--darken10'>
-                <h1><b>West Nile Virus (WNV) and St. Louis Encephalitis(SLEV) In California's Vulnerable Census Tracts</b></h1>
-                <p>Census tracts maps will go here</p>
-            </div>
-        </div>
+
+        <!-- <div id="accordion">
+                <h3>Hex Layers</h3>
+                <div>
+                    <label id='layer-radio1' class='radio-container'>
+                        <input name='radio-basic' id='radio1' value='wnv-hex' type='radio' checked>
+                        <div class='radio mr6'></div>
+                        WNV Hex Layer
+                    </label>
+
+                    <label id='layer-radio2' class='radio-container'>
+                        <input name='radio-basic' id='radio2' value='slev-hex' type='radio'>
+                        <div class='radio mr6'></div>
+                        SLEV Hex Layer
+                    </label>
+                </div>
+
+                <h3>Point Layers</h3>
+                <div> -->
+        <!-- Switch Toggle (WNV) -->
+        <!-- <label id='layer-switch1' class='switch-container'>
+                        <input type='checkbox' id='switch1' value='WNV' />
+                        <div class='switch switch--l mr6'></div>
+                        WNV
+                    </label> -->
+
+        <!-- Switch Toggle (SLEV) -->
+        <!-- <label id='layer-switch2' class='switch-container'>
+                        <input type='checkbox' id='switch2' value='SLEV' />
+                        <div class='switch switch--l mr6'></div>
+                        SLEV
+                    </label>
+                </div>
+            </div> -->
     </div>
+
 
     <!-- Mapbox GL source -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
