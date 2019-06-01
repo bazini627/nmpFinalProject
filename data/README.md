@@ -1,13 +1,106 @@
-### PostGIS Analysis For SLEV/WNV Positives In Vulnerable Census Tracts
+# Docker Installation Instructions For Ubuntu 19.04
+
+### Add GPG Key For Official Docker Repo 
+`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
+
+### Add Repo To System (Stable only repo doesn't exist yet for 19.04)
+`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable edge test"`
+
+### Ensure Installing From Docker Repo And Not Ubuntu Default Repo
+`apt-cache policy docker-ce`
+
+Output: 
+```
+docker-ce:
+  Installed: (none)
+  Candidate: 5:19.03.0~1.5.beta5-0~ubuntu-disco
+  Version table:
+ *** 5:19.03.0~1.5.beta5-0~ubuntu-disco 500
+        500 https://download.docker.com/linux/ubuntu disco/test amd64 Packages
+        100 /var/lib/dpkg/status
+     5:19.03.0~1.4.beta4-0~ubuntu-disco 500
+        500 https://download.docker.com/linux/ubuntu disco/test amd64 Packages
+     5:19.03.0~1.3.beta3-0~ubuntu-disco 500
+        500 https://download.docker.com/linux/ubuntu disco/test amd64 Packages
+     5:19.03.0~1.2.beta2-0~ubuntu-disco 500
+        500 https://download.docker.com/linux/ubuntu disco/test amd64 Packages
+     5:19.03.0~1.1.beta1-0~ubuntu-disco 500
+        500 https://download.docker.com/linux/ubuntu disco/test amd64 Packages
+```
+
+### Check Docker Staus And Make Sure Is Running
+`sudo systemctl status docker`
+
+Output: 
+```
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: 
+   Active: active (running) since Fri 2019-05-31 17:43:31 PDT; 11min ago
+     Docs: https://docs.docker.com
+ Main PID: 8324 (dockerd)
+    Tasks: 12
+   Memory: 40.3M
+   CGroup: /system.slice/docker.service
+           └─8324 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/contai
+
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.366671980-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.366682440-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.367023487-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.368620032-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.529253221-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.655852930-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.797542770-07:00
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.797631727-07:00
+May 31 17:43:31 <youruser> systemd[1]: Started Docker Application Container Engine.
+May 31 17:43:31 <youruser> dockerd[8324]: time="2019-05-31T17:43:31.821129140-07:00
+```
+
+### Install Docker Community Edition
+`sudo apt-get install -y docker-ce`
+
+### Add User To Docker Group To Avoid Having To Use `sudo` Each Time With Docker
+`sudo usermod -aG docker ${USER}`
+
+### Confirm User Is Part Of Docker Group
+`id -nG`
+
+Output:   
+`<youruser> adm sudo docker`
+
+### Pull Down [MDillon's](https://hub.docker.com/r/mdillon/postgis/) Postgres/PostGIS Docker Image
+`docker pull mdillon/postgis`
+
+### Create Data Dir For Container So Data Is Persistent (Othewise Data Is Lost Once Container Is Shutdown)
+`mkdir -p $HOME/docker/volumes/postgres`
+
+### Startup The New Docker Container
+`docker run --rm --name pg-docker -e POSTGRES_PASSWORD=<password> -d -p 5433:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data`
+
+Flags:  
+`--rm`  Removes the container and its file system once container has been shutdown. It's generally regarded as good practice to pass this flag and if data needs to be persisten the `--v` flag can be passed.  
+`--name`  Name you would like for the container to identify it.    
+`--e`  Expose the `POSTGRES_PASSWORD` varible so we can set a a password for the DB.   
+`-d`  Launch the container in the background.    
+`-p` Bind port on local host to port in container.  So in this instacne port 5433 on local host is bound to 5432 of the container.  Port 5432 was already being used by my local instance of Postgres.  
+`-v` Mount the newly created `$HOME/docker/volumes/postgres` dir to the /`var/lib/postgresql/data` dir of the container so the data is persistent.  
+
+### Determine IP of Container To Connect With PGADMIN4
+`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pg-docker`
+
+![pg-admin connect](./images/pg-docker-connect.png)   
+
+
+
+# PostGIS Analysis For SLEV/WNV Positives In Vulnerable Census Tracts
 
 #### Add CDC 2016 GeoJSON to PostGIS
 
-`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" cdcSVI2016.geojson -nln data.cdc_svi_2016`
+`ogr2ogr -f "PostgreSQL" PG:"host=<container ip> dbname=california user=postgres password=123" cdcSVI2016.geojson -nln data.cdc_svi_2016`
 
 
 #### Add SLEV GeoJSON to PostGIS
 
-`ogr2ogr -f "PostgreSQL" PG:"host=localhost dbname=california user=postgres password=123" sle2015_2018_cleaned.geojson -nln data.sle_2015_2018`
+`ogr2ogr -f "PostgreSQL" PG:"host=<container ip> dbname=california user=postgres password=123" sle2015_2018_cleaned.geojson -nln data.sle_2015_2018`
 
 
 #### Change date column in SLEV table to date type from string
@@ -77,7 +170,7 @@ RENAME TO sle_2015_2018_3310;
 
 #### Export the above view to a GeoJSON with GDAL
 
-`ogr2ogr -t_srs EPSG:4326 -s_srs EPSG:3310 -f GeoJSON sle_2016_cdc_svi_gt75.geojson "PG:host=localhost dbname=california user=postgres password=123" -sql "SELECT * FROM data.sle_2016_cdc_svi"`
+`ogr2ogr -t_srs EPSG:4326 -s_srs EPSG:3310 -f GeoJSON sle_2016_cdc_svi_gt75.geojson "PG:host=<container ip> dbname=california user=postgres password=123" -sql "SELECT * FROM data.sle_2016_cdc_svi"`
 
 #### Working with the WNV data was similar to the SLEV commands above with one exception.
 #### Since the date column was a list of strings (e.g. `8-19-2003, 9-2-2003`) a new `date_array` column was created to work with instead of manipulating the original column.
