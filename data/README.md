@@ -1,4 +1,5 @@
 # Docker Installation Instructions For Ubuntu 19.04
+## Commands come from [Grigor Khachatryan's](https://medium.com/@Grigorkh/how-to-install-docker-on-ubuntu-19-04-7ccfeda5935) and [Syed Komail Abbas'](https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198) Docker tutorials
 
 ### Add GPG Key For Official Docker Repo 
 `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
