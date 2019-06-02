@@ -248,7 +248,7 @@
                         <div><span style='background-color: #2ca25f'></span>215</div>
                         <div><span style='background-color: #006d2c'></span>340</div>
                     </div>
-                    
+
                     <!-- SLEV Hex Legend Div -->
                     <div id='slev-hex-legend' class='legend'>
                         <h4>SLEV Hex Layer</h4>
@@ -272,8 +272,41 @@
         </div>
         <div class='col col--6'>
             <div class='col col--6 col--offl6 border border--darken10'>
-                <h1><b>West Nile Virus (WNV) and St. Louis Encephalitis(SLEV) In California's Vulnerable Census Tracts</b></h1>
-                <p>Census tracts maps will go here</p>
+                <h1><b>Do We See WNV and SLEV Positive Detections More In California's Vulnerable Census Tracts?</b>
+                </h1>
+                <p>An analysis was performed on this WNV and SLEV data to determine whether there may be higher numbers
+                    of postive detections in California's vulnerable census tracts among the mosquito pool and bird
+                    samples collected.  The CDC has released data files for 2010, 2014, and 2016 where it has determined which census tracts
+                    may be the most vulnerable to events such as natural disasters or disease outbreaks. A point-in-polygonanalysis was performed using PostgreSQL 
+                    and PostGIS to determine how many of the positive detections for given years fall within the CDC determined vulnerable
+                    census tracts. In order to look at the most vulnerable census tracts and what points may fall within these
+                    tracts, a CDC Social Vulnerability Index value of .75 or higher was used.
+                </p>
+                <br>
+                <p>
+                    In <b>2010</b>, of the <b>8048</b> census tracts in California, <b>2001</b> had a CDC SVI value greater than or equal to <b>.75</b>.
+                    This means that about a quarter of all California census tracts were deemed highly vulnerable according to the CDC.
+                    There were also <b>1041</b> positive detections of WNV across California in 2010. Looking at how may
+                    of these detections occurred in highly vulnerable census tracts we see that there were <b>287</b> positive detections within
+                    these census tracts.  Given these values this means that <b>~28%</b> of positive detections for mosquito pool and bird
+                    specimens for WNV occurred within highly vulnerable census tracts.
+                </p>
+                <br>
+                <p>
+                    <b>2014</b> saw the CDC deem <b>2003</b> of California's census tracts as highly vulnerable, a slight increase in vulnerable census tracts
+                    compared to 2010 which had 2001 highly vulnerable census tracts. Even with the slight increase, about a quarter of California's census tracts
+                    were deemed highly vulnerable. California also saw <b>3550</b> positive detections for WNV in 2014.
+                    Of these positive detections, <b>528</b> occurred in California's highly vulnerable census tracts. With these values we see that ~15% of
+                    California's positive detections among mosquito pools and birds occurred within highly vulnerable census tracts.
+                </p>
+                <br>
+                <p>
+                    In <b>2016</b>, the CDC classified <b>1995</b> of California's census tracts as highly vulnerable.  California also saw <b>2527</b> positive 
+                    detections for WNV in 2016.  Of these positive detections, <b>426</b> occurred in California's highly vulnerable census tracts. 
+                    With these values we see that ~17% of California's positive detections among mosquito pools and birds occurred within highly vulnerable 
+                    census tracts.
+                </p>
+
             </div>
         </div>
     </div>
