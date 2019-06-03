@@ -24,6 +24,14 @@
         type='text/css' />
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background:#000000;
+            font-family: 'Vollkorn';
+            color: #d3d3d3;
+        }
+
         #map {
             width: 80%;
             height: 900px;
@@ -33,25 +41,23 @@
 
         header {
             padding: 6px 10%;
-            font-family: 'Vollkorn';
         }
 
         h1 {
             text-align: center;
             margin-right: 20px;
-            color: #001323;
+            color: #d3d3d3;
         }
 
         footer {
             padding: 6px 10%;
             margin-left: 150px;
             width: 80%;
-            font-family: 'Vollkorn';
         }
 
         p {
             font-size: 1em;
-            color: #001323;
+            color: #d3d3d3;
         }
 
         /* WNV Hex Layer Radio */
@@ -205,10 +211,6 @@
         .mapboxgl-popup {
             font-family: 'Vollkorn';
             max-width: 250px;
-        }
-
-        .table table--dark {
-            font-family: 'Vollkorn';
         }
 
         td,
@@ -386,10 +388,10 @@
                 <thead>
                     <tr>
                         <th style="text-align: center; vertical-align: middle;">Year</th>
-                        <th style="text-align: center; vertical-align: middle;">SVI 0 - .24 as %</th>
-                        <th style="text-align: center; vertical-align: middle;">SVI .25 - .49 as %</th>
-                        <th style="text-align: center; vertical-align: middle;">SVI .50 - .74 as %</th>
-                        <th style="text-align: center; vertical-align: middle;">SVI >=.75 as %</th>
+                        <th style="text-align: center; vertical-align: middle;">SVI 0 - .24 as % of Total Detections</th>
+                        <th style="text-align: center; vertical-align: middle;">SVI .25 - .49 as % of Total Detections</th>
+                        <th style="text-align: center; vertical-align: middle;">SVI .50 - .74 as % of Total Detections</th>
+                        <th style="text-align: center; vertical-align: middle;">SVI >=.75 as % of Total Detections</th>
                     </tr>
                 </thead>
                 <tbody>
