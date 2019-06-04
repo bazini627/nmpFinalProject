@@ -797,7 +797,12 @@
                 else {
 
                     $('#slider').prop('disabled', true)
-                    $('#wnv-hex-legend').show();
+                    
+                    // Get the value of the active layer (will either be 'wnv-hex' or 'slev-hex')
+                    var activeRadio = $('input[name=radio-basic]:checked').val();
+                    
+                    //Concatenate id tag + id of active radio + '-legend' to show the correct hex layer legend
+                    $('#' + activeRadio + '-legend').show();
                 }
 
             });
