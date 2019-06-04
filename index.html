@@ -475,6 +475,9 @@
             closeButton: false
         });
 
+        // Default to hiding SLEV Hex Layer legend since layer is inactive
+        $('#slev-hex-legend').hide();
+
         // // Add search capability
         // map.addControl(new MapboxGeocoder({
         //     accessToken: mapboxgl.accessToken,
@@ -554,7 +557,7 @@
                         5.5, 2.5,
 
                         // zoom >= 8 radius will be 4px
-                        8,4 
+                        8, 4
                     ]
                 },
                 'source-layer': 'sle_2015_2018_cleaned',
@@ -747,8 +750,10 @@
                     map.setLayoutProperty('SLEV', 'visibility', 'none')
                     $('input[id=switch2]').prop('checked', false); // WNV
                     $('input[id=switch3]').prop('checked', false); //SLEV
-
-                } else {
+                    $('#wnv-hex-legend').show();
+                    $('#slev-hex-legend').hide();
+                }
+                else {
 
                     map.setLayoutProperty('wnv-hex', 'visibility', 'none');
                     map.setLayoutProperty('slev-hex', 'visibility', 'visible');
@@ -756,6 +761,9 @@
                     map.setLayoutProperty('WNV', 'visibility', 'none')
                     $('input[id=switch2]').prop('checked', false); // WNV
                     $('input[id=switch3]').prop('checked', false); //SLEV
+                    $('#slev-hex-legend').show();
+                    $('#wnv-hex-legend').hide();
+
                 }
             });
 
