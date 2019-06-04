@@ -788,12 +788,16 @@
                 // 'ui-id-3 means the point Layer header in accordion has been clicked so remove the disabled prop for the slider
                 if ($id == 'ui-id-3') {
 
-                    $('#slider').removeAttr('disabled')
+                    $('#slider').removeAttr('disabled');
+                    $('#slev-hex-legend').hide();
+                    $('#wnv-hex-legend').hide();
+
                 }
                 // Otherwise the hex layer header has been clicked so disable the slider
                 else {
 
                     $('#slider').prop('disabled', true)
+                    $('#wnv-hex-legend').show();
                 }
 
             });
