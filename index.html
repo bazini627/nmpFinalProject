@@ -784,26 +784,39 @@
 
             // Disable/Enable the slider depending on what header is clicked in the accordion
             $("h3").on("click", function () {
+                
                 var $id = $(this).attr("id");
-
-                // 'ui-id-3 means the point Layer header in accordion has been clicked so remove the disabled prop for the slider
+                var activeRadio = $('input[name=radio-basic]:checked');
+                var activeRadioValue = $('input[name=radio-basic]:checked').val();
+                var activeToggle = $('input[type=checkbox]:checked')
+                
+                // 'ui-id-3 means the point Layer header in accordion has been clicked 
                 if ($id == 'ui-id-3') {
 
+                    // Remove disabled prop from slider
                     $('#slider').removeAttr('disabled');
-                    $('#slev-hex-legend').hide();
-                    $('#wnv-hex-legend').hide();
+                    // Hide the hex layer legend
+                    $('#' + activeRadioValue + '-legend').hide();
+                    // Remove the hex layer
+                    map.setLayoutProperty(activeRadioValue, 'visibility', 'none')
+                    // Set radio to unchecked
+                    activeRadio.prop('checked',false);
 
                 }
-                // Otherwise the hex layer header has been clicked so disable the slider
+                // Otherwise the hex layer header has been clicked 
                 else {
 
+                    // Disable slider
                     $('#slider').prop('disabled', true)
+
+                    // Remove active point layer (or both if active)
+                    map.setLayoutProperty('WNV', 'visibility', 'none')
+                    map.setLayoutProperty('SLEV', 'visibility', 'none')
+                    // Set toggle position to off
+                    activeToggle.prop('checked', false);
                     
-                    // Get the value of the active layer (will either be 'wnv-hex' or 'slev-hex')
-                    var activeRadio = $('input[name=radio-basic]:checked').val();
+
                     
-                    //Concatenate id tag + id of active radio + '-legend' to show the correct hex layer legend
-                    $('#' + activeRadio + '-legend').show();
                 }
 
             });
