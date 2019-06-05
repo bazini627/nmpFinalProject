@@ -650,6 +650,7 @@
 
                 // Make overlay text bold
                 var title = document.createElement('strong');
+                
                 // Content of overlay
                 title.textContent = feature.properties.NAME + " County";
 
@@ -719,6 +720,7 @@
 
                 var toggleElement = document.getElementById(toggleableLayerIds[i]);
                 toggleElement.onclick = function (e) {
+                   
                     // Looks at visibilty property declared above in map.addLayer'
                     var visibility = map.getLayoutProperty(this.value, 'visibility');
 
@@ -726,6 +728,7 @@
                     if (visibility === 'visible') {
                         map.setLayoutProperty(this.value, 'visibility', 'none');
                     }
+                    
                     // If clicking a layer and the property isn't visible then it's one that was previously turned off and should be reactivated
                     else {
                         map.setLayoutProperty(this.value, 'visibility', 'visible');
@@ -784,24 +787,32 @@
 
             // Disable/Enable the slider depending on what header is clicked in the accordion
             $("h3").on("click", function () {
-                
+
                 var $id = $(this).attr("id");
                 var activeRadio = $('input[name=radio-basic]:checked');
                 var activeRadioValue = $('input[name=radio-basic]:checked').val();
                 var activeToggle = $('input[type=checkbox]:checked')
-                
+
                 // 'ui-id-3 means the point Layer header in accordion has been clicked 
                 if ($id == 'ui-id-3') {
 
                     // Remove disabled prop from slider
                     $('#slider').removeAttr('disabled');
+                    
                     // Hide the hex layer legend
                     $('#' + activeRadioValue + '-legend').hide();
+                   
                     // Remove the hex layer
                     map.setLayoutProperty(activeRadioValue, 'visibility', 'none')
-                    // Set radio to unchecked
-                    activeRadio.prop('checked',false);
-
+                   
+                    // Set hex radio to unchecked
+                    activeRadio.prop('checked', false);
+                   
+                    // Activate the WNV layer
+                    map.setLayoutProperty('WNV', 'visibility', 'visible')
+                   
+                    // Switch the WNV toggle
+                    $('input[id=switch1]').prop('checked', true);
                 }
                 // Otherwise the hex layer header has been clicked 
                 else {
@@ -812,11 +823,18 @@
                     // Remove active point layer (or both if active)
                     map.setLayoutProperty('WNV', 'visibility', 'none')
                     map.setLayoutProperty('SLEV', 'visibility', 'none')
+                    
                     // Set toggle position to off
                     activeToggle.prop('checked', false);
                     
-
+                    // Activate the WNV layer
+                    map.setLayoutProperty('wnv-hex', 'visibility', 'visible')
                     
+                    // Activate WNV Radio
+                    $('input[id=radio1]').prop('checked', true);
+                    
+                    // Add WNV Hex Legend
+                    $('#wnv-hex-legend').show();
                 }
 
             });
