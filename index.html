@@ -217,7 +217,7 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
             border-radius: 3px;
             position: absolute;
-            width: 16%;
+            width: auto;
             top: 500px;
             left: 10px;
             padding: 10px;
@@ -672,19 +672,6 @@
                 // Short hand for hovered feature
                 var feature = e.features[0];
 
-                // Empty overlay that will eventually hold the county name
-                overlay.innerHTML = '';
-
-                // Make overlay text bold
-                var title = document.createElement('strong');
-
-                // Content of overlay
-                title.textContent = feature.properties.NAME + " County";
-
-                // Add the content to the overlay
-                overlay.appendChild(title);
-                overlay.style.display = 'block';
-
                 // Filter on NAME (county) in the tileset
                 map.setFilter('CountiesHighlghted',
                     ['in', "NAME", feature.properties.NAME]
@@ -695,7 +682,7 @@
             map.on('mouseleave', 'Counties', function () {
                 map.getCanvas().style.cursor = '';
                 map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
-                overlay.style.display = 'none';
+                //overlay.style.display = 'none';
             });
 
 
@@ -707,19 +694,31 @@
                     layers: ['WNV', 'SLEV']
                 });
 
+                // Shorthand for hovered feature
+                var pointFeature = e.features[0];
+
                 // Change the cursor to a point to notify user some interactivity may be available
                 map.getCanvas().style.cursor = 'pointer';
 
-                var popUpContent = '<h1>Collection Details</h1></br></br>';
-                popUpContent += `<strong>City:</strong> ${e.features[0].properties.city}<br/>`;
-                popUpContent += `<strong>Specimen Type:</strong> ${e.features[0].properties.spectype}<br/>`;
-                popUpContent += `<strong>Virus:</strong> ${e.features[0].properties.virus}<br/>`;
-                popUpContent += `<strong>Collection Date(s):</strong> ${e.features[0].properties.date}`;
+                // Empty overlay that will eventually hold the county name
+                overlay.innerHTML = '';
 
-                // Populate the popup and set its coordinates based on the feature found.
-                popUp.setLngLat(e.features[0].geometry.coordinates)
-                    .setHTML(popUpContent)
-                    .addTo(map);
+                 // Make overlay text bold
+                var infoContent = document.createElement('strong');
+                // Allow newline ('/r/n') in textContent
+                infoContent.setAttribute('style', 'white-space: pre;');
+
+
+                // Content of overlay
+                infoContent.textContent = 'Collection Details\r\n';
+                infoContent.textContent += `City: ${e.features[0].properties.city}\r\n`;
+                infoContent.textContent += `Specimen Type: ${e.features[0].properties.spectype}\r\n`;
+                infoContent.textContent += `Virus: ${e.features[0].properties.virus}\r\n`;
+                infoContent.textContent += `Collection Date(s): ${e.features[0].properties.date}\r\n`;
+
+                 // Add the content to the overlay
+                overlay.appendChild(infoContent);
+                overlay.style.display = 'block'
             }
 
             var pointerLeave = function (e) {
@@ -731,7 +730,7 @@
 
                 // Change the cursor to a point to notify user some interactivity may be available
                 map.getCanvas().style.cursor = '';
-                popUp.remove()
+                overlay.style.display = 'none';
             }
 
             map.on('mouseenter', 'WNV', pointerEnter)
