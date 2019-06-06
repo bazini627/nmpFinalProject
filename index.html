@@ -682,7 +682,6 @@
             map.on('mouseleave', 'Counties', function () {
                 map.getCanvas().style.cursor = '';
                 map.setFilter('CountiesHighlghted', ['in', 'NAME', '']);
-                //overlay.style.display = 'none';
             });
 
 
@@ -703,7 +702,7 @@
                 // Empty overlay that will eventually hold the county name
                 overlay.innerHTML = '';
 
-                 // Make overlay text bold
+                // Make overlay text bold
                 var infoContent = document.createElement('strong');
                 // Allow newline ('/r/n') in textContent
                 infoContent.setAttribute('style', 'white-space: pre;');
@@ -716,7 +715,7 @@
                 infoContent.textContent += `Virus: ${e.features[0].properties.virus}\r\n`;
                 infoContent.textContent += `Collection Date(s): ${e.features[0].properties.date}\r\n`;
 
-                 // Add the content to the overlay
+                // Add the content to the overlay
                 overlay.appendChild(infoContent);
                 overlay.style.display = 'block'
             }
