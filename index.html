@@ -239,6 +239,20 @@
         caption {
             color: #d3d3d3;
         }
+
+        #wnv-circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background: #ffffb3;
+        }
+
+        #slev-circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background:  #8dd3c7;
+        }
     </style>
 </head>
 
@@ -270,14 +284,14 @@
                 <label id='layer-switch1' class='switch-container'>
                     <input type='checkbox' id='switch1' value='WNV' />
                     <div class='switch switch--l mr6'></div>
-                    WNV
+                    WNV <div id="wnv-circle"></div>
                 </label>
 
                 <!-- Switch Toggle (SLEV) -->
                 <label id='layer-switch2' class='switch-container'>
                     <input type='checkbox' id='switch2' value='SLEV' />
                     <div class='switch switch--l mr6'></div>
-                    SLEV
+                    SLEV <div id="slev-circle"></div>
                 </label>
             </div>
         </div>
@@ -386,16 +400,20 @@
                 </p>
                 <br>
                 <p>
-                    In 2016 the CDC classified 1995 of California's census tracts as highly vulnerable, which is still around a quarter of all census tracts.
-                    Positive detections for WNV in 2016 for mosquito pool and bird specimens were 2527. Of these 2527 positive detections,
-                    426 occurred in California's highly vulnerable census tracts. With these values we see that ~17% of California's positive
+                    In 2016 the CDC classified 1995 of California's census tracts as highly vulnerable, which is still
+                    around a quarter of all census tracts.
+                    Positive detections for WNV in 2016 for mosquito pool and bird specimens were 2527. Of these 2527
+                    positive detections,
+                    426 occurred in California's highly vulnerable census tracts. With these values we see that ~17% of
+                    California's positive
                     detections among mosquito pools and bird specimens occurred within highly vulnerable census tracts.
                 </p>
                 <br>
                 <p>
                     SLEV was relatively dormant for quite some time in California until its reemergence in 2015. Since
-                    there is no data for the previous years, 
-                    2016 is the only year we can look at for SLEV to determine whether detections fell disproportionately in highly vulnerable census tracts. 
+                    there is no data for the previous years,
+                    2016 is the only year we can look at for SLEV to determine whether detections fell
+                    disproportionately in highly vulnerable census tracts.
                     Remember that in 2016 the CDC classified
                     1995 of the census tracts in California
                     as highly vulnerable, about a quarter of all census tracts. There were 186 positive
@@ -403,22 +421,28 @@
                     specimens in California in 2016. The number of positive detections that occurred in highly
                     vulnerable census tracts was 122. Of all
                     positive detections, ~66% occured within census tracts that were deemed highly vulnerable by
-                    the CDC.  Without data for previous or ensuing years it's difficult to determine any sort of pattern with regards to SLEV detections for mosquito pools and 
+                    the CDC. Without data for previous or ensuing years it's difficult to determine any sort of pattern
+                    with regards to SLEV detections for mosquito pools and
                     bird specmiens falling within highly vunlnerable census tracts.
                 </p>
                 <br>
                 <p>
                     If we look across 2010, 2014, and 2016 for WNV in California, 2010 started with a high of ~28% of
                     detections occurring within highly
-                    vulnerable census tracts with a considerable decline going into 2014 (~15% of detections) and a slight increase in
+                    vulnerable census tracts with a considerable decline going into 2014 (~15% of detections) and a
+                    slight increase in
                     2016 (~17% detections). What could account for
                     this decline? Education efforts may have been ramped up during the years following 2010, along with
-                    greater mosquito control efforts.  Could there be an environmental explanation for the decline?
-                    In <a target="_blank" href="https://academic.oup.com/jme/article/42/2/134/878837">"Drought-Induced Amplification and Epidemic Transmission of West Nile 
-                    Virus in Southern Florida"</a>, Shamana, Day, and Stieglitz argue that periods of prolonged spring drought lead to greater exposure between 
-                    birds (hosts) and mosquitoes (vectors) which in turn has the potential for greater amplification of WNV.  In California, 2014 - 2016 were
-                    exceptional <a target="_blank" href="https://www.drought.gov/drought/states/california">drought</a> years and this environmental cause for 
-                    the decline would not seem to hold.   
+                    greater mosquito control efforts. Could there be an environmental explanation for the decline?
+                    In <a target="_blank" href="https://academic.oup.com/jme/article/42/2/134/878837">"Drought-Induced
+                        Amplification and Epidemic Transmission of West Nile
+                        Virus in Southern Florida"</a>, Shamana, Day, and Stieglitz argue that periods of prolonged
+                    spring drought lead to greater exposure between
+                    birds (hosts) and mosquitoes (vectors) which in turn has the potential for greater amplification of
+                    WNV. In California, 2014 - 2016 were
+                    exceptional <a target="_blank" href="https://www.drought.gov/drought/states/california">drought</a>
+                    years and this environmental cause for
+                    the decline would not seem to hold.
                 </p>
                 <br>
                 <table class='table'>
@@ -464,24 +488,36 @@
                         <tr>
                     </tbody>
                     <tfoot>
-                        <td colspan="5">* Points that fell within census tracts with uncalculatable SVI values were dropped (2 points
-                                dropped for 2010, 9 points dropped for 2014, and 12 points dropped for 2016)</td>
+                        <td colspan="5">* Points that fell within census tracts with uncalculatable SVI values were
+                            dropped (2 points
+                            dropped for 2010, 9 points dropped for 2014, and 12 points dropped for 2016)</td>
                     </tfoot>
                 </table>
                 <br>
                 <p>
                     How do detections look when taking into account other census tracts within the index?
-                    One thing that we do see across these years is that highly vulnerable census tracts do not make up the majority of areas where positive 
-                    detections occured.  We see that those tracts that that are part of the mid to mid-high range of the CDC's index make up a greater percentage
-                    of the positive detections.  Unfortunately, these same comparisons could not be made SLEV given its reemergence 
-                    in 2015 and the most recent SVI data files from the CDC are for 2016.  For 2014 and 2016, it's the low to mid range census tracts that make 
-                    up the index that have the greatest percentages of WNV detections.  While we may not see the majority of positive detections for WNV in 
-                    highly vulnerable census tracts among mosquito pool and bird specimens, there is still potential that these highly vulnerable census tracts 
-                    may be burdened with a higher percentage of the human cases of WNV that occur and is an area for further study. Residents of highly vulnerable 
-                    census tracts may need to travel to census tracts that are less vulnerable, which may also have a higher percentage of postitve detections as seen in 
-                    2014 and 2016, and their line of work may expose them to mosquitoes more so than in their home census tract.  
-                    With regards to SLEV, one area of possible study would be its slow creep north from 2015 - 2018 which can be seen in the map when using the year slider to 
-                    visualize the point data.  It starts off in 2015 solely in Riverside county and then begins it's exapansion north in the ensuing years.     
+                    One thing that we do see across these years is that highly vulnerable census tracts do not make up
+                    the majority of areas where positive
+                    detections occured. We see that those tracts that that are part of the mid to mid-high range of the
+                    CDC's index make up a greater percentage
+                    of the positive detections. Unfortunately, these same comparisons could not be made SLEV given its
+                    reemergence
+                    in 2015 and the most recent SVI data files from the CDC are for 2016. For 2014 and 2016, it's the
+                    low to mid range census tracts that make
+                    up the index that have the greatest percentages of WNV detections. While we may not see the majority
+                    of positive detections for WNV in
+                    highly vulnerable census tracts among mosquito pool and bird specimens, there is still potential
+                    that these highly vulnerable census tracts
+                    may be burdened with a higher percentage of the human cases of WNV that occur and is an area for
+                    further study. Residents of highly vulnerable
+                    census tracts may need to travel to census tracts that are less vulnerable, which may also have a
+                    higher percentage of postitve detections as seen in
+                    2014 and 2016, and their line of work may expose them to mosquitoes more so than in their home
+                    census tract.
+                    With regards to SLEV, one area of possible study would be its slow creep north from 2015 - 2018
+                    which can be seen in the map when using the year slider to
+                    visualize the point data. It starts off in 2015 solely in Riverside county and then begins it's
+                    exapansion north in the ensuing years.
                 </p>
     </footer>
 
