@@ -241,17 +241,23 @@
         }
 
         #wnv-circle {
-            width: 25px;
-            height: 25px;
-            border-radius: 25px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
             background: #ffffb3;
+            border: 1px solid #000000;
+            margin-top: 2px;
+            margin-left: 7px;
         }
 
         #slev-circle {
-            width: 25px;
-            height: 25px;
-            border-radius: 25px;
-            background:  #8dd3c7;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #8dd3c7;
+            border: 1px solid #000000;
+            margin-top: 6px;
+            margin-left: 6px;
         }
     </style>
 </head>
@@ -284,14 +290,14 @@
                 <label id='layer-switch1' class='switch-container'>
                     <input type='checkbox' id='switch1' value='WNV' />
                     <div class='switch switch--l mr6'></div>
-                    WNV <div id="wnv-circle"></div>
+                    WNV <span class='dot' id='wnv-circle'></span>
                 </label>
 
                 <!-- Switch Toggle (SLEV) -->
                 <label id='layer-switch2' class='switch-container'>
                     <input type='checkbox' id='switch2' value='SLEV' />
                     <div class='switch switch--l mr6'></div>
-                    SLEV <div id="slev-circle"></div>
+                    SLEV <span class='dot' id='slev-circle'></span>
                 </label>
             </div>
         </div>
@@ -768,10 +774,10 @@
 
                 // Content of overlay
                 infoContent.textContent = 'Collection Details\r\n';
-                infoContent.textContent += `City: ${e.features[0].properties.city}\r\n`;
-                infoContent.textContent += `Specimen Type: ${e.features[0].properties.spectype}\r\n`;
-                infoContent.textContent += `Virus: ${e.features[0].properties.virus}\r\n`;
-                infoContent.textContent += `Collection Date(s): ${e.features[0].properties.date}\r\n`;
+                infoContent.textContent += `City: ${pointFeature.properties.city}\r\n`;
+                infoContent.textContent += `Specimen Type: ${pointFeature.properties.spectype}\r\n`;
+                infoContent.textContent += `Virus: ${pointFeature.properties.virus}\r\n`;
+                infoContent.textContent += `Collection Date(s): ${pointFeature.properties.date}\r\n`;
 
                 // Add the content to the overlay
                 overlay.appendChild(infoContent);
