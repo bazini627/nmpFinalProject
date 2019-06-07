@@ -372,13 +372,18 @@
                     may be the most vulnerable to events such as natural disasters or disease outbreaks. A simple
                     point-in-polygon analysis was performed using
                     <a target="_blank" href="https://www.postgresql.org/">PostgreSQL</a> and <a target="_blank"
-                        href="https://postgis.net/">PostGIS</a>
+                        href="https://postgis.net/">PostGIS</a> within a <a target="_blank"
+                        href="https://docs.docker.com/">Docker</a> container
                     to determine how many of the positive detections for given years fall within
                     the CDC determined vulnerable
                     census tracts. In order to look at the most vulnerable census tracts and what points may fall within
                     these
                     tracts, a <a target="blank" href="https://svi.cdc.gov/">CDC Social Vulnerability Index</a> value of
-                    .75 or higher was used.
+                    .75 or higher was used. All commands for the installation of a PostgreSQL/PostGIS docker container,
+                    along
+                    with commands used for the point-in-polygon analysis, can be found <a target="_blank"
+                        href="https://github.com/bazini627/nmpFinalProject/blob/master/data/README.md">
+                        here</a>.
                 </p>
                 <br>
                 <p>
