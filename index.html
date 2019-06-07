@@ -611,7 +611,7 @@
             // WNV Layer
             map.addSource('WNV', {
                 type: 'vector',
-                url: 'mapbox://bazini627.cjvyqzs0x0ani2onfqa6ez9bc-8roev'
+                url: 'mapbox://bazini627.cjwmn01mm0dig2ioloansfs76-6v4gr'
             });
             map.addLayer({
                 'id': 'WNV',
@@ -799,6 +799,7 @@
 
                 // Content of overlay
                 infoContent.textContent = 'Collection Details\r\n';
+                infoContent.textContent += `County: ${pointFeature.properties.county}\r\n`;
                 infoContent.textContent += `City: ${pointFeature.properties.city}\r\n`;
                 infoContent.textContent += `Specimen Type: ${pointFeature.properties.spectype}\r\n`;
                 infoContent.textContent += `Virus: ${pointFeature.properties.virus}\r\n`;
