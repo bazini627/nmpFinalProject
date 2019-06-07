@@ -601,7 +601,7 @@
                 'layout': {
                     'visibility': 'visible'
                 },
-                "paint": {
+                'paint': {
                     'fill-opacity': .2,
                     'fill-outline-color': '#d3d3d3',
                 },
@@ -620,11 +620,11 @@
                 'layout': {
                     'visibility': 'none',
                 },
-                "paint": {
+                'paint': {
                     'circle-color': '#ffffb3',
                     'circle-radius': [
-                        "interpolate", ["linear"],
-                        ["zoom"],
+                        'interpolate', ['linear'],
+                        ['zoom'],
                         // zoom <= 5.5 radius will be 2.5px
                         5.5, 2.5,
 
@@ -649,11 +649,11 @@
                 'layout': {
                     'visibility': 'none',
                 },
-                "paint": {
+                'paint': {
                     'circle-color': '#8dd3c7',
                     'circle-radius': [
-                        "interpolate", ["linear"],
-                        ["zoom"],
+                        'interpolate', ['linear'],
+                        ['zoom'],
                         // zoom <= 5.5 radius will be 2.5px
                         5.5, 2.5,
 
@@ -690,7 +690,15 @@
                         215, '#2ca25f',
                         340, '#006d2c',
                     ],
-                    'fill-opacity': 1,
+                    'fill-opacity': [
+                        'interpolate', ['linear'],
+                        ['zoom'],
+                        // Full opacity at <= 5.5
+                        5.5, 1,
+
+                        // Some transparency so can see below hexagon >= 6
+                        6, .5
+                    ],
                     'fill-outline-color': 'black'
                 },
             });
@@ -718,7 +726,15 @@
                         30, '#2b8cbe',
                         100, '#045a8d',
                     ],
-                    'fill-opacity': 1,
+                    'fill-opacity': [
+                        'interpolate', ['linear'],
+                        ['zoom'],
+                        // Full opacity zoomed out 
+                        5.5, 1,
+
+                        // Some transparency so can see below hexagon
+                        6, .5
+                    ],
                     'fill-outline-color': 'black'
                 }
             });
@@ -728,10 +744,10 @@
                 'type': 'line',
                 'source': 'Counties',
                 'source-layer': 'caCountiesNoChannelIslands-85jvh9',
-                "paint": {
-                    "line-color": "yellow",
-                    "line-width": 2,
-                    "line-opacity": 1,
+                'paint': {
+                    'line-color': 'yellow',
+                    'line-width': 2,
+                    'line-opacity': 1,
                 },
                 "filter": ['in', 'NAME', '']
             });
