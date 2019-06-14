@@ -350,7 +350,7 @@
         <!-- Div of slider which is disabled on first load -->
         <div class='range' id=year-slider>
             <h2>Positive Detections By Year: <label id='active-year'>2018</label></h2>
-            <input id='slider' class='row' disabled type='range' min='2003' max='2018' step='1' value='2018' />
+            <input id='slider' class='row' type='range' min='2003' max='2018' step='1' value='2018' />
         </div>
     </div>
 
@@ -589,14 +589,9 @@
             closeButton: false
         });
 
-        // Default to hiding SLEV Hex Layer legend since layer is inactive
+        // Default to hiding SLEV Hex Layer legend since layer is inactive and slider
         $('#slev-hex-legend').hide();
-
-        // // Add search capability
-        // map.addControl(new MapboxGeocoder({
-        //     accessToken: mapboxgl.accessToken,
-        //     mapboxgl: mapboxgl
-        // }));
+        $('.range').hide()
 
         map.on('load', function () {
 
@@ -923,8 +918,8 @@
                 // 'ui-id-3 means the point Layer header in accordion has been clicked 
                 if ($id == 'ui-id-3') {
 
-                    // Remove disabled prop from slider
-                    $('#slider').removeAttr('disabled');
+                    // Show slider since point layer is clicked
+                    $('.range').show();
 
                     // Hide the hex layer legend
                     $('#' + activeRadioValue + '-legend').hide();
@@ -945,7 +940,7 @@
                 else {
 
                     // Disable slider
-                    $('#slider').prop('disabled', true)
+                    $('.range').hide()
 
                     // Remove active point layer (or both if active)
                     map.setLayoutProperty('WNV', 'visibility', 'none')
