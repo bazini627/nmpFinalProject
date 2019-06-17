@@ -360,8 +360,8 @@
             href="https://www.cdc.gov/westnile/index.html">West Nile Virus (WNV)</a> and <a target="_blank"
             href="https://www.cdc.gov/sle/index.html">St. Louis Encephalitis Virus
             (SLEV)</a> for
-        mosquito pool and bird specimens in California between 2003 and 2018 and was created using <a
-            target="_blank" href="https://docs.mapbox.com/mapbox-gl-js/overview/">
+        mosquito pool and bird specimens in California between 2003 and 2018 and was created using <a target="_blank"
+            href="https://docs.mapbox.com/mapbox-gl-js/overview/">
             Mapbox GL JS</a>.
         Hexbin layers were used to represent both viruses to show density of positive detections in
         mosquito pool and bird specimens. Individual point layers for each virus are also available for display
@@ -385,7 +385,19 @@
     </p>
     <p class='footnote'>* Diana A. Singh, Maria L. Salas, Robert E. Snyder, Oliver Oyler, Sarah Skallet,
         Tina Feisli, Chris Preas, and Jill Hacker. <i>The Reemergence of St. Louis Encephalitis Virus In
-            California.</i> Poster presented at California Department of Public Health, Richmond, California</p>
+            California.</i> Poster presented at California Department of Public Health, Richmond, California
+    </p>
+    <h1>About The Data</h1>
+    <p>
+        The California county boundary data comes from the Census Bureau's
+        <a target="_blank" href=https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">
+            Tiger Line/Shape Files</a> website. West Nile Virus and St. Louis Encephalitis data were scraped from the <a
+            target="_blank" href="https://legacy-maps.calsurv.org/">California Vectorborne Disease Surveillance Map
+            Gateway</a>.
+        Cleaned data and Jupyter notebooks used to clean the data can be found in the map's GitHub <a target="_blank"
+            href="https://github.com/bazini627/wnvSlevMap">
+            repo</a>.
+    </p>
     <h1>Do We See WNV and SLEV Positive Detections More In California' s Vulnerable Census Tracts?</h1>
     <p>
         An analysis was performed on this WNV and SLEV data to determine whether there may be higher numbers
@@ -544,10 +556,6 @@
         visualize the point data. It starts off in 2015 solely in Riverside county and then begins its
         expansion north in the ensuing years.
     </p>
-
-    <footer>
-       Map Authored By: <a target="_blank" href="https://github.com/bazini627/nmpFinalProject/tree/master">Matthew Bacinskas</a>
-    </footer>
 
     <!-- Mapbox GL source -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
