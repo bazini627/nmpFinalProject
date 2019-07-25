@@ -27,7 +27,7 @@ In the web map linked in the data sources section below we can see where WNV/SLE
 
    *B. Medium For Delivery*
 
-   The final deliverable will be a web-browser based application making use of HTML, CSS, JavaScript, and [Leaflet](https://leafletjs.com/).  Point-in-polygon analyis is being done on the back-end with [PostgreSQL](https://www.postgresql.org/)/[PostGIS](https://postgis.net/).  
+   The final deliverable will be a web-browser based application making use of HTML, CSS, JavaScript, and [MapboxGL](https://docs.mapbox.com/mapbox-gl-js/api/).  Point-in-polygon analyis is being done on the back-end with [PostgreSQL](https://www.postgresql.org/)/[PostGIS](https://postgis.net/).  
    
    *C. Application Layout*
     
